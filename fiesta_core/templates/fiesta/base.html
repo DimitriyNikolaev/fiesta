@@ -1,0 +1,19 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    {% block mainstylesheet %}
+        <link href="/static/fiesta_core/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="/static/fiesta_core/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+    {% endblock %}
+    {% block extraheads %}{% endblock %}
+</head>
+<body>
+    {# maincontent place here #}
+    {% block layout %}{% endblock %}
+
+    {# import scripts on current page #}
+    {% block extrascripts %}{% endblock %}
+</body>
+</html>

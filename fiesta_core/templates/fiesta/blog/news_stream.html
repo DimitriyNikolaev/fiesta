@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% block content_wrapper %}
+    <div class="container">
+        {% if news.count %}
+            <section>
+                <div>
+                    {% include "partials/pagination.html" %}
+
+                        {% for news_item in news %}
+                            <article class="row">
+                                <h3>{{ news_item.title }}</h3>
+                                <span>{{ news_item.dateAdding }}</span>
+                                {# photochki #}
+
+                                <p>{{ news_item.text|truncatewords:"25"  }}</p>
+                            </article>
+                        {% endfor %}
+
+                    {% include "partials/pagination.html" %}
+                </div>
+            </section>
+        {% else %}
+            <p>{% trans "No news found." %}</p>
+        {% endif %}
+    </div>
+{% endblock %}

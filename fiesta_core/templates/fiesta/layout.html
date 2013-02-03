@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block layout %}
+    <header>
+    {% block header %}
+        <div class="container">
+            <div class="row">
+                <div class="span7">
+                    <a href="#">Blog Fiesta</a>
+                </div>
+                <div class="span5">
+                    {% include "fiesta/partials/auth_tag.html" %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    </header>
+    <section>
+    {% block content_wrapper %}
+
+    {% endblock %}
+    </section>
+    <footer>
+    {% block footer %}
+    {% endblock %}
+    </footer>
+{% endblock %}
