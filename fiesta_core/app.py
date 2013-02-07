@@ -7,7 +7,7 @@ from fiesta_core.apps.blog.app import application as blog_app
 from fiesta_core.apps.dashboard.app import application as dashboard_app
 
 class FiestaBlog(Application):
-    name = 'Fiesta'
+    name = 'fiesta'
 
     blog_app = blog_app
     dashboard_app = dashboard_app

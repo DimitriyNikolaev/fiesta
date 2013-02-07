@@ -1,0 +1,49 @@
+{% extends "dashboard/layout.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block header %}
+    {% trans "Create or update news" %}
+{% endblock %}
+
+{% block content_wrapper %}
+<form method="post" action="." class="form-stacked wysiwyg" enctype="multipart/form-data">
+    {% for field in form %}
+    <div class="control-group {% for error in field.errors %}error{% endfor %}">
+        {% if field.is_hidden %}
+            {{ field }}
+        {% else %}
+            <label for="{{ field.auto_id }}" class="control-label {% if field.field.required %}required{% endif %}">{{ field.label }}{% if field.field.required %} <span>*</span>{% endif %}</label>
+            <div class="controls">
+                {{ field }}
+                {% for error in field.errors %}
+                    <span class="help-block">
+                    {{ error }}
+                </span>
+                {% endfor %}
+                {% if field.help_text %}
+                    <span class='help-block'>
+                    {{ field.help_text }}
+                </span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="table-header">
+        <h3>{% trans "Upload, change or remove photos" %}</h3>
+    </div>
+    <div class="well">
+        {{ photos_formset.management_form }}
+        {{ photos_formset.non_form_errors }}
+        <ol class='upload-image'>
+            {% for image_form in photos_formset %}
+                {% include "dashboard/partials/news_photos.html" with form=image_form %}
+            {% endfor %}
+        </ol>
+    </div>
+</form>
+{% endblock %}

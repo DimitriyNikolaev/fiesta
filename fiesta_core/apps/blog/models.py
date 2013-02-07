@@ -9,7 +9,7 @@ from utils import upload_to_path
 
 class News(models.Model):
     type = models.CharField(_('Type'),max_length=10, null=False, default='News', blank=False)
-    title = models.CharField(_('Title'),max_length=255, null=False, default=_(''), blank=False)
+    title = models.CharField(_('Title'),max_length=255, null=False, default='', blank=False)
     text = models.TextField(_('Text'), null=False, blank=False, default='' )
     date_added = models.DateTimeField('Date added',null=False,blank=False, default=datetime.now())
     event_date = models.DateTimeField(_('Event date'), null=True, blank=True)
@@ -37,6 +37,16 @@ class NewsPhoto(models.Model):
     subnews = models.ForeignKey(Subnews, verbose_name=_('Subnews photo'), null=True, blank=True, related_name='subnews_photos')
     is_newsphoto = models.BooleanField(_('is_newsphoto'), null=False, blank=False)
     image = models.ImageField(upload_to=upload_to_path)
+    display_order = models.PositiveIntegerField(_("Display Order"), default=0,
+        help_text=_("""An image with a display order of
+                       zero will be the primary image for a product"""))
+
+
+    class Meta:
+        unique_together = ("news", "subnews", "display_order")
+        ordering = ["display_order"]
+        verbose_name = _('News Photo')
+        verbose_name_plural = _('News Photo')
 
 
 class NewsTags(models.Model):
