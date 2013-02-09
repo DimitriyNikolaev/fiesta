@@ -14,11 +14,12 @@ class NewsForm(ModelForm):
         model = News
 
 
-    def save(self):
-        object.save()
-        if hasattr(self, 'save_m2m'):
-            self.save_m2m()
-        return object
+    # def save(self):
+    #     object = super(NewsForm, self).save(False)
+    #     object.save()
+    #     if hasattr(self, 'save_m2m'):
+    #         self.save_m2m()
+    #     return object
 
 
 
@@ -34,6 +35,7 @@ class NewsForm(ModelForm):
         return super(NewsForm, self).clean()
 
 class NewsImageForm(forms.ModelForm):
+    type = forms.Select
     class Meta:
         model = NewsPhoto
         exclude = ('subnews','is_newsphoto')
@@ -59,7 +61,7 @@ class NewsImageForm(forms.ModelForm):
 
 
 
-MewsPhotoImageSet = inlineformset_factory(News, NewsPhoto,
+NewsPhotoImageSet = inlineformset_factory(News, NewsPhoto,
     form=NewsImageForm,
-    extra=2)
+    extra=5)
 

@@ -21,7 +21,7 @@ class BlogApplication(Application):
     def get_urls(self):
         urlpatterns = patterns('',
             url(r'^$', self.news_list.as_view(), name='news_list'),
-            url(r'^add_news$',self.add_or_update_news.as_view(), name='add_or_update_news')
+            url(r'^add_news/$',self.add_or_update_news.as_view(), name='add_or_update_news')
         )
         return self.post_process_urls(urlpatterns)
 

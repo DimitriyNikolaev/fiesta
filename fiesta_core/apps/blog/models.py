@@ -6,9 +6,11 @@ from django.db import models
 from datetime import datetime, date
 
 from utils import upload_to_path
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS
 
 class News(models.Model):
-    type = models.CharField(_('Type'),max_length=10, null=False, default='News', blank=False)
+    type = models.PositiveSmallIntegerField(_('Type'),null=False, default=0, blank=False, choices=FIESTA_NEWSLINE_ENTITY_TYPES)
+    lang = models.CharField(_('Language'), max_length=2, null=False, blank=False, default='ru', choices=FIESTA_BLOG_LANGS)
     title = models.CharField(_('Title'),max_length=255, null=False, default='', blank=False)
     text = models.TextField(_('Text'), null=False, blank=False, default='' )
     date_added = models.DateTimeField('Date added',null=False,blank=False, default=datetime.now())
@@ -18,6 +20,7 @@ class News(models.Model):
     deadline_date = models.DateTimeField(_('Deadline date'), null=True, blank=True)
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
+
 
 
 

@@ -10,6 +10,11 @@
 
 {% block content_wrapper %}
 <form method="post" action="." class="form-stacked wysiwyg" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="table-header">
+        <h3>{% trans "News details" %}</h3>
+    </div>
+    <div class="well product-details">
     {% for field in form %}
     <div class="control-group {% for error in field.errors %}error{% endfor %}">
         {% if field.is_hidden %}
@@ -32,7 +37,7 @@
         {% endif %}
     </div>
     {% endfor %}
-
+    </div>
     <div class="table-header">
         <h3>{% trans "Upload, change or remove photos" %}</h3>
     </div>
@@ -44,6 +49,14 @@
                 {% include "dashboard/partials/news_photos.html" with form=image_form %}
             {% endfor %}
         </ol>
+    </div>
+    <div class="form-actions control-group">
+        <div class="pull-right">
+            <a href="{% url fiesta:dashboard:news_list %}">{% trans "Cancel" %}</a> {% trans "or" %} <button class="btn btn-primary btn-large" type="submit">{% trans "Save news" %}</button>
+        </div>
+        {% if product %}
+            <a class="btn btn-success btn-large" href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a>
+        {% endif %}
     </div>
 </form>
 {% endblock %}
