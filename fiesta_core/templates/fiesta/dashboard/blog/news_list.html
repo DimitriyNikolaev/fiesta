@@ -10,6 +10,12 @@
 {% endblock %}
 
 {% block content_wrapper %}
+    <div class="table-header">
+        <h2>{% trans "News list" %}</h2>
+    </div>
+    <div class="btn-toolbar">
+        <a class="btn btn-primary pull-right" href="{% url fiesta:dashboard:add_news %}">{% trans "Add news" %}</a>
+    </div>
     {% if news %}
         <form action="." method="post">
             {% csrf_token %}
@@ -37,8 +43,8 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        {% comment %}<li><a href="{% url dashboard:edit-news product.id %}">{% trans "Edit" %}</a></li>
-                                        <li><a href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a></li>{% endcomment %}
+                                        <li><a href="{% url fiesta:dashboard:edit_news news_item.id %}">{% trans "Edit" %}</a></li>
+                                        {% comment %}<li><a href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a></li>{% endcomment %}
                                     </ul>
                                 </div>
                             </div>

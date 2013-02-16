@@ -3,7 +3,7 @@ __author__ = 'dimitriy'
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf.urls import patterns,url
 from fiesta_core.core.application import Application
-from views import NewsList,AddOrUpdateNewsView
+from views import NewsList,AddNewsView, UpdateNewsView
 from fiesta_core.apps.dashboard.nav import Node,register
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,12 +16,14 @@ class BlogApplication(Application):
     name=None
 
     news_list = NewsList
-    add_or_update_news = AddOrUpdateNewsView
+    add_news = AddNewsView
+    update_news = UpdateNewsView
 
     def get_urls(self):
         urlpatterns = patterns('',
             url(r'^$', self.news_list.as_view(), name='news_list'),
-            url(r'^add_news/$',self.add_or_update_news.as_view(), name='add_or_update_news')
+            url(r'^add_news/$',self.add_news.as_view(), name='add_news'),
+            url(r'^update_news/(?P<pk>\d+)/$',self.update_news.as_view(), name='edit_news')
         )
         return self.post_process_urls(urlpatterns)
 
