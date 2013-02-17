@@ -170,3 +170,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     'fiesta_core.core.context_processors.user_metadata',
     )
+
+AUTHENTICATION_BACKENDS = (
+    'fiesta_core.apps.account.auth_backend.CustomUserModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+CUSTOM_USER_MODEL = 'fiesta_core.apps.account.models.SocialUser'

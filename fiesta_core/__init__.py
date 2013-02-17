@@ -3,6 +3,7 @@ import os
 
 FIESTA_CORE_APPS = [
     'fiesta_core',
+    'fiesta_core.apps.account',
     'fiesta_core.apps.blog',
     'fiesta_core.apps.dashboard',
     'fiesta_core.apps.dashboard.blog',
