@@ -7,6 +7,6 @@ from utils import upload_avatar_path
 
 class SocialUser(User):
     objects = UserManager()
-    avatar = models.ImageField(upload_to=upload_avatar_path)
+    avatar = models.ImageField(upload_to=upload_avatar_path, null=True, blank=True, default=None)
     aboutSelf = models.TextField(max_length=300, blank=True, null=True)
     social_status = models.CharField(max_length=255, blank=True, null=True)

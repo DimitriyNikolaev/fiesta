@@ -11,7 +11,7 @@ class AccountApplication(Application):
     user_registration = UserRegistrationView
 
     def get_urls(self):
-        urlpatterns = patterns(''.
+        urlpatterns = patterns('',
             url(r'^registration/$',self.user_registration.as_view(), name='registration' ),
         )
 application = AccountApplication()

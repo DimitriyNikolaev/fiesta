@@ -25,7 +25,7 @@ class CustomUserModelBackend(ModelBackend):
     @property
     def user_class(self):
         if not hasattr(self, '_user_class'):
-            self._user_class = get_model(*settings.CUSTOM_USER_MODEL.split('.', 2))
+            self._user_class = get_model(*settings.CUSTOM_USER_MODEL.split('.', 5))
             if not self._user_class:
                 raise ImproperlyConfigured('Could not get custom user model')
         return self._user_class
