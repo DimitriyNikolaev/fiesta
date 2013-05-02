@@ -176,4 +176,4 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-CUSTOM_USER_MODEL = 'fiesta_core.apps.account.models.SocialUser'
+CUSTOM_USER_MODEL = 'account.SocialUser'

@@ -1,0 +1,68 @@
+{% extends "dashboard/layout.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>{% trans "Create or update subnews" %}</h1>
+    </div>
+{% endblock %}
+
+{% block content_wrapper %}
+{% if parent %}
+<form method="post" action="." class="form-stacked wysiwyg" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="table-header">
+        <h3>{% trans "subnews details for:" %} {{ parent.title }}</h3>
+    </div>
+    <div class="well product-details">
+    {% for field in form %}
+    <div class="control-group {% for error in field.errors %}error{% endfor %}">
+        {% if field.is_hidden %}
+            {{ field }}
+        {% else %}
+            <label for="{{ field.auto_id }}" class="control-label {% if field.field.required %}required{% endif %}">{{ field.label }}{% if field.field.required %} <span>*</span>{% endif %}</label>
+            <div class="controls">
+                {{ field }}
+                {% for error in field.errors %}
+                    <span class="help-block">
+                    {{ error }}
+                </span>
+                {% endfor %}
+                {% if field.help_text %}
+                    <span class='help-block'>
+                    {{ field.help_text }}
+                </span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    </div>
+    <div class="table-header">
+        <h3>{% trans "Upload, change or remove photos" %}</h3>
+    </div>
+    <div class="well">
+        {{ photos_formset.management_form }}
+        {{ photos_formset.non_form_errors }}
+        <ol class='upload-image'>
+            {% for image_form in photos_formset %}
+                {% include "dashboard/partials/news_photos.html" with form=image_form %}
+            {% endfor %}
+        </ol>
+    </div>
+
+    <div class="form-actions control-group">
+        <div class="pull-right">
+            <a href="{% url "fiesta:dashboard:edit_news" parent.pk %}">{% trans "Cancel" %}</a> {% trans "or" %} <button class="btn btn-primary btn-large" type="submit">{% trans "Save subnews" %}</button>
+        </div>
+    </div>
+
+</form>
+
+{% else %}
+    {% trans "Unable to create object" %}
+{% endif %}
+{% endblock %}

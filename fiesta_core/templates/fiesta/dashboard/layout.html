@@ -16,7 +16,7 @@
                         <ul class="nav pull-right">
                             {% if user.is_authenticated %}
                                 <li><span>{% trans "Welcome" %} <em>{{ request.user.name|default:'Guest' }}</em></span></li>
-                                <li><a href="{% url logout %}?next=/"><i class="icon-signout"></i> {% trans "Logout" %}</a></li>
+                                <li><a href="{% url "logout" %}?next=/"><i class="icon-signout"></i> {% trans "Logout" %}</a></li>
                             {% endif %}
                         </ul>
                     </div>
@@ -70,7 +70,7 @@
         <div class="container-fluid dashboard">
             {% block breadcrumbs %}
                 <ul class="breadcrumb">
-                    <li><a href="{% url fiesta:dashboard:dashboard-index %}">{% trans "Dashboard" %}</a> <span class="divider">/</span></li>
+                    <li><a href="{% url "fiesta:dashboard:dashboard-index" %}">{% trans "Dashboard" %}</a> <span class="divider">/</span></li>
                 </ul>
             {% endblock %}
             <div class="content">

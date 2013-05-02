@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% block content_wrapper %}
+    <div class="container blog-layout">
+        <div class="row">
+            {% include "partials/nav_menu.html" %}
+        </div>
+        <div class="row">
+            <section class="span9">
+                {% block news_stream %}
+                {% endblock %}
+            </section>
+            <aside class="span3">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        реклама
+                    </div>
+                    <div class="row-fluid">
+                        попклярные события
+                    </div>
+                    <div class="row-fluid">
+                        присоединяйтесь
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock %}

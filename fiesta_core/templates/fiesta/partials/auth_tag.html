@@ -1,19 +1,22 @@
-<div id="login-wrap">
+<div id="login-wrap" class="container-fluid" style="padding-right: 0px;">
     {% if user.is_authenticated %}
-        <div>
-            <span>{{ user.first_name }} {{ user.last_name }}</span>
-
-        </div>
-        <div>
-            <img src="{{ avatar }}" width="30" height="30" alt="no avatar"/>
-            <form method="post" action="logout?next={{ current_path|urlencode }}">
-                {% csrf_token %}
-                <input type="submit" name="logout" value="выход"/>
-            </form>
+        <div class="row-fluid">
+            <div class="span7 ">
+                <span class="pull-right">{{ user.username}}</span>
+            </div>
+            <div class="span4 offset1">
+                <a href="{% url "fiesta:account:profile" %}"><img src="{{ avatar }}" width="110" height="110" alt="no avatar"/></a>
+                <form method="post" action="/logout?next=/">
+                    {% csrf_token %}
+                    <div class="pull-right" style="margin-top: 20px;">
+                        <input type="submit" name="logout" value="выход" class="btn" />
+                    </div>
+                </form>
+            </div>
         </div>
     {% else %}
-        <div>
-        <form method="post" action="login?next={{ current_path|urlencode }}" class="form-horizontal">
+        <div class="authinput">
+        <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">
             {% csrf_token %}
             <div class="control-group">
                 <label for="id_username" class="control-label">Логин</label>
@@ -34,7 +37,7 @@
                 </div>
                 <div class="pull-right" >
                     <span>Еще не зарегистрированы?</span>
-                    <a href="/private" class="btn-link">Жми сюда!</a>
+                    <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>
                 </div>
 
             </div>

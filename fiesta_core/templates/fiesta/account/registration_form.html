@@ -1,6 +1,20 @@
-{% extends 'fiesta/layout.html' %}
+{% extends 'fiesta/account/layout.html' %}
 {% load i18n %}
 
-{% block content_wrapper %}
+{% block account_layout%}
+
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>{% trans 'Register with sicual account' %}</h2>
+        </div>
+        <div class="span6 register_form">
+            <form id="register_form" action=".?next=/" method="post" class="form-stacked"/>
+            <h2>{% trans 'Register with email' %}</h2>
+            {% csrf_token %}
+            {% include "fiesta/partials/form_fields.html" with form=registration_form %}
+            <button name="registration_submit" type="submit" value="Register" class="btn btn-primary btn-large js-disable-on-click" data-loading-text="{%trans 'Registering...' %}">{% trans 'Register' %}</button>
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

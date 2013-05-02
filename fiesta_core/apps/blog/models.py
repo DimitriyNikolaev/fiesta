@@ -21,13 +21,20 @@ class News(models.Model):
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        u"""Return a product's absolute url"""
+        return ('catalogue:detail', (), {
+            'product_slug': self.slug,
+            'pk': self.id})
+
 
 
 
 class Subnews(models.Model):
-    news = models.ForeignKey(News, null=False, blank=False)
+    news = models.ForeignKey(News, null=False, blank=False, related_name='subnews')
 
-    title = models.CharField(_('Title'),max_length=255, null=False, default=_(''), blank=False)
+    title = models.CharField(_('Title'),max_length=255, null=False, default='', blank=False)
     text = models.TextField(_('Text'), null=False, blank=False, default='' )
     event_date = models.DateTimeField(_('Event date'), null=True, blank=True)
     external_link = models.URLField(_('Externallink'), null=True, blank=True)

@@ -1,22 +1,14 @@
-{% extends "layout.html" %}
+{% extends "blog/blog_layout.html" %}
 {% load i18n %}
-{% block content_wrapper %}
-    <div class="container">
+{% block news_stream %}
+    <div class="container-fluid">
         {% if news.count %}
             <section>
                 <div>
                     {% include "partials/pagination.html" %}
-
                         {% for news_item in news %}
-                            <article class="row">
-                                <h3>{{ news_item.title }}</h3>
-                                <span>{{ news_item.dateAdding }}</span>
-                                {# photochki #}
-
-                                <p>{{ news_item.text|truncatewords:"25"  }}</p>
-                            </article>
+                            {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
                         {% endfor %}
-
                     {% include "partials/pagination.html" %}
                 </div>
             </section>

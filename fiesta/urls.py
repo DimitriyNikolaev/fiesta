@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.views import login, logout_then_login
+from django.contrib.auth.views import login, logout
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'', include(application.urls)),
     url(r'^login$', login, { "template_name": "partials/auth_tag.html" }, name='login' ),
-    url(r'^logout$', logout_then_login, name='logout' )
+    url(r'^logout$', logout,name='logout' )
 )
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

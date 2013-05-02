@@ -1,0 +1,17 @@
+{% extends 'fiesta/account/layout.html' %}
+{% load i18n %}
+
+{% block account_layout%}
+
+    <div class="row-fluid">
+        <div class="span6 register_form">
+            <form id="profile_form" action="." method="post" class="form-stacked"/>
+            <h2>{% trans 'Your profile' %}</h2>
+            {% csrf_token %}
+            {% include "fiesta/partials/form_fields.html" with form=form %}
+            <button name="profile_update_submit" type="submit" value="Profile" class="btn btn-primary btn-large js-disable-on-click" data-loading-text="{%trans 'Updating...' %}">{% trans 'Update' %}</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

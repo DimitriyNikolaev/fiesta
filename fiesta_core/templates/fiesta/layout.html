@@ -5,8 +5,11 @@
     {% block header %}
         <div class="container">
             <div class="row">
-                <div class="span7">
-                    <a href="#">Blog Fiesta</a>
+                <div class="span2">
+                    Санкт-Петербург
+                </div>
+                <div class="span5">
+                    <a href="#"><img src="{{ STATIC_URL }}fiesta_core/img/fiesta_logo.jpg"/></a>
                 </div>
                 <div class="span5">
                     {% include "fiesta/partials/auth_tag.html" %}
@@ -22,6 +25,7 @@
     </section>
     <footer>
     {% block footer %}
+
     {% endblock %}
     </footer>
 {% endblock %}

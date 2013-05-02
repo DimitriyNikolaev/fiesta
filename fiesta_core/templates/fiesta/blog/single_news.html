@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block content_wrapper %}
+    <div class="container">
+        <div class="row">
+            {% include 'fiesta/blog/partial/single_news_template.html' with news=news %}
+        </div>
+    </div>
+{% endblock %}

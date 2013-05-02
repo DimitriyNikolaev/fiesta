@@ -4,7 +4,7 @@ from django.core.context_processors import csrf
 __author__ = 'dimitriy'
 
 def user_metadata(request):
-    avatar = "/static/img/default_avatar.png"
+    avatar = "/static/fiesta_core/img/default_avatar.png"
     #if request.user.is_authenticated():
         #avatar = request.user.get_profile().avatar.url
 

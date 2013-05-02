@@ -1,0 +1,12 @@
+<article class="row-fluid">
+    <a href="{% url "fiesta:blog:single_news" news_item.id %}"><h3>{{ news_item.title }}</h3></a>
+    <span>{{ news_item.dateAdding }}</span>
+    {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
+    <p>{{ news_item.text}}</p>
+    <div>
+
+    </div>
+    <div>
+
+    </div>
+</article>
