@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from fiesta_core.apps.blog.models import News,NewsPhoto, NewsTags, Subnews
 from fiesta_core.forms.widgets import ImageInput
 from django.forms.models import inlineformset_factory
-
+from fiesta_core.global_utils.image_utils import get_preview
 
 
 class NewsForm(ModelForm):
@@ -38,22 +38,32 @@ class NewsImageForm(forms.ModelForm):
     type = forms.Select
     class Meta:
         model = NewsPhoto
-        exclude = ('subnews','is_newsphoto')
+        exclude = ('subnews','is_newsphoto', 'display_order', 'preview')
 
         # use ImageInput widget to create HTML displaying the
         # actual uploaded image and providing the upload dialog
         # when clicking on the actual image.
         widgets = {
-            'image': ImageInput(),
+            'image': ImageInput()
             }
+    # def clean_preview(self):
+    #     exist_preview = self.cleaned_data['preview']
+    #     if exist_preview is None:
+    #         image = self.cleaned_data['image']
+    #         preview = get_preview(image,'preview')
+    #         return preview
+    #     return exist_preview
+
 
     def save(self, *args, **kwargs):
         # We infer the display order of the image based on the order of the image fields
         # within the formset.
         kwargs['commit'] = False
         obj = super(NewsImageForm, self).save(*args, **kwargs)
-        obj.display_order = self.get_display_order()
         obj.is_newsphoto = True
+        preview = get_preview(self.cleaned_data['image'], 'preview')
+        obj.preview.save(preview.name, preview)
+        obj.display_order = self.get_display_order()
         obj.save()
         return obj
 

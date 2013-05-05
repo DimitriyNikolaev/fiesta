@@ -4,7 +4,13 @@
     {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
     <p>{{ news_item.text}}</p>
     <div>
-
+        {% for img in news_item.news_photos.all %}
+            {% if img.preview %}
+                <img src="{{ img.preview.url }}"/>
+            {% else %}
+                <img src="{{ img.image.url }}">
+            {% endif %}
+        {% endfor %}
     </div>
     <div>
 
