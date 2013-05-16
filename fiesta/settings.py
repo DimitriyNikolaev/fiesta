@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'fiesta_core.middlewares.UnicUserId.UnicUserIdMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -177,3 +178,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 CUSTOM_USER_MODEL = 'account.SocialUser'
+
+UNIC_TMP_USER_ID = 'unic_tmp_userid'

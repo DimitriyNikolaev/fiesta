@@ -21,7 +21,7 @@ class NewsList(ListView):
         return ctx
 
     def get_queryset(self):
-        return News.objects.all()
+        return News.objects.all().order_by('date_added')
 
 class AddNewsView(CreateView):
     template_name = 'dashboard/blog/news_add_or_update.html'
