@@ -31,18 +31,22 @@
                                 <a href="#"><img src="{{ STATIC_URL }}fiesta_core/img/fiesta_logo_new.png"/></a>
                             </div>
                             <div class="span2 locale">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="/i18n/setlang/" method="POST">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="/" />
                                     <div class="control-group">
                                         <div class="controls switch">
-                                            <input id="rus" name="view" type="radio" checked>
+
+                                            <input id="rus" value="ru" name="language" type="radio" onclick="this.form.submit();">
                                             <label for="rus" onclick="">rus</label>
 
-                                            <input id="eng" name="view" type="radio">
+                                            <input id="eng" value="en" name="language" type="radio" onclick="this.form.submit();">
                                             <label for="eng" onclick="">eng</label>
 
                                             <span class="slide-button well"></span>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'', include(application.urls)),
     url(r'^login$', login, { "template_name": "partials/auth_tag.html" }, name='login' ),
-    url(r'^logout$', logout,name='logout' )
+    url(r'^logout$', logout,name='logout' ),
+    url(r'^i18n/', include('django.conf.urls.i18n'))
 )
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

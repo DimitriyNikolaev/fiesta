@@ -16,3 +16,7 @@ FIESTA_BLOG_LANGS = (
     ('fi',_("Finnish"))
 )
 
+FIESTA_NEWS_CITY = (
+    (0, _('Saint Petersburg')),
+    (1, _('Moscow'))
+)
