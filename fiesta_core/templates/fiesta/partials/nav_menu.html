@@ -1,17 +1,17 @@
 {% load i18n %}
 <div class="navbar">
     <div class="navbar-inner">
-        <div class="container-fluid ">
-            <ul class="nav">
-                <li><a href="#">{% trans "All news" %}</a></li>
+        <div class="container-fluid">
+            <ul class="nav navribbon">
+                <li><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a></li>
 
-                <li><a href="#">{% trans "News" %}</a></li>
+                <li><a href="{% url "fiesta:blog:stream_type" 0%}">{% trans "News" %}</a></li>
 
-                <li><a href="#">{% trans "Places" %}</a></li>
+                <li><a href="{% url "fiesta:blog:stream_type" 4%}">{% trans "Places" %}</a></li>
 
-                <li><a href="#">{% trans "Events" %}</a></li>
+                <li><a href="{% url "fiesta:blog:stream_type" 2%}">{% trans "Events" %}</a></li>
 
-                <li><a href="#">{% trans "Attractions" %}</a></li>
+                <li><a href="{% url "fiesta:blog:stream_type" 5%}">{% trans "Attractions" %}</a></li>
 
             </ul>
                 <div>{% include "partials/search.html" %}</div>

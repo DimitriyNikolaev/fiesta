@@ -25,7 +25,10 @@ class NewsStream(ListView):
             self.search_signal.send(sender=self, query=q, user=self.request.user)
             return gat_news_base_queryset().filter(title__icontains=q, is_displayed=True).order_by('date_added')
         else:
-            return gat_news_base_queryset().order_by('date_added')
+            if 'type' in self.kwargs:
+                return gat_news_base_queryset().filter(type=self.kwargs['type']).order_by('date_added')
+            else:
+                return gat_news_base_queryset().filter().order_by('date_added')
 
     def get_context_data(self, **kwargs):
         context = super(NewsStream, self).get_context_data(**kwargs)

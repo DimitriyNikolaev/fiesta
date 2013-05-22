@@ -28,7 +28,7 @@ header, nav, section, article, aside, footer {
 }
 
 .pull-right-control{margin-right: 20px;}
-.navribbon{padding-right: 20px; padding-left: 20px; }
+.navribbon {margin: 0px !important; }
 .navinnerribbon {background-color: #4498cd;background-image: linear-gradient(to bottom, #a7d8f8, #50a7de); border: 1px solid #2f1c15;background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#a7d8f8), to(#50a7de));background-image:-webkit-linear-gradient(top, #a7d8f8, #50a7de);background-image:-o-linear-gradient(top, #a7d8f8, #50a7de);background-image:linear-gradient(to bottom, #a7d8f8, #50a7de);}
 .navribbon .nav > li > a{color: #2f1c15; font-size: 18px; font-weight: bold;}
 
@@ -46,7 +46,7 @@ header, nav, section, article, aside, footer {
 }
 
 .menu input, textarea, .uneditable-input{
-    width: 180px;
+    width: 104px;
 }
 
 .authinput .form-horizontal .control-label { width: 130px; }

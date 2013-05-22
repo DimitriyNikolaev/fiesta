@@ -14,6 +14,7 @@ class BlogApp(Application):
     def get_urls(self):
         urlpatterns = patterns('',
         url(r'^$',self.news_stream.as_view(), name='index'),
+        url(r'^(?P<type>\d+)$',self.news_stream.as_view(), name='stream_type'),
         url(r'^news/(?P<pk>\d+)/$', self.single_news.as_view(), name='single_news')
         )
         return self.post_process_urls(urlpatterns)

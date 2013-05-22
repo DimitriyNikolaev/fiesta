@@ -6,7 +6,7 @@ from django.db import models
 from datetime import datetime, date
 
 from utils import upload_to_path
-from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS, FIESTA_NEWS_CITY
 
 class News(models.Model):
     type = models.PositiveSmallIntegerField(_('Type'),null=False, default=0, blank=False, choices=FIESTA_NEWSLINE_ENTITY_TYPES)
@@ -20,6 +20,7 @@ class News(models.Model):
     deadline_date = models.DateTimeField(_('Deadline date'), null=True, blank=True)
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
+    city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
 
     @models.permalink
     def get_absolute_url(self):

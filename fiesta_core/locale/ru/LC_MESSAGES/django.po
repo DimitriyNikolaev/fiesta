@@ -1,0 +1,365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-19 18:35+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+
+#: defaults.py:6 templates/fiesta/dashboard/blog/news_list.html:9
+#: templates/fiesta/partials/nav_menu.html:8
+msgid "News"
+msgstr "Новости"
+
+#: defaults.py:7
+msgid "Advertisement"
+msgstr "Реклама"
+
+#: defaults.py:8
+msgid "Event"
+msgstr "События"
+
+#: defaults.py:9
+msgid "Live"
+msgstr "Live"
+
+#: defaults.py:10
+msgid "Place"
+msgstr "Места"
+
+#: defaults.py:11
+msgid "Sight"
+msgstr "Достопримечательность"
+
+#: defaults.py:15
+msgid "Russian"
+msgstr "Русский"
+
+#: defaults.py:16
+msgid "Finnish"
+msgstr "Финский"
+
+#: defaults.py:20
+msgid "Saint Petersburg"
+msgstr "Санкт-Петербург"
+
+#: defaults.py:21
+msgid "Moscow"
+msgstr "Москва"
+
+#: apps/account/admin.py:25
+msgid "Personal info"
+msgstr ""
+
+#: apps/account/admin.py:28
+msgid "Permissions"
+msgstr ""
+
+#: apps/account/admin.py:29
+msgid "Important dates"
+msgstr ""
+
+#: apps/account/admin.py:30
+msgid "Groups"
+msgstr ""
+
+#: apps/account/forms.py:57
+msgid "Please choose a less common password"
+msgstr ""
+
+#: apps/account/forms.py:96 apps/account/forms.py:98
+msgid "Email Address"
+msgstr ""
+
+#: apps/account/forms.py:99
+msgid "Password"
+msgstr ""
+
+#: apps/account/forms.py:102
+msgid "Confirm Password"
+msgstr ""
+
+#: apps/account/forms.py:114
+msgid "A user with that email address already exists."
+msgstr ""
+
+#: apps/account/forms.py:121
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: apps/blog/models.py:12 templates/fiesta/dashboard/blog/news_list.html:25
+msgid "Type"
+msgstr "Тип"
+
+#: apps/blog/models.py:13
+msgid "Language"
+msgstr "Язык"
+
+#: apps/blog/models.py:14 apps/blog/models.py:37
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:77
+#: templates/fiesta/dashboard/blog/news_list.html:26
+msgid "Title"
+msgstr "Заголовок"
+
+#: apps/blog/models.py:15 apps/blog/models.py:38
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:78
+msgid "Text"
+msgstr "Текст"
+
+#: apps/blog/models.py:17 apps/blog/models.py:39
+msgid "Event date"
+msgstr "Дата события"
+
+#: apps/blog/models.py:18 apps/blog/models.py:40
+msgid "Externallink"
+msgstr "Внешняя ссылка"
+
+#: apps/blog/models.py:19 apps/blog/models.py:41
+msgid "Place name"
+msgstr "Название места"
+
+#: apps/blog/models.py:20 apps/blog/models.py:42
+msgid "Deadline date"
+msgstr "Дата окончания"
+
+#: apps/blog/models.py:21 apps/blog/models.py:43
+msgid "Contacts"
+msgstr "Контакты"
+
+#: apps/blog/models.py:22
+msgid "Is_displayed"
+msgstr "Показывать на сайте"
+
+#: apps/blog/models.py:46
+msgid "News photo"
+msgstr "Картинки"
+
+#: apps/blog/models.py:47
+msgid "Subnews photo"
+msgstr "Картинки"
+
+#: apps/blog/models.py:48
+msgid "is_newsphoto"
+msgstr ""
+
+#: apps/blog/models.py:51
+msgid "Display Order"
+msgstr ""
+
+#: apps/blog/models.py:52
+msgid ""
+"An image with a display order of\n"
+"                       zero will be the primary image for a product"
+msgstr ""
+
+#: apps/blog/models.py:59 apps/blog/models.py:60
+msgid "News Photo"
+msgstr ""
+
+#: apps/blog/models.py:85
+msgid "News tag value"
+msgstr ""
+
+#: apps/blog/views.py:34
+msgid "Latest news"
+msgstr "Последние новости"
+
+#: apps/blog/views.py:36
+#, python-format
+msgid "News matching '%(query)s'"
+msgstr ""
+
+#: apps/dashboard/blog/app.py:11
+msgid "Blog"
+msgstr ""
+
+#: apps/dashboard/blog/views.py:44 apps/dashboard/blog/views.py:61
+#: apps/dashboard/blog/views.py:90 apps/dashboard/blog/views.py:107
+#: apps/dashboard/blog/views.py:135 apps/dashboard/blog/views.py:154
+#: apps/dashboard/blog/views.py:185 apps/dashboard/blog/views.py:202
+msgid "Your submitted data was not valid - please correct the below errors"
+msgstr ""
+
+#: templates/fiesta/account/registration_form.html:8
+msgid "Register with sicual account"
+msgstr ""
+
+#: templates/fiesta/account/registration_form.html:12
+msgid "Register with email"
+msgstr ""
+
+#: templates/fiesta/account/registration_form.html:15
+msgid "Registering..."
+msgstr ""
+
+#: templates/fiesta/account/registration_form.html:15
+msgid "Register"
+msgstr ""
+
+#: templates/fiesta/account/user_profile.html:9
+msgid "Your profile"
+msgstr ""
+
+#: templates/fiesta/account/user_profile.html:12
+msgid "Updating..."
+msgstr ""
+
+#: templates/fiesta/account/user_profile.html:12
+msgid "Update"
+msgstr "Обновить"
+
+#: templates/fiesta/blog/news_stream.html:16
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:108
+#: templates/fiesta/dashboard/blog/news_list.html:61
+msgid "No news found."
+msgstr "Новости не найдены"
+
+#: templates/fiesta/dashboard/layout.html:25
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: templates/fiesta/dashboard/layout.html:26
+msgid "Logout"
+msgstr "Выход"
+
+#: templates/fiesta/dashboard/layout.html:80
+msgid "Dashboard"
+msgstr "Админка"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:9
+msgid "Create or update news"
+msgstr "Создать или обновить новость"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:17
+msgid "News details"
+msgstr "Новость"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:44
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:45
+msgid "Upload, change or remove photos"
+msgstr "Загрузить, изменить или удалить картинку"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:58
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:59
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:58
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:59
+msgid "or"
+msgstr "или"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:58
+msgid "Save news"
+msgstr "Сохранить новость"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:61
+msgid "View on site"
+msgstr ""
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:67
+msgid "SubNews list"
+msgstr "Список новостных подразделов"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:70
+msgid "Add subnews"
+msgstr "добавить новостной подразел"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:89
+#: templates/fiesta/dashboard/blog/news_list.html:42
+msgid "Actions"
+msgstr "Действия"
+
+#: templates/fiesta/dashboard/blog/news_add_or_update.html:93
+#: templates/fiesta/dashboard/blog/news_list.html:46
+msgid "Edit"
+msgstr "Редактироваь"
+
+#: templates/fiesta/dashboard/blog/news_list.html:14
+msgid "News list"
+msgstr "Список новостей"
+
+#: templates/fiesta/dashboard/blog/news_list.html:17
+msgid "Add news"
+msgstr "Добавить новость"
+
+#: templates/fiesta/dashboard/blog/news_list.html:27
+msgid "Date"
+msgstr "Дата"
+
+#: templates/fiesta/dashboard/blog/news_list.html:28
+msgid "is_displayed"
+msgstr "Показывать насайте"
+
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:9
+msgid "Create or update subnews"
+msgstr "Создать или обновить новостной подраздел"
+
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:18
+msgid "subnews details for:"
+msgstr ""
+
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:59
+msgid "Save subnews"
+msgstr "Сохранить новостной подраздел"
+
+#: templates/fiesta/dashboard/blog/subnews_add_or_update.html:66
+msgid "Unable to create object"
+msgstr ""
+
+#: templates/fiesta/partials/image_input_widget.html:5
+msgid "Upload Image"
+msgstr "Загрузить картинку"
+
+#: templates/fiesta/partials/nav_menu.html:6
+msgid "All news"
+msgstr "Вся лента"
+
+#: templates/fiesta/partials/nav_menu.html:10
+msgid "Places"
+msgstr "Места"
+
+#: templates/fiesta/partials/nav_menu.html:12
+msgid "Events"
+msgstr "События"
+
+#: templates/fiesta/partials/nav_menu.html:14
+msgid "Attractions"
+msgstr "Достопримечательности"
+
+#: templates/fiesta/partials/pagination.html:8
+msgid "previous"
+msgstr "пред."
+
+#: templates/fiesta/partials/pagination.html:11
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\tPage %(page_num)s of %(total_pages)s\n"
+"\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\tстраница %(page_num)s из %(total_pages)s\n"
+"\t\t\t"
+
+
+#: templates/fiesta/partials/pagination.html:16
+msgid "next"
+msgstr "след."
+
+#: view/decorators.py:34
+msgid "You must log in to access this page"
+msgstr ""
