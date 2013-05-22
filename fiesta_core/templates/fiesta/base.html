@@ -7,15 +7,12 @@
 
         <link href="/static/fiesta_core/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/static/fiesta_core/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
-
+        <link href="{{ STATIC_URL }}fiesta_core/css/dropdowns.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ STATIC_URL }}fiesta_core/css/toggle-switch.css" rel="stylesheet" type="text/css" media="screen" />
     {% endblock %}
     {% block extraheads %}{% endblock %}
     {% block scripts %}
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}fiesta_core/js/jquery/jquery-1.7.2.js"><\/script>')</script>
-        <script src="{{ STATIC_URL }}fiesta_core/js/jquery/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
-        <!-- Twitter Bootstrap -->
-        <script type="text/javascript" src="{{ STATIC_URL }}fiesta_core/js/bootstrap/bootstrap.min.js"></script>
+
     {% endblock %}
 </head>
 <body>

@@ -5,6 +5,8 @@
     <button class="btn btn-primary">{% trans "Upload Image" %}</button>
     {% endif %}
     <div class="input-field">
-        <input {{ input_attrs|safe }} />
+        <label>
+            <input {{ input_attrs|safe }} />
+        </label>
     </div>
 </div>

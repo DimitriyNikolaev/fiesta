@@ -1,8 +1,24 @@
-<article class="row-fluid">
-    <a href="{% url "fiesta:blog:single_news" news_item.id %}"><h3>{{ news_item.title }}</h3></a>
-    <span>{{ news_item.dateAdding }}</span>
-    {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
-    <p>{{ news_item.text}}</p>
+<article class="row-fluid article-prev">
+    <div class="span7">
+    {% if news_item.news_photos.all|length > 1 %}
+    <div id="news_slides_{{news_item.id  }}" class="slides">
+        {% for img in news_item.news_photos.all %}
+            {% if img.preview %}
+                <img src="{{ img.preview.url }}"/>
+            {% else %}
+                <img src="{{ img.image.url }}">
+            {% endif %}
+        {% endfor %}
+    </div>
+    <script>
+        $(function(){
+          $("#news_slides_{{news_item.id}}").slidesjs({
+            width: 400,
+            height: 300
+          });
+        });
+    </script>
+    {% else %}
     <div>
         {% for img in news_item.news_photos.all %}
             {% if img.preview %}
@@ -12,7 +28,15 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div>
+    {% endif %}
+    </div>
+    <div class="span5">
+        <a href="{% url "fiesta:blog:single_news" news_item.id %}"><h4>{{ news_item.title }}</h4></a>
+        <span>{{ news_item.dateAdding }}</span>
+        {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
+        <p>{{ news_item.text}}</p>
+        <div>
 
+        </div>
     </div>
 </article>
