@@ -23,12 +23,12 @@ class NewsStream(ListView):
         q = self.get_search_query()
         if q:
             self.search_signal.send(sender=self, query=q, user=self.request.user)
-            return gat_news_base_queryset().filter(title__icontains=q, is_displayed=True).order_by('date_added')
+            return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], title__icontains=q, is_displayed=True).order_by('date_added')
         else:
             if 'type' in self.kwargs:
-                return gat_news_base_queryset().filter(type=self.kwargs['type']).order_by('date_added')
+                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], type=self.kwargs['type']).order_by('date_added')
             else:
-                return gat_news_base_queryset().filter().order_by('date_added')
+                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY]).order_by('date_added')
 
     def get_context_data(self, **kwargs):
         context = super(NewsStream, self).get_context_data(**kwargs)

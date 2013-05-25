@@ -72,8 +72,8 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
+#MEDIA_ROOT = 'home/e/evesdrearu/fiesta/public_html/fiesta/assets/media'
 MEDIA_ROOT = location('assets/media')
-
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
@@ -83,6 +83,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
+#STATIC_ROOT = 'home/e/evesdrearu/fiesta/public_html/static' #location('static')
 STATIC_ROOT = '' #location('static')
 
 # URL prefix for static files.
@@ -121,7 +122,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'fiesta_core.middlewares.UnicUserId.UnicUserIdMiddleware'
+    'fiesta_core.middlewares.UnicUser.UnicUserMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -184,7 +185,7 @@ LOGGING = {
 }
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    "django.core.context_processors.static",
+    'django.core.context_processors.static',
     'fiesta_core.core.context_processors.user_metadata',
     'django.core.context_processors.i18n'
     )
@@ -197,3 +198,4 @@ AUTHENTICATION_BACKENDS = (
 CUSTOM_USER_MODEL = 'account.SocialUser'
 
 UNIC_TMP_USER_ID = 'unic_tmp_userid'
+UNIC_TMP_USER_CITY = 'unic_tmp_user_city'

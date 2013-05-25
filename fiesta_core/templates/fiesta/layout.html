@@ -4,6 +4,37 @@
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/jquery.slides.min.js"></script>
 {#    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap/bootstrap.min.js"></script>#}
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/dropdowns.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        //set_city();
+
+        $("input[name=city_dd]").change( function() {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + 14);
+            var c_value = $(this).val() + ";expires="+exdate.toUTCString();
+            document.cookie="unic_tmp_user_city="+c_value;
+            window.location.href = '{% url "fiesta:blog:index" %}';
+            })
+    });
+    var set_city = function()
+    {
+        var val  = getCookie('unic_tmp_user_city');
+        if(val)
+        {
+            var radioObj = $("input[name=city_dd]");
+            for(var i = 0; i < radioObj.length; i++) {
+                if(radioObj[i].value == val) {
+                    radioObj[i].checked = true;
+                }
+            }
+        }
+    }
+    function getCookie(name)
+    {
+        var re = new RegExp(name + "=([^;]+)"); var value = re.exec(document.cookie); return (value != null) ? value[1] : null;
+    }
+    </script>
 {% endblock %}
 
 {% block layout %}
@@ -18,12 +49,12 @@
                                 {% include "fiesta/partials/auth_tag.html" %}
                                 <div class="btn-group" >
                                     <div class=" btn dropdown-toggle" data-toggle="dropdown">
-                                        <span data-label-placement="" class="city-label">Санкт-Петербург</span>
+                                        <span data-label-placement="" class="city-label">{{ city }}</span>
                                         <span class="caret"></span>
                                     </div>
                                     <ul class="dropdown-menu">
-                                      <li><input type="radio" id="city_dd_spb" name="city_dd" value="spb"><label for="city_dd_spb">Санкт-Петербург</label></li>
-                                      <li><input type="radio" id="city_dd_msk" name="city_dd" value="msk"><label for="city_dd_msk">Москва</label></li>
+                                      <li><input type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">Санкт-Петербург</label></li>
+                                      <li><input type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">Москва</label></li>
                                     </ul>
                                 </div>
                             </div>
@@ -37,10 +68,10 @@
                                     <div class="control-group">
                                         <div class="controls switch">
 
-                                            <input id="rus" value="ru" name="language" type="radio" onclick="this.form.submit();">
+                                            <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
                                             <label for="rus" onclick="">rus</label>
 
-                                            <input id="eng" value="en" name="language" type="radio" onclick="this.form.submit();">
+                                            <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
                                             <label for="eng" onclick="">eng</label>
 
                                             <span class="slide-button well"></span>

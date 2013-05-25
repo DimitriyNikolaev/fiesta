@@ -6,10 +6,10 @@ body{
     color:#333;
     height:100%;
     background-color:#FFFFFF;
-    background-image:linear-gradient(to bottom, #fffff, #50a7de);
+    /*background-image:linear-gradient(to bottom, #fffff, #50a7de);
     background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#50a7de));
     background-image:-webkit-linear-gradient(top, #ffffff, #50a7de);
-    background-image:-o-linear-gradient(top, #ffffff, #50a7de);
+    background-image:-o-linear-gradient(top, #ffffff, #50a7de);*/
 
     background-repeat: repeat;
     background-size: contain;
