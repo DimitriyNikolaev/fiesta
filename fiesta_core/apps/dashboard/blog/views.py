@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from fiesta_core.apps.blog.models import News, Subnews
 from forms import NewsForm,NewsPhotoImageSet, SubnewsForm, SubnewsPhotoImageSet
+from fiesta_core.apps.blog.model_extension import NewsPreview, RedisKeys
+from fiesta_core.global_utils.redis_adapter import redis_adapter
+import pickle
 
 class NewsList(ListView):
     template_name = 'dashboard/blog/news_list.html'
@@ -49,12 +52,18 @@ class AddNewsView(CreateView):
     def form_valid(self, form):
         news = form.save()
 
+
         photos_formset = NewsPhotoImageSet(self.request.POST,
             self.request.FILES,
             instance=news)
         is_valid = all([photos_formset.is_valid()])
         if is_valid:
             photos_formset.save()
+            #save preview to redis
+            photos = news.news_photos.all()
+            preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos > 0 else '')
+            preview_serialized = pickle.dumps(preview)
+            redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
             return HttpResponseRedirect(self.get_success_url())
 
         messages.error(self.request,
@@ -101,6 +110,11 @@ class UpdateNewsView(UpdateView):
         is_valid = all([photos_formset.is_valid()])
         if is_valid:
             photos_formset.save()
+            #save preview to redis
+            photos = news.news_photos.all()
+            preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos > 0 else '')
+            preview_serialized = pickle.dumps(preview)
+            redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
             return HttpResponseRedirect(self.get_success_url())
 
         messages.error(self.request,
