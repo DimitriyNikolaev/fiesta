@@ -4,7 +4,8 @@ __author__ = 'dimitriy'
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from datetime import datetime, date
-
+from fiesta_core.global_utils.redis_adapter import redis_adapter
+from model_extension import RedisKeys
 from utils import upload_to_path
 from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS, FIESTA_NEWS_CITY
 
@@ -22,6 +23,9 @@ class News(models.Model):
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
 
+    @property
+    def views_count(self):
+        return redis_adapter.scard(RedisKeys.news_views % self.id)
     @models.permalink
     def get_absolute_url(self):
         u"""Return a product's absolute url"""
