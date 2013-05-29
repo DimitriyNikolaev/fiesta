@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load pop_news %}
 {% block scripts %}
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}fiesta_core/js/jquery-1_9/jquery-1.9.1.min.js"><\/script>')</script>
@@ -39,30 +40,44 @@
 {% endblock %}
 
 {% block layout %}
-    <div class="container">
-        <section id="middle" class="span10">
+    <div id="wrapper">
+        <section id="middle">
             <div id="container">
-                <header>
+                <header id="header">
                 {% block header %}
-                    <div class="auth">
-                        <a href="#" class="login-link">Вход</a>&nbsp;/&nbsp;<a href="#" class="reg-link">Регистрация</a>
-                    </div>
-                    <div class="locale">
-                        <form action="/i18n/setlang/" method="POST">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="/" />
-                            <div class="control-group">
-                                <div class="controls switch">
-                                    <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
-                                    <label for="rus" onclick="">rus</label>
-
-                                    <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
-                                    <label for="eng" onclick="">eng</label>
-
-                                    <span class="slide-button well"></span>
-                                </div>
+                    <div class="first-block">
+                        <div class="auth">
+                            <a href="#" class="login-link">{% trans "Sign in" %}</a>&nbsp;/&nbsp;<a href="#" class="reg-link">{% trans "Sign up" %}</a>
+                        </div>
+                        <div class="cities-selector" >
+                            <div class="dropdown-toggle" data-toggle="dropdown">
+                                <span data-label-placement="" class="city-label">{{ city }}</span>
+                                <span class="caret"></span>
                             </div>
-                        </form>
+                            <ul class="dropdown-menu">
+                              <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
+                              <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="second-block">
+                        <div class="locale">
+                            <form action="/i18n/setlang/" method="POST">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="/" />
+                                <div class="control-group">
+                                    <div class="controls switch">
+                                        <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
+                                        <label for="rus" onclick="">rus</label>
+
+                                        <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
+                                        <label for="eng" onclick="">eng</label>
+
+                                        <span class="slide-button well"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="cb"> </div>
                     <div class="main-menu">
@@ -70,21 +85,12 @@
                     </div>
 
 
-                    <div >
+                    {% comment %}<div >
                         <div>
-                            {% comment %}{% include "fiesta/partials/auth_tag.html" %}{% endcomment %}
-                            <div class="btn-group" >
-                                <div class=" btn dropdown-toggle" data-toggle="dropdown">
-                                    <span data-label-placement="" class="city-label">{{ city }}</span>
-                                    <span class="caret"></span>
-                                </div>
-                                <ul class="dropdown-menu">
-                                  <li><input type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">Санкт-Петербург</label></li>
-                                  <li><input type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">Москва</label></li>
-                                </ul>
-                            </div>
+                            {% include "fiesta/partials/auth_tag.html" %}
+
                         </div>
-                    </div>
+                    </div>{% endcomment %}
 
                 {% endblock %}
                 </header>
@@ -114,7 +120,7 @@
             </aside>
         </section>
         <div style="clear:both;"></div>
-        <footer id="footer" class="span10">
+        <footer id="footer">
             <div class="footer-container">
                  <strong>Footer:</strong> Mus elit Morbi mus enim lacus at quis Nam eget morbi. Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
             </div>

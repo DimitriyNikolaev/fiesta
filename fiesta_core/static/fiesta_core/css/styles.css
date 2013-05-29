@@ -1,54 +1,131 @@
 * {margin:0;padding:0;outline:none} /* обнуляем все элементы */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
 /* общие стили */
-html {height:100%}
+
+html,body {height:100%}
 body{
     /*font:normal 1em/1.3 arial, helvetica, sans-serif;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: #ffffff;
     color:#535353;
     height:100%;
-    background-image: linear-gradient(bottom, #fff 100%, #50A8DE 0%);
-    background-image: -o-linear-gradient(bottom, #fff 100%, #50A8DE 0%);
-    background-image: -moz-linear-gradient(bottom, #fff 100%, #50A8DE 0%);
-    background-image: -webkit-linear-gradient(bottom, #fff 100%, #50A8DE 0%);
-    background-image: -ms-linear-gradient(bottom, #fff 100%, #50A8DE 0%);
-
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(1, #fff),
-        color-stop(0, #50A8DE)
-    );
+    background-repeat: no-repeat;
+    background-image: linear-gradient(bottom, #50A8DE, #fff);
+    background-image: -o-linear-gradient(bottom, #50A8DE, #fff);
+    background-image: -moz-linear-gradient(bottom, #50A8DE, #fff);
+    background-image: -webkit-linear-gradient(bottom, #50A8DE, #fff);
+    background-image: -ms-linear-gradient(bottom, #50A8DE, #fff);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fff), color-stop(0, #50A8DE));
     background-attachment: fixed;
 }
+label,
+select,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+}
+button,input,select,textarea { margin: 0; font-size: 100%; vertical-align: middle;}
+button, input { *overflow: visible; line-height: normal;}
+a {color: #0088cc; text-decoration: none;}
+a:hover, a:focus { color: #005580; text-decoration: underline;}
+img {
+  /* Responsive images (ensure images don't scale beyond their parents) */
 
-html, body {position: relative;}
+  max-width: 100%; /* Part 1: Set a maxium relative to the parent */
+  width: auto\9;   /* IE7-8 need help adjusting responsive images */
+  height: auto;    /* Part 2: Scale the height according to the width, otherwise you get stretching */
+
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+.well { min-height: 20px; padding: 19px; margin-bottom: 20px; background-color: #f5f5f5; border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
 
 .cb{clear: both; font-size: 0px; line-height: 0px;}
 .fl{float: left;}
 
-.container{background: #EFEFEF; }
+#wrapper{width: 1034px; margin: 0 auto; background: #EFEFEF; position: relative; }
 
 #header { border-bottom: solid 2px #FFC000; width: 100%;}
-#middle {border-right: solid 2px #ddd; background: #fff url(../img/logo.png) no-repeat top center;  position: relative;}
-#container {float: left; overflow: hidden; padding: 20px 20px 100px 20px; width: 662px;}
+#middle {width: 754px; border-right: solid 2px #ddd; background: #fff url(../img/logo.png) no-repeat top center;  position: relative;}
+#container {float: left; overflow: hidden; padding: 20px 20px 100px 20px; width: 714px;}
 #content {padding: 20px 0 0 0;}
-#sideRight { float: right; margin-right: -282px; position: relative;}
+#sideRight { width: 278px; float: right; margin-right: -280px; position: relative;}
 #footer { height: 100px;background: #BFF08E;margin: -100px 0 0 0; position: absolute;}
 #footer .footer-container{border-top: solid 2px #FFC000; margin:0 20px ;}
 
 
 /* Main menu styles*/
-.main-menu{ margin: 45px 0 0 0; background: #F6F6F6;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;}
+.main-menu{ background: #F6F6F6;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;}
 .main-menu ul {list-style: none; list-style-type: none; margin: 0; padding: 0;}
-.main-menu li{ float: left; padding: 5px 0 5px 6px;}
-.main-menu li a {display: block; float: left; padding: 3px 10px; color: #000; font-weight: bold;}
+.main-menu li{ float: left; padding: 6px 0 6px 6px;}
+.main-menu li a {display: block; float: left; padding: 4px 10px; color: #000; font-weight: bold;}
 .main-menu li a:hover, .main-menu li.current a{ background: #FCDDA7; border-radius: 15px; text-decoration: none;}
 .top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px;}
 .top-search form{margin: 0; padding: 0;}
-.top-search input.search-text{border: none; width: 70px; color: #111; background: none;box-shadow:none;-webkit-transition:none;transition:none;border-radius:none; margin: 0;}
+.top-search input.search-text{display: inline-block; background: none; height: 20px; padding: 4px 6px; font-size: 12px; line-height: 20px; 
+    vertical-align: middle; border: none; width: 120px; color: #111; margin: 0;}
+
+/* Header blocks */
+#header .first-block, #header .logo-block{display: block; float: left;}
+#header .logo-block{}
+#header .second-block{float: right;}
+
+/* Cities selector styles*/
+.cities-selector{display: inline-block; position: relative; background: #fff;margin: 35px 0 10px 0;}
+.cities-selector .dropdown-toggle{ position: relative;
+    display: inline-block; padding: 10px 20px 10px 10px; background: #fff url(../img/arrow-down.png) no-repeat right 5px center; cursor: pointer;}
+.cities-selector .dropdown-toggle span{cursor: pointer; border-bottom: dotted 1px #666; color: #333;}
+.cities-selector ul{list-style: none;
+    -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; 
+    display: none; position: absolute; min-width: 100%;
+    background: #fff; z-index: 2; left: 0; top:100%; margin-top:-1px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;-moz-background-clip: padding;}
+.cities-selector ul li{padding: 0 10px; border: solid #ddd; border-width: 0 1px;}
+.cities-selector ul li label{display: block;border-bottom: solid 1px #ddd;padding: 5px 0; color: #333;}
+.cities-selector ul li label:hover{text-decoration: none;}
+.cities-selector ul li:first-child{border-top-width: 1px;}
+.cities-selector ul li:last-child{border-bottom-width: 1px;-webkit-border-bottom-right-radius: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;}
+.cities-selector ul li:last-child a{border-bottom: none;}
+.open > .dropdown-menu { display: block;}
+.open > .dropdown-toggle{border: solid #ddd; border-width: 1px 1px 0px 1px; padding: 9px 19px 10px 9px; z-index: 3; 
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-position: right 4px center;}
+.open > .dropdown-toggle span{border-bottom-color: #fff;}
 
 /* Auth styles*/
-.auth {background: url(../img/auth-icon.png) no-repeat; padding: 0 0 0 20px; float: left;}
+.auth {background: url(../img/auth-icon.png) no-repeat; padding: 0 0 0 20px; }
 .auth a.login-link,.auth a.reg-link{text-transform: uppercase; color: #666;}
 .auth a.login-link{border-bottom: dotted 1px #666;}
 .auth a.reg-link{border-bottom: solid 1px #666; font-size: 95%;}

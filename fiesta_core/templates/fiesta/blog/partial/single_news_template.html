@@ -3,17 +3,17 @@
         <div id="news_slides_{{news_item.id  }}" class="slides">
             {% for img in news_item.news_photos.all %}
                 {% if img.preview %}
-                    <img src="{{ img.preview.url }}"/>
+                    <img class="photo" src="{{ img.preview.url }}"/>
                 {% else %}
-                    <img src="{{ img.image.url }}">
+                    <img class="photo" src="{{ img.image.url }}">
                 {% endif %}
             {% endfor %}
         </div>
         <script>
             $(function(){
               $("#news_slides_{{news_item.id}}").slidesjs({
-                width: 400,
-                height: 300
+                //width: 400,
+                //height: 300
               });
             });
         </script>

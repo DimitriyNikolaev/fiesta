@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-19 18:35+0400\n"
+"POT-Creation-Date: 2013-05-30 01:28+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: defaults.py:6 templates/fiesta/dashboard/blog/news_list.html:9
-#: templates/fiesta/partials/nav_menu.html:8
+#: templates/fiesta/partials/nav_menu.html:5
 msgid "News"
 msgstr "Новости"
 
@@ -52,11 +52,11 @@ msgstr "Русский"
 msgid "Finnish"
 msgstr "Финский"
 
-#: defaults.py:20
+#: defaults.py:20 templates/fiesta/layout.html:58
 msgid "Saint Petersburg"
 msgstr "Санкт-Петербург"
 
-#: defaults.py:21
+#: defaults.py:21 templates/fiesta/layout.html:59
 msgid "Moscow"
 msgstr "Москва"
 
@@ -100,84 +100,88 @@ msgstr ""
 msgid "The two password fields didn't match."
 msgstr ""
 
-#: apps/blog/models.py:12 templates/fiesta/dashboard/blog/news_list.html:25
+#: apps/blog/models.py:13 templates/fiesta/dashboard/blog/news_list.html:25
 msgid "Type"
 msgstr "Тип"
 
-#: apps/blog/models.py:13
+#: apps/blog/models.py:14
 msgid "Language"
 msgstr "Язык"
 
-#: apps/blog/models.py:14 apps/blog/models.py:37
+#: apps/blog/models.py:15 apps/blog/models.py:42
 #: templates/fiesta/dashboard/blog/news_add_or_update.html:77
 #: templates/fiesta/dashboard/blog/news_list.html:26
 msgid "Title"
 msgstr "Заголовок"
 
-#: apps/blog/models.py:15 apps/blog/models.py:38
+#: apps/blog/models.py:16 apps/blog/models.py:43
 #: templates/fiesta/dashboard/blog/news_add_or_update.html:78
 msgid "Text"
 msgstr "Текст"
 
-#: apps/blog/models.py:17 apps/blog/models.py:39
+#: apps/blog/models.py:18 apps/blog/models.py:44
 msgid "Event date"
 msgstr "Дата события"
 
-#: apps/blog/models.py:18 apps/blog/models.py:40
+#: apps/blog/models.py:19 apps/blog/models.py:45
 msgid "Externallink"
 msgstr "Внешняя ссылка"
 
-#: apps/blog/models.py:19 apps/blog/models.py:41
+#: apps/blog/models.py:20 apps/blog/models.py:46
 msgid "Place name"
 msgstr "Название места"
 
-#: apps/blog/models.py:20 apps/blog/models.py:42
+#: apps/blog/models.py:21 apps/blog/models.py:47
 msgid "Deadline date"
 msgstr "Дата окончания"
 
-#: apps/blog/models.py:21 apps/blog/models.py:43
+#: apps/blog/models.py:22 apps/blog/models.py:48
 msgid "Contacts"
 msgstr "Контакты"
 
-#: apps/blog/models.py:22
+#: apps/blog/models.py:23
 msgid "Is_displayed"
 msgstr "Показывать на сайте"
 
-#: apps/blog/models.py:46
-msgid "News photo"
-msgstr "Картинки"
-
-#: apps/blog/models.py:47
-msgid "Subnews photo"
-msgstr "Картинки"
-
-#: apps/blog/models.py:48
-msgid "is_newsphoto"
+#: apps/blog/models.py:24
+msgid "City"
 msgstr ""
 
 #: apps/blog/models.py:51
+msgid "News photo"
+msgstr "Картинки"
+
+#: apps/blog/models.py:52
+msgid "Subnews photo"
+msgstr "Картинки"
+
+#: apps/blog/models.py:53
+msgid "is_newsphoto"
+msgstr ""
+
+#: apps/blog/models.py:56
 msgid "Display Order"
 msgstr ""
 
-#: apps/blog/models.py:52
+#: apps/blog/models.py:57
 msgid ""
 "An image with a display order of\n"
 "                       zero will be the primary image for a product"
 msgstr ""
 
-#: apps/blog/models.py:59 apps/blog/models.py:60
+#: apps/blog/models.py:64 apps/blog/models.py:65
 msgid "News Photo"
 msgstr ""
 
-#: apps/blog/models.py:85
+#: apps/blog/models.py:90
 msgid "News tag value"
 msgstr ""
 
-#: apps/blog/views.py:34
+#: apps/blog/views.py:39
 msgid "Latest news"
 msgstr "Последние новости"
 
-#: apps/blog/views.py:36
+#: apps/blog/views.py:41
 #, python-format
 msgid "News matching '%(query)s'"
 msgstr ""
@@ -186,12 +190,20 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: apps/dashboard/blog/views.py:44 apps/dashboard/blog/views.py:61
-#: apps/dashboard/blog/views.py:90 apps/dashboard/blog/views.py:107
-#: apps/dashboard/blog/views.py:135 apps/dashboard/blog/views.py:154
-#: apps/dashboard/blog/views.py:185 apps/dashboard/blog/views.py:202
+#: apps/dashboard/blog/views.py:47 apps/dashboard/blog/views.py:70
+#: apps/dashboard/blog/views.py:99 apps/dashboard/blog/views.py:121
+#: apps/dashboard/blog/views.py:149 apps/dashboard/blog/views.py:168
+#: apps/dashboard/blog/views.py:199 apps/dashboard/blog/views.py:216
 msgid "Your submitted data was not valid - please correct the below errors"
 msgstr ""
+
+#: templates/fiesta/layout.html:50
+msgid "Sign in"
+msgstr "Вход"
+
+#: templates/fiesta/layout.html:50
+msgid "Sign up"
+msgstr "Регистрация"
 
 #: templates/fiesta/account/registration_form.html:8
 msgid "Register with sicual account"
@@ -221,7 +233,7 @@ msgstr ""
 msgid "Update"
 msgstr "Обновить"
 
-#: templates/fiesta/blog/news_stream.html:16
+#: templates/fiesta/blog/news_stream.html:13
 #: templates/fiesta/dashboard/blog/news_add_or_update.html:108
 #: templates/fiesta/dashboard/blog/news_list.html:61
 msgid "No news found."
@@ -324,19 +336,19 @@ msgstr ""
 msgid "Upload Image"
 msgstr "Загрузить картинку"
 
-#: templates/fiesta/partials/nav_menu.html:6
+#: templates/fiesta/partials/nav_menu.html:4
 msgid "All news"
 msgstr "Вся лента"
 
-#: templates/fiesta/partials/nav_menu.html:10
+#: templates/fiesta/partials/nav_menu.html:6
 msgid "Places"
 msgstr "Места"
 
-#: templates/fiesta/partials/nav_menu.html:12
+#: templates/fiesta/partials/nav_menu.html:7
 msgid "Events"
 msgstr "События"
 
-#: templates/fiesta/partials/nav_menu.html:14
+#: templates/fiesta/partials/nav_menu.html:8
 msgid "Attractions"
 msgstr "Достопримечательности"
 
@@ -354,7 +366,6 @@ msgstr ""
 "\n"
 "\t\t\t\tстраница %(page_num)s из %(total_pages)s\n"
 "\t\t\t"
-
 
 #: templates/fiesta/partials/pagination.html:16
 msgid "next"
