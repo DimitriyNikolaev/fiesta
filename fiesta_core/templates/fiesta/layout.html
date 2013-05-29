@@ -47,7 +47,7 @@
                 {% block header %}
                     <div class="first-block">
                         <div class="auth">
-                            <a href="#" class="login-link">{% trans "Sign in" %}</a>&nbsp;/&nbsp;<a href="#" class="reg-link">{% trans "Sign up" %}</a>
+                            <a href="#" class="login-link">{% trans "Sign in" %}</a>&nbsp;/&nbsp;<a href="{% url "fiesta:account:registration" %}" class="reg-link">{% trans "Sign up" %}</a>
                         </div>
                         <div class="cities-selector" >
                             <div class="dropdown-toggle" data-toggle="dropdown">
