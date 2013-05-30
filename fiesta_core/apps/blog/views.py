@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'dimitriy'
+import pickle
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
 from django.conf import settings
 from models import News
 from fiesta_core.global_utils.redis_adapter import redis_adapter
+from model_extension import RedisKeys, NewsPreview
 
 def gat_news_base_queryset():
     return News.objects.select_related('news_photos').filter(is_displayed=True)
@@ -23,12 +25,12 @@ class NewsStream(ListView):
         q = self.get_search_query()
         if q:
             self.search_signal.send(sender=self, query=q, user=self.request.user)
-            return gat_news_base_queryset().filter(title__icontains=q, is_displayed=True).order_by('date_added')
+            return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], title__icontains=q, is_displayed=True).order_by('date_added')
         else:
             if 'type' in self.kwargs:
-                return gat_news_base_queryset().filter(type=self.kwargs['type']).order_by('date_added')
+                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], type=self.kwargs['type']).order_by('date_added')
             else:
-                return gat_news_base_queryset().filter().order_by('date_added')
+                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY]).order_by('date_added')
 
     def get_context_data(self, **kwargs):
         context = super(NewsStream, self).get_context_data(**kwargs)
@@ -52,12 +54,19 @@ class SingleNewsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SingleNewsView, self).get_context_data(**kwargs)
-        context['views_count'] = 0
+        context['views_count'] = self.setAnalitic()
         return context;
 
-    def get(self, request, *args, **kwargs):
-        if settings.UNIC_TMP_USER_ID in request.COOKIES:
-            redis_adapter().sadd('news_%s' % '')
-        return self.render_to_response(self.get_context_data(), **kwargs)
-        pass
+    def setAnalitic(self):
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        if settings.UNIC_TMP_USER_ID in self.request.COOKIES:
+            unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
+            redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
+        views_count = redis_adapter.scard(RedisKeys.news_views % pk)
+        redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
+        return views_count
+
+
+
+
 

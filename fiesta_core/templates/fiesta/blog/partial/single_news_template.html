@@ -1,42 +1,42 @@
-<article class="row-fluid article-prev">
-    <div class="span7">
+<article class="wall-article">
     {% if news_item.news_photos.all|length > 1 %}
-    <div id="news_slides_{{news_item.id  }}" class="slides">
-        {% for img in news_item.news_photos.all %}
-            {% if img.preview %}
-                <img src="{{ img.preview.url }}"/>
-            {% else %}
-                <img src="{{ img.image.url }}">
-            {% endif %}
-        {% endfor %}
-    </div>
-    <script>
-        $(function(){
-          $("#news_slides_{{news_item.id}}").slidesjs({
-            width: 400,
-            height: 300
-          });
-        });
-    </script>
+        <div id="news_slides_{{news_item.id  }}" class="slides">
+            {% for img in news_item.news_photos.all %}
+                {% if img.preview %}
+                    <img class="photo" src="{{ img.preview.url }}"/>
+                {% else %}
+                    <img class="photo" src="{{ img.image.url }}">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <script>
+            $(function(){
+              $("#news_slides_{{news_item.id}}").slidesjs({
+                //width: 400,
+                //height: 300
+              });
+            });
+        </script>
     {% else %}
-    <div>
+    <a href="{% url "fiesta:blog:single_news" news_item.id %}">
         {% for img in news_item.news_photos.all %}
             {% if img.preview %}
-                <img src="{{ img.preview.url }}"/>
+                <img class="photo" src="{{ img.preview.url }}"/>
             {% else %}
-                <img src="{{ img.image.url }}">
+                <img class="photo" src="{{ img.image.url }}">
             {% endif %}
         {% endfor %}
-    </div>
+    </a>
     {% endif %}
-    </div>
-    <div class="span5">
-        <a href="{% url "fiesta:blog:single_news" news_item.id %}"><h4>{{ news_item.title }}</h4></a>
+
+    <section class="article-content">
+        <h2>{{ news_item.title }}</h2>
         <span>{{ news_item.dateAdding }}</span>
         {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
-        <p>{{ news_item.text}}</p>
+        <div class="text">{{ news_item.text}}</div>
         <div>
-
+            {{ news_item.views_count }}
         </div>
-    </div>
+    </section>
+<div class="cb"> </div>
 </article>

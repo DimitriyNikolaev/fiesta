@@ -1,88 +1,131 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load pop_news %}
 {% block scripts %}
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}fiesta_core/js/jquery-1_9/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/jquery.slides.min.js"></script>
 {#    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap/bootstrap.min.js"></script>#}
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/dropdowns.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        //set_city();
+
+        $("input[name=city_dd]").change( function() {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + 14);
+            var c_value = $(this).val() + ";expires="+exdate.toUTCString();
+            document.cookie="unic_tmp_user_city="+c_value;
+            window.location.href = '{% url "fiesta:blog:index" %}';
+            })
+    });
+    var set_city = function()
+    {
+        var val  = getCookie('unic_tmp_user_city');
+        if(val)
+        {
+            var radioObj = $("input[name=city_dd]");
+            for(var i = 0; i < radioObj.length; i++) {
+                if(radioObj[i].value == val) {
+                    radioObj[i].checked = true;
+                }
+            }
+        }
+    }
+    function getCookie(name)
+    {
+        var re = new RegExp(name + "=([^;]+)"); var value = re.exec(document.cookie); return (value != null) ? value[1] : null;
+    }
+    </script>
 {% endblock %}
 
 {% block layout %}
-    <div class="container">
-        <div class="row">
-            <section class="span8 section-layout">
-                <header>
+    <div id="wrapper">
+        <section id="middle">
+            <div id="container">
+                <header id="header">
                 {% block header %}
-                    <div class="container-fluid">
-                        <div class="row-fluid">
-                            <div class="span3">
-                                {% include "fiesta/partials/auth_tag.html" %}
-                                <div class="btn-group" >
-                                    <div class=" btn dropdown-toggle" data-toggle="dropdown">
-                                        <span data-label-placement="" class="city-label">Санкт-Петербург</span>
-                                        <span class="caret"></span>
-                                    </div>
-                                    <ul class="dropdown-menu">
-                                      <li><input type="radio" id="city_dd_spb" name="city_dd" value="spb"><label for="city_dd_spb">Санкт-Петербург</label></li>
-                                      <li><input type="radio" id="city_dd_msk" name="city_dd" value="msk"><label for="city_dd_msk">Москва</label></li>
-                                    </ul>
-                                </div>
+                    <div class="first-block">
+                        <div class="auth">
+                            <a href="#" class="login-link">{% trans "Sign in" %}</a>&nbsp;/&nbsp;<a href="{% url "fiesta:account:registration" %}" class="reg-link">{% trans "Sign up" %}</a>
+                        </div>
+                        <div class="cities-selector" >
+                            <div class="dropdown-toggle" data-toggle="dropdown">
+                                <span data-label-placement="" class="city-label">{{ city }}</span>
+                                <span class="caret"></span>
                             </div>
-                            <div class="span7">
-                                <a href="#"><img src="{{ STATIC_URL }}fiesta_core/img/fiesta_logo_new.png"/></a>
-                            </div>
-                            <div class="span2 locale">
-                                <form class="form-horizontal" action="/i18n/setlang/" method="POST">
-                                    {% csrf_token %}
-                                    <input name="next" type="hidden" value="/" />
-                                    <div class="control-group">
-                                        <div class="controls switch">
-
-                                            <input id="rus" value="ru" name="language" type="radio" onclick="this.form.submit();">
-                                            <label for="rus" onclick="">rus</label>
-
-                                            <input id="eng" value="en" name="language" type="radio" onclick="this.form.submit();">
-                                            <label for="eng" onclick="">eng</label>
-
-                                            <span class="slide-button well"></span>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
+                            <ul class="dropdown-menu">
+                              <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
+                              <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
+                            </ul>
                         </div>
                     </div>
+                    <div class="second-block">
+                        <div class="locale">
+                            <form action="/i18n/setlang/" method="POST">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="/" />
+                                <div class="control-group">
+                                    <div class="controls switch">
+                                        <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
+                                        <label for="rus" onclick="">rus</label>
+
+                                        <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
+                                        <label for="eng" onclick="">eng</label>
+
+                                        <span class="slide-button well"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="cb"> </div>
+                    <div class="main-menu">
+                        {% include "partials/nav_menu.html" %}
+                    </div>
+
+
+                    {% comment %}<div >
+                        <div>
+                            {% include "fiesta/partials/auth_tag.html" %}
+
+                        </div>
+                    </div>{% endcomment %}
+
                 {% endblock %}
                 </header>
-                <section>
+                <div id="content">
                 {% block content_wrapper %}
 
                 {% endblock %}
-                </section>
-                <footer>
-                {% block footer %}
-
-                {% endblock %}
-                </footer>
-            </section>
-            <aside class="span4 aside-add-blocks">
-                <div class="container-fluid">
-                    <div class="row-fluid">
+                </div>
+            </div>
+            <aside class="span4">
+                <div>
+                    <div >
                         <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <h4>Популярные события</h4>
-                            <img src="{{ STATIC_URL }}fiesta_core/img/popevent.png">
+                    <div >
+                        <div >
+                            {% pop_news_list %}
                         </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <div >
+                        <div >
                             <h4>Присоединяйтесь</h4>
                             <img src="{{ STATIC_URL }}fiesta_core/img/vk.png">
                         </div>
                     </div>
                 </div>
             </aside>
-        </div>
+        </section>
+        <div style="clear:both;"></div>
+        <footer id="footer">
+            <div class="footer-container">
+                 <strong>Footer:</strong> Mus elit Morbi mus enim lacus at quis Nam eget morbi. Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
+            </div>
+        </footer><!-- #footer -->
+
+
     </div>
 {% endblock %}

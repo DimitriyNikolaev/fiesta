@@ -1,21 +1,17 @@
-{% extends "blog/blog_layout.html" %}
+{% extends "layout.html" %}
 {% load i18n %}
-{% block news_stream %}
-    <div class="container-fluid">
+{% block content_wrapper %}
         {% if news.count %}
-            <section>
-                <div>
+
                     {% include "partials/pagination.html" %}
                         {% for news_item in news %}
                             {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
                         {% endfor %}
                     {% include "partials/pagination.html" %}
-                </div>
-            </section>
+
         {% else %}
             <p>{% trans "No news found." %}</p>
         {% endif %}
-    </div>
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}
