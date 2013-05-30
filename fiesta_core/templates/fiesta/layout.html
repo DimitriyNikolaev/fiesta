@@ -51,8 +51,7 @@
                         </div>
                         <div class="cities-selector" >
                             <div class="dropdown-toggle" data-toggle="dropdown">
-                                <span data-label-placement="" class="city-label">{{ city }}</span>
-                                <span class="caret"></span>
+                                <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
                             </div>
                             <ul class="dropdown-menu">
                               <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
@@ -96,11 +95,10 @@
                 </header>
                 <div id="content">
                 {% block content_wrapper %}
-
                 {% endblock %}
                 </div>
             </div>
-            <aside class="span4">
+            <aside  id="sideRight">
                 <div>
                     <div >
                         <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>
@@ -118,14 +116,22 @@
                     </div>
                 </div>
             </aside>
+            <div class="cb">&nbsp;</div>
+            <footer id="footer">
+                <div class="footer-container">
+                    <div class="copyright">© Blog Fiesta 2013</div>
+                    <ul class="footer-menu">
+                        <li><a href="#">Реклама</a></li>
+                        <li><a href="#">Связаться с нами</a></li>
+                    </ul>
+                    <ul class="soc-icons">
+                        <li><a href="#" class="vk" title="вконтакте"></a></li>
+                        <li><a href="#" class="facebook" title="facebook"></a></li>
+                        <li><a href="#" class="twitter" title="twitter"></a></li>
+                    </ul>
+                    <div class="cb">&nbsp;</div>
+                </div>
+            </footer><!-- #footer -->
         </section>
-        <div style="clear:both;"></div>
-        <footer id="footer">
-            <div class="footer-container">
-                 <strong>Footer:</strong> Mus elit Morbi mus enim lacus at quis Nam eget morbi. Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
-            </div>
-        </footer><!-- #footer -->
-
-
     </div>
 {% endblock %}
