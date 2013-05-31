@@ -2,14 +2,16 @@
 __author__ = 'dimitriy'
 
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, DateField
 from fiesta_core.apps.blog.models import News,NewsPhoto, NewsTags, Subnews
 from fiesta_core.forms.widgets import ImageInput
 from django.forms.models import inlineformset_factory
 from fiesta_core.global_utils.image_utils import get_preview
 
 
+
 class NewsForm(ModelForm):
+    date_added = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
     class Meta:
         model = News
 

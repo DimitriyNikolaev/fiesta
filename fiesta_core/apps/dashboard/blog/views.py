@@ -41,7 +41,7 @@ class AddNewsView(CreateView):
         return ctx
     def form_invalid(self, form):
 
-        photos_formset = NewsPhotoImageSet(self.request.POST, self.request.FILES)
+        photos_formset = NewsPhotoImageSet(self.request.POST, self.request.FILES, instance=self.object)
 
         messages.error(self.request,
             _("Your submitted data was not valid - please "
@@ -93,7 +93,7 @@ class UpdateNewsView(UpdateView):
         return ctx
     def form_invalid(self, form):
 
-        photos_formset = NewsPhotoImageSet(self.request.POST, self.request.FILES)
+        photos_formset = NewsPhotoImageSet(self.request.POST, self.request.FILES, instance=self.object)
 
         messages.error(self.request,
                        _("Your submitted data was not valid - please "
