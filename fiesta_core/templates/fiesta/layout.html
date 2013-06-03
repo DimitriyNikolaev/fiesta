@@ -17,7 +17,7 @@
             var c_value = $(this).val() + ";expires="+exdate.toUTCString();
             document.cookie="unic_tmp_user_city="+c_value;
             window.location.href = '{% url "fiesta:blog:index" %}';
-            })
+            });
     });
     var set_city = function()
     {
@@ -46,9 +46,7 @@
                 <header id="header">
                 {% block header %}
                     <div class="first-block">
-                        <div class="auth">
-                            <a href="#" class="login-link">{% trans "Sign in" %}</a>&nbsp;/&nbsp;<a href="{% url "fiesta:account:registration" %}" class="reg-link">{% trans "Sign up" %}</a>
-                        </div>
+                        {% include "fiesta/partials/auth_tag.html" %}
                         <div class="cities-selector" >
                             <div class="dropdown-toggle" data-toggle="dropdown">
                                 <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
@@ -83,14 +81,6 @@
                         {% include "partials/nav_menu.html" %}
                     </div>
 
-
-                    <div >
-                        <div>
-                            {% include "fiesta/partials/auth_tag.html" %}
-
-                        </div>
-                    </div>
-
                 {% endblock %}
                 </header>
                 <div id="content">
@@ -117,6 +107,8 @@
                 </div>
             </aside>
             <div class="cb">&nbsp;</div>
+
+            <!-- #footer -->
             <footer id="footer">
                 <div class="footer-container">
                     <div class="copyright">© Blog Fiesta 2013</div>
@@ -125,7 +117,7 @@
                         <li><a href="#">Связаться с нами</a></li>
                     </ul>
                     <ul class="soc-icons">
-                        <li><a href="#" class="vk" title="вконтакте"></a></li>
+                        <li><a href="http://vk.com/blog_fiesta" target="_blank" class="vk" title="вконтакте"></a></li>
                         <li><a href="#" class="facebook" title="facebook"></a></li>
                         <li><a href="#" class="twitter" title="twitter"></a></li>
                     </ul>

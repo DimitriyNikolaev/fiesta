@@ -97,7 +97,7 @@ img {
 .cities-selector .dropdown-toggle span{cursor: pointer; border-bottom: dotted 1px #666; color: #333;}
 .cities-selector ul{list-style: none; border-radius: 2px; display: none; position: absolute; min-width: 100%;  background: #fff; z-index: 2; left: 0; top:100%; margin-top:-1px; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
 .cities-selector ul li{padding: 0 10px; border: solid #ddd; border-width: 0 1px;}
-.cities-selector ul li label{display: block;border-bottom: solid 1px #ddd;padding: 5px 0; color: #333; text-wrap: normal; }
+.cities-selector ul li label{display: block;border-bottom: solid 1px #ddd;padding: 5px 0; color: #333; white-space: nowrap;}
 .cities-selector ul li label:hover{text-decoration: none;}
 .cities-selector ul li:first-child{border-top-width: 1px;}
 .cities-selector ul li:last-child{border-bottom-width: 1px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px;}
@@ -109,12 +109,29 @@ img {
     background-position: right 4px center;}
 .open > .dropdown-toggle span{border-bottom-color: #fff;}
 
+/*Controls group styles*/
+.auth .control-group{white-space: nowrap;}
+.auth .control-group label{display: block; width: 60px; float: left;text-align:right;margin: 5px 0 0 0;}
+.auth .control-group .controls{margin:0 0 10px 70px;}
+.auth .control-group .controls input[type=text],
+.auth .control-group .controls input[type=password]{border:solid 1px #ddd; border-radius: 2px; padding: 5px 3px;box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);}
+.auth .controls-row .pull-right{margin-left: 70px;}
+button, input[type=submit] { display: inline-block; vertical-align: middle; text-align: center;}
+
 /* Auth styles*/
-.auth {background: url(../img/auth-icon.png) no-repeat center left; padding: 0 0 0 20px; }
-.auth a.login-link,.auth a.reg-link{text-transform: uppercase; color: #666;}
-.auth a.login-link{border-bottom: dotted 1px #666;}
+.auth{list-style: none;}
+.auth li{float: left; margin-right: 5px;}
+.auth li.login{ position: relative;}
+.auth a.login-link,.auth a.reg-link, .auth a.profile{text-transform: uppercase; color: #666;cursor: pointer;}
+.auth a.login-link,.auth a.profile{background:#fff url(../img/auth-icon.png) no-repeat center left; padding: 0 0 0 20px; display: inline-block; z-index: 2; position:relative;}
+.auth a.login-link span,.auth a.profile span{border-bottom: dotted 1px #666;}
 .auth a.reg-link{border-bottom: solid 1px #666; font-size: 95%;}
-.auth a.login-link:hover,.auth a.reg-link:hover{ text-decoration: none;}
+.auth a.login-link:hover,.auth a.reg-link:hover, .auth a.profile:hover{ text-decoration: none;}
+.auth a.profile:hover span{border-bottom:solid 1px #666; }
+.auth .login-form{display: none; position: absolute; margin:0 0 0 -10px;  padding: 10px; z-index: 1; background: #fff; border: solid #ddd; border-width: 0 1px 1px 1px; border-radius: 2px; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);}
+.auth .open > .login-form{display: block;}
+
+
 .locale{float:right;width: 100px;}
 .locale .form-horizontal .controls{margin-left: 0px;}
 .locale .well {border-radius: 25px;}
