@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import django
+
 __author__ = 'dimitriy'
 import urlparse
 from django.views.generic import TemplateView,FormView
@@ -9,6 +11,9 @@ from django.contrib.auth import (authenticate, login as auth_login,
                                  logout as auth_logout)
 from fiesta_core.apps.account.forms import EmailAuthenticationForm, EmailUserCreationForm, SocialUserForm
 from models import SocialUser
+
+class UserSignInView(TemplateView):
+    template_name = 'account/signin_form.html'
 
 class UserRegistrationView(TemplateView):
     template_name = 'account/registration_form.html'

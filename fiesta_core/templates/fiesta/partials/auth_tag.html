@@ -14,7 +14,6 @@
         });
     });
 </script>
-{#<div id="login-wrap" class="container-fluid" style="padding-right: 0px;">#}
 <ul class="auth">
     {% if user.is_authenticated %}
         <li>
@@ -31,24 +30,9 @@
                 </div>
             </form>
         </li>
-
-{#        <div class="row-fluid">#}
-{#            <div class="span7 ">#}
-{#                <span class="pull-right">{{ user.username}}</span>#}
-{#            </div>#}
-{#            <div class="span4 offset1">#}
-{#                <a href="{% url "fiesta:account:profile" %}"><img src="{{ avatar }}" width="110" height="110" alt="no avatar"/></a>#}
-{#                <form method="post" action="/logout?next=/">#}
-{#                    {% csrf_token %}#}
-{#                    <div class="pull-right" style="margin-top: 20px;">#}
-{#                        <input type="submit" name="logout" value="выход" class="btn" />#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
     {% else %}
         <li class="login" >
-            <a class="login-link"><span>{% trans "Sign in" %}</span></a>
+            <a class="login-link" href="{% url "fiesta:account:signin" %}"><span>{% trans "Sign in" %}</span></a>
             <div class="login-form">
                 <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">
                     {% csrf_token %}
@@ -80,36 +64,6 @@
         <li class="register">
             <a href="{% url "fiesta:account:registration" %}" class="reg-link">{% trans "Sign up" %}</a>
         </li>
-{#        <div class="authinput">#}
-{#        <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">#}
-{#            {% csrf_token %}#}
-{#            <div class="control-group">#}
-{#                <label for="id_username" class="control-label">Логин</label>#}
-{#                <div class="controls">#}
-{#                    <input type="text" name="username" maxlength="30" id="id_username"/>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="control-group">#}
-{#                <label for="id_password" class="control-label" >Пароль</label>#}
-{#                <div class="controls">#}
-{#                    <input type="password" name="password" id="id_password"/>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="controls-row">#}
-{##}
-{#                <div class="pull-right" style="margin-left: 20px;">#}
-{#                    <input type="submit" name="login" value="вход" class="btn" />#}
-{#                </div>#}
-{#                <div class="pull-right" >#}
-{#                    <span>Еще не зарегистрированы?</span>#}
-{#                    <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-{##}
-{#        </form>#}
-{#        </div>#}
     {% endif %}
-{#</div>#}
 </ul>
 <div class="cb">&nbsp;</div>

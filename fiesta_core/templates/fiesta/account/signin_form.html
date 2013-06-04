@@ -2,28 +2,30 @@
 {% load i18n %}
 
 {% block account_layout%}
-    <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">
-        {% csrf_token %}
-        <div class="control-group">
-            <label for="id_username" class="control-label">Логин</label>
-            <div class="controls">
-                <input type="text" name="username" maxlength="30" id="id_username"/>
+    <div class="auth">
+        <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">
+            {% csrf_token %}
+            <div class="control-group">
+                <label for="id_username" class="control-label">Логин</label>
+                <div class="controls">
+                    <input type="text" name="username" maxlength="30" id="id_username"/>
+                </div>
             </div>
-        </div>
-        <div class="control-group">
-            <label for="id_password" class="control-label" >Пароль</label>
-            <div class="controls">
-                <input type="password" name="password" id="id_password"/>
+            <div class="control-group">
+                <label for="id_password" class="control-label" >Пароль</label>
+                <div class="controls">
+                    <input type="password" name="password" id="id_password"/>
+                </div>
             </div>
-        </div>
-        <div class="controls-row">
-            <div class="pull-right">
-                <input type="submit" name="login" value="{% trans "Sign in" %}" class="btn" />
+            <div class="controls-row">
+                <div class="pull-right">
+                    <input type="submit" name="login" value="{% trans "Sign in" %}" class="btn" />
+                </div>
+                <div >
+                    <span>Еще не зарегистрированы?</span>
+                    <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>
+                </div>
             </div>
-            <div >
-                <span>Еще не зарегистрированы?</span>
-                <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 {% endblock %}
