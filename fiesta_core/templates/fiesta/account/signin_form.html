@@ -17,14 +17,17 @@
                     <input type="password" name="password" id="id_password"/>
                 </div>
             </div>
+            <div class="control-group pull-right">
+                <a href="#" class="remember-link">Вспомнить пароль</a>
+            </div>
             <div class="controls-row">
-                <div class="pull-right">
+                <div class="pull-right fl">
                     <input type="submit" name="login" value="{% trans "Sign in" %}" class="btn" />
                 </div>
-                <div >
-                    <span>Еще не зарегистрированы?</span>
-                    <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>
+                <div class="fl">
+                    <a href="{% url "fiesta:account:registration" %}" class="register-link">Регистрация</a>
                 </div>
+                <div class="cb">&nbsp;</div>
             </div>
         </form>
     </div>

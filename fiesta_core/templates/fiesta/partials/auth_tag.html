@@ -2,19 +2,32 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var authLi = $(".auth .login");
+        var auth = $(".auth");
         var loginLink = $('.auth a.login-link');
         loginLink.removeAttr("href");
-        loginLink.mouseup(function(login){authLi.toggleClass('open');});
+        loginLink.mouseup(function(login){auth.toggleClass('open');});
         $('.auth .login-form form').mouseup(function(){ return false; });
         $(this).mouseup(function(evt){
             if($(evt.target).parent('.auth .login-link').length < 1 && $(evt.target).parent('.auth .login').length < 1){
-                authLi.removeClass('open');
+                auth.removeClass('open');
             }
         });
+
+        var inputs = $('.auth .login-form  .login-box input[type=text], .auth .login-form .pwd-box input[type=password]');
+        if(inputs.length > 0){
+            var f = function(){
+                $(this).removeClass('empty');
+            }
+            var b = function(){
+                if($(this).val()=='')
+                    $(this).addClass('empty');
+            }
+            inputs.each(b).focus(f).blur(b);
+        }
     });
 </script>
-<ul class="auth">
+<div class="auth">
+<ul >
     {% if user.is_authenticated %}
         <li>
             <a class="profile" href="{% url "fiesta:account:profile" %}" title="Профиль пользователя">
@@ -22,12 +35,10 @@
             </a>
         </li>
         <li class="separator">/</li>
-        <li>
+        <li class="logout">
             <form method="post" action="/logout?next=/">
                 {% csrf_token %}
-                <div class="pull-right">
-                    <input type="submit" name="logout" value="{% trans "Logout" %}" class="btn" />
-                </div>
+                <input type="submit" name="logout" value="{% trans "Logout" %}" class="btn" />
             </form>
         </li>
     {% else %}
@@ -36,26 +47,21 @@
             <div class="login-form">
                 <form method="post" action="/login?next={{ current_path|urlencode }}" class="form-horizontal ">
                     {% csrf_token %}
-                    <div class="control-group">
-                        <label for="id_username" class="control-label">Логин</label>
+                    <div class="control-group login-box">
                         <div class="controls">
-                            <input type="text" name="username" maxlength="30" id="id_username"/>
+                            <input type="text" name="username" maxlength="30" id="id_username" />
+                        </div>
+                    </div>
+                    <div class="control-group pwd-box">
+                        <div class="controls">
+                            <input type="password" name="password" id="id_password" />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="id_password" class="control-label" >Пароль</label>
-                        <div class="controls">
-                            <input type="password" name="password" id="id_password"/>
-                        </div>
+                        <a href="#" class="remember-link">Вспомнить пароль</a>
                     </div>
                     <div class="controls-row">
-                        <div class="pull-right">
-                            <input type="submit" name="login" value="{% trans "Sign in" %}" class="btn" />
-                        </div>
-                        <div >
-                            <span>Еще не зарегистрированы?</span>
-                            <a href="{% url "fiesta:account:registration" %}" class="btn-link">Жми сюда!</a>
-                        </div>
+                        <input type="submit" name="login" value="{% trans "Sign in" %}" class="btn" />
                     </div>
                 </form>
             </div>
@@ -67,3 +73,4 @@
     {% endif %}
 </ul>
 <div class="cb">&nbsp;</div>
+</div>
