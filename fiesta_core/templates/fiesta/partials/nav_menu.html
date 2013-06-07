@@ -1,11 +1,12 @@
 {% load i18n %}
+{% load display_tags %}
 
 <ul>
-    <li class="current"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a></li>
-    <li><a href="{% url "fiesta:blog:stream_type" 0%}">{% trans "News" %}</a></li>
-    <li><a href="{% url "fiesta:blog:stream_type" 4%}">{% trans "Places" %}</a></li>
-    <li><a href="{% url "fiesta:blog:stream_type" 2%}">{% trans "Events" %}</a></li>
-    <li><a href="{% url "fiesta:blog:stream_type" 5%}">{% trans "Attractions" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:stream_type" 0 %}"><a href="{% url "fiesta:blog:stream_type" 0%}">{% trans "News" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:stream_type" 4 %}"><a href="{% url "fiesta:blog:stream_type" 4%}">{% trans "Places" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:stream_type" 2 %}"><a href="{% url "fiesta:blog:stream_type" 2%}">{% trans "Events" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:stream_type" 5 %}"><a href="{% url "fiesta:blog:stream_type" 5%}">{% trans "Attractions" %}</a></li>
 </ul>
 <div class="top-search">
     {% include "partials/search.html" %}

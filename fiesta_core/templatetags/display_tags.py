@@ -1,6 +1,7 @@
 from django import template
 
 register = template.Library()
+from django.core.urlresolvers import reverse
 
 
 def get_parameters(parser, token):
@@ -14,6 +15,15 @@ def get_parameters(parser, token):
             "get_parameters tag takes at least 1 argument")
     return GetParametersNode(args[1].strip())
 
+@register.simple_tag
+def navactive(request, url, id):
+    if id != '':
+        if request.path == reverse(url, args=[id]):
+            return "current"
+    else:
+        if request.path == reverse(url):
+            return "current"
+    return ""
 
 class GetParametersNode(template.Node):
     """

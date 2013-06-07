@@ -16,9 +16,9 @@ MANAGERS = ADMINS
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#         'NAME': 'evesdrearu_fiest',                      # Or path to database file if using sqlite3.
-#         'USER': 'evesdrearu_fiest',                      # Not used with sqlite3.
-#         'PASSWORD': 'sps67j7k',                  # Not used with sqlite3.
+#         'NAME': 'fiesta',                      # Or path to database file if using sqlite3.
+#         'USER': 'webuser_fiesta',                      # Not used with sqlite3.
+#         'PASSWORD': 'gdu71B2-miu95K',                  # Not used with sqlite3.
 #         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
 #         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
 #     }
@@ -27,8 +27,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'fiesta',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': '1',                  # Not used with sqlite3.
+        'USER': 'webuser',                      # Not used with sqlite3.
+        'PASSWORD': 'sps67',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -84,7 +84,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 #STATIC_ROOT = 'home/e/evesdrearu/fiesta/public_html/static' #location('static')
-STATIC_ROOT = '' #location('static')
+STATIC_ROOT = location('static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -184,6 +184,7 @@ LOGGING = {
     }
 }
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.static',
     'fiesta_core.core.context_processors.user_metadata',
