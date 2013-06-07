@@ -44,45 +44,44 @@
         <section id="middle">
             <div id="container">
                 <header id="header">
-                {% block header %}
-                    <div class="first-block">
-                        {% include "fiesta/partials/auth_tag.html" %}
-                        <div class="cities-selector" >
-                            <div class="dropdown-toggle" data-toggle="dropdown">
-                                <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
-                            </div>
-                            <ul class="dropdown-menu">
-                              <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
-                              <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
-                            </ul>
+                    {% block header %}
+                    {% include "fiesta/partials/auth_tag.html" %}
+                    <div class="cities-selector" >
+                        <div class="dropdown-toggle" data-toggle="dropdown">
+                            <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
                         </div>
+                        <ul class="dropdown-menu">
+                          <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
+                          <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
+                        </ul>
                     </div>
-                    <div class="second-block">
-                        <div class="locale">
-                            <form action="/i18n/setlang/" method="POST">
-                                {% csrf_token %}
-                                <input name="next" type="hidden" value="/" />
-                                <div class="control-group">
-                                    <div class="controls switch">
-                                        <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
-                                        <label for="rus" onclick="">rus</label>
 
-                                        <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
-                                        <label for="eng" onclick="">eng</label>
+                    <a class="logo-block" href="/"><img src="{{ STATIC_URL }}fiesta_core/img/logo.png"></a>
 
-                                        <span class="slide-button well"></span>
-                                    </div>
+                    <div class="locale">
+                        <form action="/i18n/setlang/" method="POST">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="/" />
+                            <div class="control-group">
+                                <div class="controls switch">
+                                    <input id="rus" value="ru" name="language" type="radio" {%if LANGUAGE_CODE == 'ru' %} checked {% endif %} onclick="this.form.submit();">
+                                    <label for="rus" onclick="">rus</label>
+
+                                    <input id="eng" value="en" name="language" type="radio" {%if LANGUAGE_CODE == 'en' %} checked {% endif %} onclick="this.form.submit();">
+                                    <label for="eng" onclick="">eng</label>
+
+                                    <span class="slide-button well"></span>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="cb"> </div>
-                    <div class="main-menu">
-                        {% include "partials/nav_menu.html" %}
+                            </div>
+                        </form>
                     </div>
 
+                    <div class="cb"> </div>
                 {% endblock %}
                 </header>
+                <div class="main-menu">
+                    {% include "partials/nav_menu.html" %}
+                </div>
                 <div id="content">
                 {% block content_wrapper %}
                 {% endblock %}
