@@ -35,8 +35,15 @@
         {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
         <div class="text">{{ news_item.text}}</div>
         <div>
-            {{ news_item.views_count }}
+            просмотров {{ news_item.views_count }}
         </div>
+        {% if news_item.event_date %}
+            <div class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">начало {{ news_item.event_date|date:"d E" }}</div>
+        {% endif %}
+        {% if news_item.deadline_date %}
+            <div class="to-date">конец {{ news_item.deadline_date|date:"d E" }}</div>
+        {% endif %}
+
     </section>
 <div class="cb"> </div>
 </article>
