@@ -25,6 +25,15 @@ def navactive(request, url, id):
             return "current"
     return ""
 
+@register.filter(name='paging_slice')
+def paging_slice(p):
+    first = p.number - 5;
+    last = p.number + 5;
+    first = None if first <= 0 else first
+    last = last if  p.paginator.num_pages > last else None
+    l = p.paginator.page_range[first:last]
+    return p.paginator.page_range[first:last]
+
 class GetParametersNode(template.Node):
     """
     Renders current get parameters except for the specified parameter
