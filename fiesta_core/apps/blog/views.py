@@ -14,7 +14,7 @@ def gat_news_base_queryset():
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 20
+    paginate_by = 2
     model = News
 
     def get_search_query(self):
@@ -24,7 +24,7 @@ class NewsStream(ListView):
     def get_queryset(self):
         q = self.get_search_query()
         if q:
-            self.search_signal.send(sender=self, query=q, user=self.request.user)
+            #self.search_signal.send(sender=self, query=q, user=self.request.user)
             return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], title__icontains=q, is_displayed=True).order_by('date_added')
         else:
             if 'type' in self.kwargs:

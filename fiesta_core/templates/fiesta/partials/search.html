@@ -4,7 +4,7 @@
     {{ search_form.q }}
 	<input type="submit" value="{% trans "Search" %}" class="btn" />
 </form>{% endcomment %}
-<form>
-    <input type="text" class="search-text"/>
+<form method="get" action=".">
+    <input type="text" id="q" name="q"  class="search-text" value="{{ search_term }}"/>
     <input type="image" src="{{ STATIC_URL }}fiesta_core/img/search-btn.png" />
 </form>

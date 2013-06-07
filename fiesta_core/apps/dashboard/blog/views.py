@@ -112,7 +112,7 @@ class UpdateNewsView(UpdateView):
             photos_formset.save()
             #save preview to redis
             photos = news.news_photos.all()
-            preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos > 0 else '')
+            preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos.count() > 0 else '')
             preview_serialized = pickle.dumps(preview)
             redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
             return HttpResponseRedirect(self.get_success_url())
