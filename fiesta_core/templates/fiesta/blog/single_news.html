@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% load i18n %}
-{% block news_stream %}
+{% block content_wrapper %}
     <article class="wall-article">
             {% if news.news_photos.all|length > 1 %}
                 <div id="news_slides_{{news.id  }}" class="slides">
