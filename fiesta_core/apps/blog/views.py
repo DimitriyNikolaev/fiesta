@@ -14,7 +14,7 @@ def gat_news_base_queryset():
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 2
+    paginate_by = 7
     model = News
 
     def get_search_query(self):
