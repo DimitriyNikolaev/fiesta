@@ -3,11 +3,10 @@
 {% block content_wrapper %}
         {% if news|length > 0 %}
 
-                    {% include "partials/pagination.html" %}
-                        {% for news_item in news %}
-                            {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
-                        {% endfor %}
-                    {% include "partials/pagination.html" %}
+            {% for news_item in news %}
+                {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
+            {% endfor %}
+            {% include "partials/pagination.html" %}
 
         {% else %}
             <p>{% trans "No news found." %}</p>

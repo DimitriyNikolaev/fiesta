@@ -1,6 +1,20 @@
 <article class="wall-article">
-    {% if news_item.photo %}
-        {% comment %}<div id="news_slides_{{news_item.id  }}" class="slides">
+    <div class="img-container">
+        <div class="dates-wrapper">
+            <ul>
+                {% if news_item.event_date %}
+                    <li class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news_item.event_date|date:"d E" }}</li>
+                    {% if news_item.deadline_date %}
+                        <li class="triangle">&nbsp;</li>
+                    {% endif %}
+                {% endif %}
+                {% if news_item.deadline_date %}
+                    <li class="to-date">{{ news_item.deadline_date|date:"d E" }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    {% comment %}{% if news_item.news_photos.all|length > 1 %}
+        <div id="news_slides_{{news_item.id  }}" class="slides" style="width: 400px;">
             {% for img in news_item.news_photos.all %}
                 {% if img.preview %}
                     <img class="photo" src="{{ img.preview.url }}"/>
@@ -12,38 +26,33 @@
         <script>
             $(function(){
               $("#news_slides_{{news_item.id}}").slidesjs({
-                //width: 400,
-                //height: 300
+                width: 400,
+                height: 300
               });
             });
         </script>
     {% else %}{% endcomment %}
-    <a href="{% url "fiesta:blog:single_news" news_item.id %}">
-        {% with img=news_item.photo %}
-            {% if img.preview %}
-                <img class="photo" src="{{ img.preview.url }}"/>
-            {% else %}
-                <img class="photo" src="{{ img.image.url }}">
-            {% endif %}
-        {% endwith %}
-    </a>
+    {% if  news_item.photo  %}
+            <a href="{% url "fiesta:blog:single_news" news_item.id %}">
+                {% with img=news_item.photo %}
+                    {% if img.preview %}
+                        <img class="photo" src="{{ img.preview.url }}"/>
+                    {% else %}
+                        <img class="photo" src="{{ img.image.url }}">
+                    {% endif %}
+                {% endwith %}
+            </a>
     {% endif %}
+    </div>
 
     <section class="article-content">
-        <h2>{{ news_item.title }}</h2>
+        <h2><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
         <span>{{ news_item.dateAdding }}</span>
         {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
         <div class="text">{{ news_item.text}}</div>
-        <div>
-            просмотров {{ news_item.views_count }}
-        </div>
-        {% if news_item.event_date %}
-            <div class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">начало {{ news_item.event_date|date:"d E" }}</div>
-        {% endif %}
-        {% if news_item.deadline_date %}
-            <div class="to-date">конец {{ news_item.deadline_date|date:"d E" }}</div>
-        {% endif %}
-
+        <ul class="statistic">
+            <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
+        </ul>
     </section>
-<div class="cb"> </div>
+    <div class="cb">&nbsp;</div>
 </article>

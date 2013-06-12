@@ -16,7 +16,7 @@ def gat_news_base_queryset(city):
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 7
+    paginate_by = 5
     model = News
 
     def get_search_query(self):
@@ -38,7 +38,7 @@ class NewsStream(ListView):
         for p in photos:
             photos_dict[p.news_id] = p
         for item in queryset:
-            item.photo = photos_dict[item.id]
+            item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
         return queryset
 
     def get_context_data(self, **kwargs):

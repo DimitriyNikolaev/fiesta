@@ -2,23 +2,38 @@
 {% load i18n %}
 
 {% if paginator.num_pages > 1 %}
-	<div>
-		<ul class="pager">
-			{% if page_obj.has_previous %}
-				<li class="previous"><a href="?{% get_parameters page %}page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a></li>
-			{% endif %}
+    <div class="paginator-wrapper">
+        <div class="paginator">
+            <a class="anchor prev" {% if page_obj.has_previous %}href="?{% get_parameters page %}page={{ page_obj.previous_page_number }}"{% endif %} title="{% trans "previous" %}">&nbsp;</a>
+{#		<ul class="pager">#}
+{#			{% if page_obj.has_previous %}#}
+{#				<li class="previous"><a href="?{% get_parameters page %}page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a></li>#}
+{#			{% endif %}#}
+
 			{% comment %}<li class="current">
 			{% blocktrans with page_num=page_obj.number total_pages=paginator.num_pages %}
 				Page {{ page_num }} of {{ total_pages }}
 			{% endblocktrans %}
 			</li>{% endcomment %}
 
-            {% for num in page_obj|paging_slice %}
-                <li class="{% if num == page_obj.number %}current-page{% endif %}" ><a href="?{% get_parameters page %}page={{ num }}">{{ num }}</a></li>
-            {% endfor %}
-			{% if page_obj.has_next %}
-				<li class="next"><a href="?{% get_parameters page %}page={{ page_obj.next_page_number }}">{% trans "next" %}</a></li>
-			{% endif %}
-		</ul>
-	</div>
+            <div class="pages">
+                {% for num in page_obj|paging_slice %}
+                    {% if num == page_obj.number %}
+                        <a class="current-page">{{ num }}</a>
+                    {% else %}
+                        <a href="?{% get_parameters page %}page={{ num }}">{{ num }}</a>
+                    {% endif %}
+
+{#                <li class="{% if num == page_obj.number %}current-page{% endif %}" ><a href="?{% get_parameters page %}page={{ num }}">{{ num }}</a></li>#}
+                {% endfor %}
+            </div>
+
+
+{#			{% if page_obj.has_next %}#}
+{#				<li class="next"><a href="?{% get_parameters page %}page={{ page_obj.next_page_number }}">{% trans "next" %}</a></li>#}
+{#			{% endif %}#}
+{#		</ul>#}
+            <a class="anchor next" {% if page_obj.has_next %}href="?{% get_parameters page %}page={{ page_obj.next_page_number }}"{% endif %} title="{% trans "next" %}">&nbsp;</a>
+	    </div>
+    </div>
 {% endif %}
