@@ -13,41 +13,21 @@
                 {% endif %}
             </ul>
         </div>
-    {% comment %}{% if news_item.news_photos.all|length > 1 %}
-        <div id="news_slides_{{news_item.id  }}" class="slides" style="width: 400px;">
-            {% for img in news_item.news_photos.all %}
+    {% if  news_item.photo  %}
+        <a href="{% url "fiesta:blog:single_news" news_item.id %}">
+            {% with img=news_item.photo %}
                 {% if img.preview %}
                     <img class="photo" src="{{ img.preview.url }}"/>
                 {% else %}
                     <img class="photo" src="{{ img.image.url }}">
                 {% endif %}
-            {% endfor %}
-        </div>
-        <script>
-            $(function(){
-              $("#news_slides_{{news_item.id}}").slidesjs({
-                width: 400,
-                height: 300
-              });
-            });
-        </script>
-    {% else %}{% endcomment %}
-    {% if  news_item.photo  %}
-            <a href="{% url "fiesta:blog:single_news" news_item.id %}">
-                {% with img=news_item.photo %}
-                    {% if img.preview %}
-                        <img class="photo" src="{{ img.preview.url }}"/>
-                    {% else %}
-                        <img class="photo" src="{{ img.image.url }}">
-                    {% endif %}
-                {% endwith %}
-            </a>
+            {% endwith %}
+        </a>
     {% endif %}
     </div>
 
     <section class="article-content">
         <h2><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
-        <span>{{ news_item.dateAdding }}</span>
         {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
         <div class="text">{{ news_item.text}}</div>
         <ul class="statistic">

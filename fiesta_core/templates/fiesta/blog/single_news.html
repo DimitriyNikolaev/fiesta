@@ -1,46 +1,57 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block content_wrapper %}
-    <article class="wall-article">
-            {% if news.news_photos.all|length > 1 %}
-                <div id="news_slides_{{news.id  }}" class="slides">
-                    {% for img in news.news_photos.all %}
-                        {% if img.preview %}
-                            <img src="{{ img.preview.url }}"/>
-                        {% else %}
-                            <img src="{{ img.image.url }}">
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <script>
-                    $(function(){
-                      $("#news_slides_{{news.id}}").slidesjs({
-                        width: 400,
-                        height: 300
-                      });
-                    });
-                </script>
-            {% else %}
-            <a href="{% url "fiesta:blog:single_news" news.id %}">
+<article class="detail">
+    <div class="header">
+        <div class="dates-wrapper">
+            <ul>
+                {% if news.event_date %}
+                    <li class="{% if news.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news.event_date|date:"d E" }}</li>
+                    {% if news.deadline_date %}
+                        <li class="triangle">&nbsp;</li>
+                    {% endif %}
+                {% endif %}
+                {% if news.deadline_date %}
+                    <li class="to-date">{{ news.deadline_date|date:"d E" }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <h2>{{ news.title }}</h2>
+    </div>
+    <div class="image-wrapper">
+        {% if news.news_photos.all|length > 1 %}
+            <div id="news_slides_{{news.id  }}" class="slides">
                 {% for img in news.news_photos.all %}
                     {% if img.preview %}
-                        <img class="photo" src="{{ img.preview.url }}"/>
+                        <img src="{{ img.preview.url }}"/>
                     {% else %}
-                        <img class="photo" src="{{ img.image.url }}">
+                        <img src="{{ img.image.url }}">
                     {% endif %}
                 {% endfor %}
-            </a>
-            {% endif %}
-
-            <section class="article-content">
-                <h2>{{ news.title }}</h2>
-                <span>{{ news.dateAdding }}</span>
-                {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
-                <div class="text">{{ news.text}}</div>
-                <div>
-                    {{ views_count }}
-                </div>
-            </section>
-        <div class="cb"> </div>
-    </article>
+            </div>
+            <script>
+                $(function(){
+                    $("#news_slides_{{news.id}}").slidesjs({
+                        //width: 400,
+                        //height: 300
+                    });
+                });
+            </script>
+        {% else %}
+            {% for img in news.news_photos.all %}
+                {% if img.preview %}
+                    <img class="photo" src="{{ img.preview.url }}"/>
+                {% else %}
+                    <img class="photo" src="{{ img.image.url }}">
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <section class="article-content">
+        <div class="text">{{ news.text}}</div>
+        <ul class="statistic">
+            <li class="browsing" title="Просмотров">{{ views_count }}</li>
+        </ul>
+    </section>
+</article>
 {% endblock %}
