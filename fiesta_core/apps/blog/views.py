@@ -7,16 +7,37 @@ from django.conf import settings
 from models import News, NewsPhoto
 from fiesta_core.global_utils.redis_adapter import redis_adapter
 from model_extension import RedisKeys
+from cacheops import cached_as_with_params
 
+@cached_as_with_params(News.objects.all())
+def get_news_base_queryset(city, type):
+    queryset = News.objects.filter(is_displayed=True, city=city)
+    if type:
+        queryset = queryset.filter(type=type)
+    queryset = queryset.order_by('-date_added').nocache()
+    photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True).nocache()
+    photos_dict = {}
+    for p in photos:
+        photos_dict[p.news_id] = p
+    for item in queryset:
+        item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
+    return queryset
 
-def gat_news_base_queryset(city):
-    return News.objects.filter(is_displayed=True, city=city)
+def get_news_search_queryset(city, q):
+    queryset = News.objects.filter(is_displayed=True, city=city, title__icontains=q).order_by('-date_added')
+    photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
+    photos_dict = {}
+    for p in photos:
+        photos_dict[p.news_id] = p
+    for item in queryset:
+        item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
+    return queryset
 
 
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 5
+    paginate_by = 4
     model = News
 
     def get_search_query(self):
@@ -26,20 +47,13 @@ class NewsStream(ListView):
     def get_queryset(self):
         q = self.get_search_query()
         city = self.request.COOKIES[settings.UNIC_TMP_USER_CITY]
-        queryset = gat_news_base_queryset(city)
         if q:
-            queryset.filter(title__icontains=q)
+            return get_news_search_queryset(city,q)
         else:
             if 'type' in self.kwargs:
-                queryset.filter(type=self.kwargs['type'])
+                return get_news_base_queryset(city,self.kwargs['type'])
+        return get_news_base_queryset(city,None)
 
-        photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
-        photos_dict = {}
-        for p in photos:
-            photos_dict[p.news_id] = p
-        for item in queryset:
-            item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
-        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(NewsStream, self).get_context_data(**kwargs)

@@ -132,7 +132,7 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'fiesta_core',
     'south',
-    #'cacheops',
+    'cacheops',
 ]
 from fiesta_core import get_core_apps
 
@@ -195,4 +195,7 @@ CACHEOPS_REDIS = {
     'port': 6379,             # порт по умолчанию
     'db': 1,                 # можно выбрать номер БД
     'socket_timeout': 3,
+}
+CACHEOPS = {
+    '*.*': ('just_enable', 60*15),
 }

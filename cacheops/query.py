@@ -17,7 +17,7 @@ from cacheops.utils import monkey_mix, dnf, conj_scheme, get_model_name, non_pro
 from cacheops.invalidation import cache_schemes, conj_cache_key, invalidate_obj, invalidate_model
 
 
-__all__ = ('cached_method', 'cached_as', 'install_cacheops')
+__all__ = ('cached_method', 'cached_as', 'install_cacheops', 'cached_as_with_params')
 
 _old_objs = {}
 _local_get_cache = {}
@@ -92,6 +92,50 @@ def cached_as(sample, extra=None, timeout=None):
         def wrapper(*args):
             # NOTE: These args must not effect function result.
             #       I'm keeping them to cache view functions.
+            cache_data = redis_client.get(cache_key)
+            if cache_data is not None:
+                return pickle.loads(cache_data)
+
+            result = func(*args)
+            queryset._cache_results(cache_key, result, timeout)
+            return result
+
+        return wrapper
+    return decorator
+
+def cached_as_with_params(sample, extra=None, timeout=None):
+    """
+    Caches results of a function and invalidates them same way as given queryset.
+    NOTE: Ignores queryset cached ops settings, just caches.
+    """
+    # If we unexpectedly get list instead of queryset return identity decorator.
+    # Paginator could do this when page.object_list is empty.
+    # TODO: think of better way doing this.
+    if isinstance(sample, (list, tuple)):
+        return lambda func: func
+    elif isinstance(sample, Model):
+        queryset = sample.__class__.objects.inplace().filter(pk=sample.pk)
+    elif isinstance(sample, type) and issubclass(sample, Model):
+        queryset = sample.objects.all()
+    else:
+        queryset = sample
+
+    queryset._require_cacheprofile()
+    if timeout and timeout > queryset._cacheprofile['timeout']:
+        raise NotImplementedError('timeout override should be smaller than default')
+
+    def decorator(func):
+        if extra:
+            key_extra = extra
+        else:
+            key_extra = '%s.%s' % (func.__module__, func.__name__)
+
+        @wraps(func)
+        def wrapper(*args):
+            argstr = ''
+            for arg in args:
+                argstr += arg if arg else ''
+            cache_key = queryset._cache_key(extra=key_extra+'args%s'%argstr)
             cache_data = redis_client.get(cache_key)
             if cache_data is not None:
                 return pickle.loads(cache_data)
