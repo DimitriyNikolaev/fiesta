@@ -132,6 +132,7 @@ INSTALLED_APPS = [
     # 'django.contrib.admindocs',
     'fiesta_core',
     'south',
+    #'cacheops',
 ]
 from fiesta_core import get_core_apps
 
@@ -182,3 +183,16 @@ CUSTOM_USER_MODEL = 'account.SocialUser'
 
 UNIC_TMP_USER_ID = 'unic_tmp_userid'
 UNIC_TMP_USER_CITY = 'unic_tmp_user_city'
+
+
+#preview images
+PREVIEW_IMG__WIDTH = 400
+PREVIEW_IMG_HEIGHT = 300
+
+#cacheops
+CACHEOPS_REDIS = {
+    'host': 'localhost',      # сервер redis доступен локально
+    'port': 6379,             # порт по умолчанию
+    'db': 1,                 # можно выбрать номер БД
+    'socket_timeout': 3,
+}

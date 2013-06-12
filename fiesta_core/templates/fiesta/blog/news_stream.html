@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block content_wrapper %}
-        {% if news.count %}
+        {% if news|length > 0 %}
 
                     {% include "partials/pagination.html" %}
                         {% for news_item in news %}

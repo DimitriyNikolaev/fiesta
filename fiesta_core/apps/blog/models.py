@@ -36,9 +36,9 @@ class News(models.Model):
 
 
 
+
 class Subnews(models.Model):
     news = models.ForeignKey(News, null=False, blank=False, related_name='subnews')
-
     title = models.CharField(_('Title'),max_length=255, null=False, default='', blank=False)
     text = models.TextField(_('Text'), null=False, blank=False, default='' )
     event_date = models.DateTimeField(_('Event date'), null=True, blank=True)

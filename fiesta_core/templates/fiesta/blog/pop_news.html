@@ -1,7 +1,9 @@
 <div>
     <h4>Популярные события</h4>
-    {% for news in pop_news %}
-        <div>{{ news.title }}</div>
-        <img src="{{ news.preview }}"/>
-    {% endfor %}
+    {% if pop_news|length > 0 %}
+        {% for news in pop_news %}
+            <div>{{ news.title }}</div>
+            <img src="{{ news.preview }}"/>
+        {% endfor %}
+    {% endif %}
 </div>

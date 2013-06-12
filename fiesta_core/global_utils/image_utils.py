@@ -3,6 +3,7 @@ __author__ = 'dimitriy'
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 from StringIO import StringIO
+from django.conf import settings
 import os
 
 def get_preview(original_image, field):
@@ -17,7 +18,7 @@ def get_preview(original_image, field):
     # Метод thumb не используется, т.к. он не увеличивает размер изображения,
     # если оно меньше требуемого
     # img = img.crop((0, 0, min(img.size), min(img.size)))
-    img = img.resize((400,300), Image.ANTIALIAS)
+    img = img.resize((settings.PREVIEW_IMG__WIDTH, settings.PREVIEW_IMG_HEIGHT), Image.ANTIALIAS)
     img.save(thumb, 'JPEG')
     if hasattr(original_image, 'path'):
         name = 'preview_%s' %  os.path.basename(original_image.path)

@@ -1,6 +1,6 @@
 <article class="wall-article">
-    {% if news_item.news_photos.all|length > 1 %}
-        <div id="news_slides_{{news_item.id  }}" class="slides">
+    {% if news_item.photo %}
+        {% comment %}<div id="news_slides_{{news_item.id  }}" class="slides">
             {% for img in news_item.news_photos.all %}
                 {% if img.preview %}
                     <img class="photo" src="{{ img.preview.url }}"/>
@@ -17,15 +17,15 @@
               });
             });
         </script>
-    {% else %}
+    {% else %}{% endcomment %}
     <a href="{% url "fiesta:blog:single_news" news_item.id %}">
-        {% for img in news_item.news_photos.all %}
+        {% with img=news_item.photo %}
             {% if img.preview %}
                 <img class="photo" src="{{ img.preview.url }}"/>
             {% else %}
                 <img class="photo" src="{{ img.image.url }}">
             {% endif %}
-        {% endfor %}
+        {% endwith %}
     </a>
     {% endif %}
 

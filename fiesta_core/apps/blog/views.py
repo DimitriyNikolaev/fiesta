@@ -4,12 +4,14 @@ import pickle
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
 from django.conf import settings
-from models import News
+from models import News, NewsPhoto
 from fiesta_core.global_utils.redis_adapter import redis_adapter
-from model_extension import RedisKeys, NewsPreview
+from model_extension import RedisKeys
 
-def gat_news_base_queryset():
-    return News.objects.select_related('news_photos').filter(is_displayed=True)
+
+def gat_news_base_queryset(city):
+    return News.objects.filter(is_displayed=True, city=city)
+
 
 class NewsStream(ListView):
     context_object_name = "news"
@@ -23,14 +25,21 @@ class NewsStream(ListView):
 
     def get_queryset(self):
         q = self.get_search_query()
+        city = self.request.COOKIES[settings.UNIC_TMP_USER_CITY]
+        queryset = gat_news_base_queryset(city)
         if q:
-            #self.search_signal.send(sender=self, query=q, user=self.request.user)
-            return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], title__icontains=q, is_displayed=True).order_by('date_added')
+            queryset.filter(title__icontains=q)
         else:
             if 'type' in self.kwargs:
-                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY], type=self.kwargs['type']).order_by('date_added')
-            else:
-                return gat_news_base_queryset().filter(city=self.request.COOKIES[settings.UNIC_TMP_USER_CITY]).order_by('date_added')
+                queryset.filter(type=self.kwargs['type'])
+
+        photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
+        photos_dict = {}
+        for p in photos:
+            photos_dict[p.news_id] = p
+        for item in queryset:
+            item.photo = photos_dict[item.id]
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(NewsStream, self).get_context_data(**kwargs)
