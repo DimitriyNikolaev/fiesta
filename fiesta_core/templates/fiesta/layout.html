@@ -88,20 +88,16 @@
                 </div>
             </div>
             <aside  id="sideRight">
-                <div>
-                    <div >
+                <div class="side-bar">
+                    <div class="side-block">
                         <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>
                     </div>
-                    <div >
-                        <div >
-                            {% pop_news_list %}
-                        </div>
+                    <div class="side-block">
+                        {% pop_news_list %}
                     </div>
-                    <div >
-                        <div >
-                            <h4>Присоединяйтесь</h4>
-                            <img src="{{ STATIC_URL }}fiesta_core/img/vk.png">
-                        </div>
+                    <div class="side-block">
+                        <h3>Присоединяйтесь</h3>
+                        <img src="{{ STATIC_URL }}fiesta_core/img/vk.png">
                     </div>
                 </div>
             </aside>

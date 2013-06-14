@@ -1,9 +1,13 @@
-<div>
-    <h4>Популярные события</h4>
-    {% if pop_news|length > 0 %}
-        {% for news in pop_news %}
-            <div>{{ news.title }}</div>
+<h3>Популярные события</h3>
+<div class="pop-news">
+{% if pop_news|length > 0 %}
+    {% for news in pop_news %}
+        <a href="{% url "fiesta:blog:single_news" news.id %}">
+            {% if news.preview %}
             <img src="{{ news.preview }}"/>
-        {% endfor %}
-    {% endif %}
+            {% endif %}
+            <b>{{ news.title }}</b>
+        </a>
+    {% endfor %}
+{% endif %}
 </div>
