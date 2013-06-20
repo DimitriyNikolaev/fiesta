@@ -29,7 +29,7 @@
     <section class="article-content">
         <h2><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
         {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
-        <div class="text">{{ news_item.text}}</div>
+        <div class="text">{{ news_item.description}}</div>
         <ul class="statistic">
             <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
         </ul>

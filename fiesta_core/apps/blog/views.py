@@ -3,6 +3,7 @@ __author__ = 'dimitriy'
 import pickle
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
 from django.conf import settings
 from models import News, NewsPhoto
 from fiesta_core.global_utils.redis_adapter import redis_adapter
@@ -13,7 +14,7 @@ from cacheops import cached_as_with_params
 def get_news_base_queryset(city, type):
     queryset = News.objects.filter(is_displayed=True, city=city)
     if type:
-        queryset = queryset.filter(type=type)
+        queryset = queryset.filter(Q(type=type) | Q(type=1))
     queryset = queryset.order_by('-date_added').nocache()
     photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True).nocache()
     photos_dict = {}
@@ -37,7 +38,7 @@ def get_news_search_queryset(city, q):
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 4
+    paginate_by = 7
     model = News
 
     def get_search_query(self):

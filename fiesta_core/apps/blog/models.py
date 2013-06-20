@@ -13,6 +13,7 @@ class News(models.Model):
     type = models.PositiveSmallIntegerField(_('Type'),null=False, default=0, blank=False, choices=FIESTA_NEWSLINE_ENTITY_TYPES)
     lang = models.CharField(_('Language'), max_length=2, null=False, blank=False, default='ru', choices=FIESTA_BLOG_LANGS)
     title = models.CharField(_('Title'),max_length=255, null=False, default='', blank=False)
+    description = models.TextField(_('Description'), null=True, blank=True, default='')
     text = models.TextField(_('Text'), null=False, blank=False, default='' )
     date_added = models.DateTimeField('Date added',null=False,blank=False, default=datetime.now())
     event_date = models.DateTimeField(_('Event date'), null=True, blank=True)
@@ -22,6 +23,7 @@ class News(models.Model):
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
+    description = models.TextField(_('Description'), null=True, blank=True, default='')
 
     @property
     def views_count(self):

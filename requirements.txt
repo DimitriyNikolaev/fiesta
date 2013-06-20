@@ -3,3 +3,4 @@ PIL>=1.1.7
 South>=0.8
 psycopg2>=2.5
 redis>=2.7.5
+simplejson
