@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'dimitriy'
 import pickle
+from datetime import datetime, date, timedelta
+from pytz import utc
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
@@ -87,7 +89,10 @@ class SingleNewsView(DetailView):
             unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
             redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
         views_count = redis_adapter.scard(RedisKeys.news_views % pk)
-        redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
+        if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) < utc.localize(datetime.today()):
+            redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
+        else:
+            redis_adapter.zrem(RedisKeys.pop_news, pk)
         return views_count
 
 

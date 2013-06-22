@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'dimitriy'
-
+from datetime import timedelta, datetime
+from pytz import utc
 from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -10,6 +11,7 @@ from fiesta_core.apps.blog.models import News, Subnews
 from forms import NewsForm,NewsPhotoImageSet, SubnewsForm, SubnewsPhotoImageSet
 from fiesta_core.apps.blog.model_extension import NewsPreview, RedisKeys
 from fiesta_core.global_utils.redis_adapter import redis_adapter
+from django.conf import settings
 import pickle
 
 class NewsList(ListView):
@@ -115,6 +117,11 @@ class UpdateNewsView(UpdateView):
             preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos.count() > 0 else '')
             preview_serialized = pickle.dumps(preview)
             redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
+
+            if not news.is_displayed:
+                redis_adapter.zrem(RedisKeys.pop_news, news.id)
+            elif news.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
+                redis_adapter.zadd(RedisKeys.pop_news, news.id, news.views_count)
             return HttpResponseRedirect(self.get_success_url())
 
         messages.error(self.request,

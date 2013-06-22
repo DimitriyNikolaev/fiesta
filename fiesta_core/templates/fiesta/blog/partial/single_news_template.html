@@ -33,6 +33,8 @@
         <ul class="statistic">
             <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
         </ul>
+        <br/>
+        <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
     </section>
     <div class="cb">&nbsp;</div>
 </article>
