@@ -10,13 +10,14 @@ register = template.Library()
 @register.inclusion_tag('fiesta/blog/pop_news.html', takes_context=True)
 def pop_news_list(context):
     pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news,0,2)
+    result = []
     if len(pop_news_idlist) > 0:
         pipe = redis_adapter.pipeline()
         for id in pop_news_idlist:
             pipe.get(RedisKeys.preview_news_key % id)
         exec_res = pipe.execute()
         if len(exec_res) > 0:
-            result = []
+
             for ind,preview_serialized in enumerate(exec_res):
                 if preview_serialized is not None:
                     result.append(pickle.loads(preview_serialized))
