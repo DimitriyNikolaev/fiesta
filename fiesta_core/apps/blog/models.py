@@ -55,6 +55,7 @@ class NewsPhoto(models.Model):
     is_newsphoto = models.BooleanField(_('is_newsphoto'), null=False, blank=False)
     image = models.ImageField(upload_to=upload_to_path)
     preview = models.ImageField(upload_to=upload_to_path, null=True, blank=True, default=None)
+    thumbnail = models.ImageField(upload_to=upload_to_path, null=True, blank=True, default=None)
     display_order = models.PositiveIntegerField(_("Display Order"), default=0,
         help_text=_("""An image with a display order of
                        zero will be the primary image for a product"""))
@@ -73,6 +74,7 @@ class NewsPhoto(models.Model):
             if obj.image.path != self.image.path:
                 obj.image.delete()
                 obj.preview.delete()
+                obj.thumbnail.delete()
         except:
             pass
         super(NewsPhoto, self).save()
@@ -81,6 +83,7 @@ class NewsPhoto(models.Model):
             obj = NewsPhoto.objects.get(id=self.id)
             obj.image.delete()
             obj.preview.delete()
+            obj.thumbnail.delete()
         except (NewsPhoto.DoesNotExist, ValueError):
             pass
         super(NewsPhoto, self).delete()

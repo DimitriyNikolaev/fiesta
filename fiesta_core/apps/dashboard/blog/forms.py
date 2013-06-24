@@ -6,7 +6,7 @@ from django.forms import ModelForm, DateField
 from fiesta_core.apps.blog.models import News,NewsPhoto, NewsTags, Subnews
 from fiesta_core.forms.widgets import ImageInput
 from django.forms.models import inlineformset_factory
-from fiesta_core.global_utils.image_utils import get_preview
+from fiesta_core.global_utils.image_utils import get_preview, get_thumbnail
 
 
 
@@ -40,7 +40,7 @@ class NewsImageForm(forms.ModelForm):
     type = forms.Select
     class Meta:
         model = NewsPhoto
-        exclude = ('subnews','is_newsphoto', 'display_order', 'preview')
+        exclude = ('subnews','is_newsphoto', 'display_order', 'preview', 'thumbnail')
 
         # use ImageInput widget to create HTML displaying the
         # actual uploaded image and providing the upload dialog
@@ -65,6 +65,9 @@ class NewsImageForm(forms.ModelForm):
         obj.is_newsphoto = True
         preview = get_preview(self.cleaned_data['image'], 'preview')
         obj.preview.save(preview.name, preview)
+        self.cleaned_data['image'].seek(0)
+        thumbnail = get_thumbnail(self.cleaned_data['image'], 'thumbnail')
+        obj.thumbnail.save(thumbnail.name,thumbnail)
         obj.display_order = self.get_display_order()
         obj.save()
         return obj

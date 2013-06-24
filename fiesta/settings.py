@@ -191,6 +191,9 @@ UNIC_TMP_USER_CITY = 'unic_tmp_user_city'
 PREVIEW_IMG__WIDTH = 400
 PREVIEW_IMG_HEIGHT = 300
 
+THUMBNAIL_WIDTH = 80
+THUMBNAIL_HEIGHT = 80
+
 #cacheops
 CACHEOPS_REDIS = {
     'host': 'localhost',      # сервер redis доступен локально

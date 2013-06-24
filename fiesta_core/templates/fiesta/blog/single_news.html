@@ -22,10 +22,10 @@
         {% if news.news_photos.all|length > 1 %}
             <div id="news_slides_{{news.id  }}" class="slides">
                 {% for img in news.news_photos.all %}
-                    {% if img.preview %}
-                        <img src="{{ img.preview.url }}"/>
-                    {% else %}
+                    {% if img.image %}
                         <img src="{{ img.image.url }}">
+                    {% else %}
+                        <img src="{{ img.preview.url }}"/>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -39,10 +39,10 @@
             </script>
         {% else %}
             {% for img in news.news_photos.all %}
-                {% if img.preview %}
-                    <img class="photo" src="{{ img.preview.url }}"/>
-                {% else %}
+                {% if img.image %}
                     <img class="photo" src="{{ img.image.url }}">
+                {% else %}
+                    <img class="photo" src="{{ img.preview.url }}"/>
                 {% endif %}
             {% endfor %}
         {% endif %}
@@ -65,10 +65,10 @@
                 {% if subnews.subnews_photos.all|length > 1 %}
                     <div id="subnews_slides_{{subnews.id  }}" class="slides">
                         {% for img in subnews.subnews_photos.all %}
-                            {% if img.preview %}
-                                <img src="{{ img.preview.url }}"/>
-                            {% else %}
+                            {% if img.image %}
                                 <img src="{{ img.image.url }}">
+                            {% else %}
+                                <img src="{{ img.preview.url }}"/>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -82,10 +82,10 @@
                     </script>
                 {% else %}
                     {% for img in subnews.subnews_photos.all %}
-                        {% if img.preview %}
-                            <img class="photo" src="{{ img.preview.url }}"/>
-                        {% else %}
-                            <img class="photo" src="{{ img.image.url }}">
+                        {% if img.image %}
+                                <img class="photo" src="{{ img.image.url }}">
+                            {% else %}
+                                <img class="photo" src="{{ img.preview.url }}"/>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
