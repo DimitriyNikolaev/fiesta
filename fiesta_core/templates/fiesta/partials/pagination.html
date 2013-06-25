@@ -1,6 +1,5 @@
 {% load display_tags %}
 {% load i18n %}
-
 {% if paginator.num_pages > 1 %}
     <div class="paginator-wrapper">
         <div class="paginator">
@@ -27,6 +26,7 @@
 {#                <li class="{% if num == page_obj.number %}current-page{% endif %}" ><a href="?{% get_parameters page %}page={{ num }}">{{ num }}</a></li>#}
                 {% endfor %}
             </div>
+
 
 
 {#			{% if page_obj.has_next %}#}

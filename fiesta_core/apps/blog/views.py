@@ -40,7 +40,7 @@ def get_news_search_queryset(city, q):
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 7
+    paginate_by = 2
     model = News
 
     def get_search_query(self):
@@ -68,6 +68,13 @@ class NewsStream(ListView):
             context['search_term'] = q
         return context
 
+    def get(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            self.template_name = 'blog/news_stream.html'
+        else:
+            self.template_name = 'blog/partial/news_stream_page.html'
+        return super(NewsStream,self).get(request, args, kwargs)
+
 class SingleNewsView(DetailView):
     model = News
     context_object_name = 'news'
@@ -89,7 +96,7 @@ class SingleNewsView(DetailView):
             unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
             redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
         views_count = redis_adapter.scard(RedisKeys.news_views % pk)
-        if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) < utc.localize(datetime.today()):
+        if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
             redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
         else:
             redis_adapter.zrem(RedisKeys.pop_news, pk)

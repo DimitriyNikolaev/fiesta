@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% load i18n %}
+{% load display_tags %}
+
 {% block content_wrapper %}
     {% if news|length > 0 %}
 
@@ -7,26 +9,50 @@
             {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
         {% endfor %}
 
-        <script type="text/javascript">
-            var lHeight=0;
-            var rHeight=0;
-            $('article.wall-article').each(function(index){
-                if(lHeight > rHeight){
-                    $(this).attr('data-side','r');
-                    rHeight += $(this).height();
-                }
-                else{
-                    $(this).attr('data-side','l');
-                    lHeight += $(this).height();
-                }
-            })
-        </script>
-
-        {% include "partials/pagination.html" %}
-
+        {% comment %}{% include "partials/pagination.html" %}{% endcomment %}
+        <a onclick="loadNextPage()">{% trans "Show more" %}</a>
     {% else %}
         <p>{% trans "No news found." %}</p>
     {% endif %}
 {% endblock %}
 {% block extrascripts %}
+    <script type="text/javascript">
+        var lHeight=0;
+        var rHeight=0;
+        $('article.wall-article').each(function(index){
+            if(lHeight > rHeight){
+                $(this).attr('data-side','r');
+                rHeight += $(this).height();
+            }
+            else{
+                $(this).attr('data-side','l');
+                lHeight += $(this).height();
+            }
+        });
+        //paginating
+        var paginator = new Object();
+        paginator.total = {{ paginator.num_pages }};
+        paginator.next = {% if page_obj.has_next %} {{ page_obj.next_page_number }} {% else %} '' {% endif %};
+        paginator.previous = {% if page_obj.has_previous %} {{ page_obj.previous_page_number }} {% else %}'' {% endif %};
+        paginator.current = {{ page_obj.number }};
+        paginator.ulrpattern = "?{% get_parameters page %}page="
+
+        var loadNextPage = function(){
+            if(paginator.next != '')
+                $.get(paginator.ulrpattern+paginator.next,{}, onLoadNextPage)
+        }
+        var onLoadNextPage = function(data){
+            paginator.previous = paginator.current;
+            paginator.current = paginator.next;
+            if(paginator.next == paginator.total)
+                paginator.next ='';
+            else
+                paginator.next +=1;
+
+            $("#content").append(data);
+
+        }
+
+    </script>
+
 {% endblock %}

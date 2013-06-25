@@ -1,0 +1,3 @@
+{% for news_item in news %}
+    {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
+{% endfor %}
