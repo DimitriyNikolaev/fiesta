@@ -1,4 +1,6 @@
 <article class="wall-article">
+    <h2 class="article-header"><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
+    <div class="article-text">{{ news_item.description}}</div>
     <div class="img-container">
         <div class="dates-wrapper">
             <ul>
@@ -26,15 +28,9 @@
     {% endif %}
     </div>
 
-    <section class="article-content">
-        <h2><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
-        {#<p>{{ news_item.text|truncatewords:"25"  }}</p>#}
-        <div class="text">{{ news_item.description}}</div>
-        <ul class="statistic">
-            <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
-        </ul>
-        <br/>
-        <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
-    </section>
-    <div class="cb">&nbsp;</div>
+    <ul class="article-statistic">
+        <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
+    </ul>
+    <br/>
+    <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
 </article>

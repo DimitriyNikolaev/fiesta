@@ -1,16 +1,32 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block content_wrapper %}
-        {% if news|length > 0 %}
+    {% if news|length > 0 %}
 
-            {% for news_item in news %}
-                {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
-            {% endfor %}
-            {% include "partials/pagination.html" %}
+        {% for news_item in news %}
+            {% include 'fiesta/blog/partial/single_news_template.html' with news_item=news_item %}
+        {% endfor %}
 
-        {% else %}
-            <p>{% trans "No news found." %}</p>
-        {% endif %}
+        <script type="text/javascript">
+            var lHeight=0;
+            var rHeight=0;
+            $('article.wall-article').each(function(index){
+                if(lHeight > rHeight){
+                    $(this).attr('data-side','r');
+                    rHeight += $(this).height();
+                }
+                else{
+                    $(this).attr('data-side','l');
+                    lHeight += $(this).height();
+                }
+            })
+        </script>
+
+        {% include "partials/pagination.html" %}
+
+    {% else %}
+        <p>{% trans "No news found." %}</p>
+    {% endif %}
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}
