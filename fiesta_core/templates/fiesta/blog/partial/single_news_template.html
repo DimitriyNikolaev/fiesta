@@ -1,6 +1,6 @@
 <article class="wall-article">
     <h2 class="article-header"><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
-    <div class="article-text">{{ news_item.description}}</div>
+    <div class="article-text">{{ news_item.description|safe}}</div>
     <div class="img-container">
         <div class="dates-wrapper">
             <ul>
