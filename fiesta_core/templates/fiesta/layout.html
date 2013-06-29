@@ -82,7 +82,7 @@
                 <div class="main-menu">
                     {% include "partials/nav_menu.html" %}
                 </div>
-                <div id="content">
+                <div>
                 {% block content_wrapper %}
                 {% endblock %}
                 </div>
@@ -100,7 +100,7 @@
                         {% pop_news_list %}
                     </div>
                     <div class="side-block">
-                        <h3>{% trans "Join to us" %}</h3>
+                        <h3>{% trans "Join us" %}</h3>
                         <img src="{{ STATIC_URL }}fiesta_core/img/vk.png">
                     </div>
                 </div>
@@ -112,8 +112,8 @@
                 <div class="footer-container">
                     <div class="copyright">© Blog Fiesta 2013</div>
                     <ul class="footer-menu">
-                        <li><a href="#">Реклама</a></li>
-                        <li><a href="#">Связаться с нами</a></li>
+                        <li><a href="{% url 'fiesta:blog:advertisement' %}">{% trans "Advertisement" %}</a></li>
+                        <li><a href="{% url 'fiesta:blog:contact' %}">{% trans "Contact us" %}</a></li>
                     </ul>
                     <ul class="soc-icons">
                         <li><a href="http://vk.com/blog_fiesta" target="_blank" class="vk" title="вконтакте"></a></li>

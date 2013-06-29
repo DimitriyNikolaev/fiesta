@@ -4,7 +4,7 @@ import pickle
 from datetime import datetime, date, timedelta
 from pytz import utc
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.db.models import Q
 from django.conf import settings
 from models import News, NewsPhoto
@@ -103,6 +103,10 @@ class SingleNewsView(DetailView):
         return views_count
 
 
+class AdvertisementView(TemplateView):
+    template_name = 'blog/advertisement.html'
 
+class ContactView(TemplateView):
+    template_name = 'blog/contact.html'
 
 

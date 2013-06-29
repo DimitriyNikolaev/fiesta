@@ -1,4 +1,5 @@
-<h3>Популярные события</h3>
+{% load i18n %}
+<h3>{% trans "Pop news" %}</h3>
 <div class="pop-news">
 {% if pop_news|length > 0 %}
     {% for news in pop_news %}

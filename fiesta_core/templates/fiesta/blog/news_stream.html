@@ -3,6 +3,7 @@
 {% load display_tags %}
 
 {% block content_wrapper %}
+<div id="content">
     {% if news|length > 0 %}
 
         {% for news_item in news %}
@@ -12,6 +13,7 @@
     {% else %}
         <p>{% trans "No news found." %}</p>
     {% endif %}
+</div>
 {% endblock %}
 {% block prefooter %}
     <a onclick="loadNextPage()">{% trans "Show more" %}</a>
