@@ -179,6 +179,10 @@ h2.article-header a:hover{text-decoration: none;}
 .article-statistic li:last-child{margin-right: 0;}
 .article-statistic li.browsing{background: url(../img/browsing-icon.png) no-repeat center left; padding: 0 0 0 25px;}
 
+.show-more-btn{display: block; width: 200px; margin: 0 auto 15px auto; text-align: center; background: #eee;box-shadow: 1px 2px 0 rgba(255, 193, 0, 1); color: #222; font-weight: bold; text-transform: uppercase; cursor: pointer; line-height: 42px; height: 38px;font-size: 13px;}
+.show-more-btn span{background: url(../img/show-more-btn.png) no-repeat right center; padding: 0 25px 0 0;}
+.show-more-btn:hover{text-decoration: none; color: #222;}
+
 /*Article details style*/
 article.detail{}
 article.detail .header,article.detail .image-wrapper{margin: 0 0 10px 0;}

@@ -16,16 +16,16 @@
 
 {% endblock %}
 {% block prefooter %}
-    <a onclick="loadNextPage()">{% trans "Show more" %}</a>
+    <a class="cb show-more-btn" onclick="loadNextPage()"><span>{% trans "Show more" %}</span></a>
     {% comment %}{% include "partials/pagination.html" %}{% endcomment %}
 {% endblock %}
 {% block extrascripts %}
     <script type="text/javascript">
-        var lHeight=0;
-        var rHeight=0;
+
 
         var manageArticlesToColumns = function(){
-
+            var lHeight=0;
+            var rHeight=0;
             $('article.wall-article').each(function(index){
                 if(lHeight > rHeight){
                     $(this).attr('data-side','r');
