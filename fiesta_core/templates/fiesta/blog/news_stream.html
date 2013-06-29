@@ -21,12 +21,19 @@
 {% endblock %}
 {% block extrascripts %}
     <script type="text/javascript">
+        //(function($) {
+        //    var origAppend = $.fn.append;
 
+        //    $.fn.append = function () {
+        //        return origAppend.apply(this, arguments).trigger("append");
+        //    };
+        //})(jQuery);
 
         var manageArticlesToColumns = function(){
             var lHeight=0;
             var rHeight=0;
             $('article.wall-article').each(function(index){
+                console.log('высота:'+$(this).height());
                 if(lHeight > rHeight){
                     $(this).attr('data-side','r');
                     rHeight += $(this).height();
@@ -40,6 +47,7 @@
 
         $.ready(new function(){
             manageArticlesToColumns();
+            //$("#content").bind("append", manageArticlesToColumns);
         });
 
 
@@ -49,7 +57,9 @@
         paginator.next = {% if page_obj.has_next %} {{ page_obj.next_page_number }} {% else %} '' {% endif %};
         paginator.previous = {% if page_obj.has_previous %} {{ page_obj.previous_page_number }} {% else %}'' {% endif %};
         paginator.current = {{ page_obj.number }};
-        paginator.ulrpattern = "?{% get_parameters page %}page="
+        paginator.ulrpattern = "?{% get_parameters page %}page=";
+        paginator.items_per_page = 0;
+        paginator.items_loaded = 0;
 
         var loadNextPage = function(){
             if(paginator.next != '')
@@ -64,7 +74,21 @@
                 paginator.next +=1;
 
             $("#content").append(data);
-            manageArticlesToColumns();
+            //manageArticlesToColumns();
+            $('#content').ready(function(){
+                $("article.wall-article:not([data-side]) img").each(function(){
+                    paginator.items_per_page +=1;
+                    this.onload = function() {
+                        paginator.items_loaded +=1;
+                        if(paginator.items_loaded == paginator.items_per_page){
+                            manageArticlesToColumns();
+                            paginator.items_loaded = 0;
+                            paginator.items_per_page = 0
+                        }
+                    }
+                });
+            });
+
         }
 
     </script>

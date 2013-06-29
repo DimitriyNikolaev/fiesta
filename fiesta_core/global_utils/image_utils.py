@@ -15,11 +15,12 @@ def get_preview(original_image, field):
     if img.mode != "RGB":
         img = img.convert("RGB")
 
-
+    width = settings.PREVIEW_IMG__WIDTH
+    height = int(round(width*img.size[1]/img.size[0]))
     # Метод thumb не используется, т.к. он не увеличивает размер изображения,
     # если оно меньше требуемого
     # img = img.crop((0, 0, min(img.size), min(img.size)))
-    img = img.resize((settings.PREVIEW_IMG__WIDTH, settings.PREVIEW_IMG_HEIGHT), Image.ANTIALIAS)
+    img = img.resize((width, height), Image.ANTIALIAS)
     img.save(thumb, 'JPEG')
     if hasattr(original_image, 'path'):
         name = 'preview_%s' %  os.path.basename(original_image.path)
@@ -41,10 +42,21 @@ def get_thumbnail(original_image,field):
         img = img.convert("RGB")
 
 
+    if img.size[0] > img.size[1]:
+        height = settings.THUMBNAIL_HEIGHT
+        width = int(round(img.size[0]*height/img.size[1]))
+    else:
+        width = settings.THUMBNAIL_WIDTH
+        height = int(round(width*img.size[1]/img.size[0]))
+
     # Метод thumb не используется, т.к. он не увеличивает размер изображения,
     # если оно меньше требуемого
     # img = img.crop((0, 0, min(img.size), min(img.size)))
-    img.thumbnail((settings.THUMBNAIL_WIDTH, settings.THUMBNAIL_HEIGHT), Image.ANTIALIAS)
+    img.thumbnail((width, height), Image.ANTIALIAS)
+    if height > settings.THUMBNAIL_HEIGHT:
+        img = img.crop((0,0,width, settings.THUMBNAIL_HEIGHT))
+    elif width > settings.THUMBNAIL_WIDTH:
+        img = img.crop((0,0,settings.THUMBNAIL_WIDTH, height))
     img.save(thumb, 'JPEG')
     if hasattr(original_image, 'path'):
         name = 'thumb_%s' %  os.path.basename(original_image.path)

@@ -66,6 +66,7 @@ class NewsStream(ListView):
         else:
             context['summary'] = _("News matching '%(query)s'") % {'query': q}
             context['search_term'] = q
+        #context['items_per_page'] = self.paginate_by
         return context
 
     def get(self, request, *args, **kwargs):
