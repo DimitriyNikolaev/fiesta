@@ -167,6 +167,12 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .article-text p{margin-bottom: 20px;}
 .article-text a.email{border-bottom: solid 1px #c3c3c3; font-weight: bold; display: inline-block;}
 .article-text a.email:hover{ border-bottom-color: #111;}
+.article-text .info-block{display: inline-block;background: #f6f6f6; padding: 20px 30px; margin: 0 20px 20px 0; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom: solid 2px #ffc000;}
+.article-text .info-block tr td{padding: 5px 0; font-size: 12px; vertical-align: middle;}
+.article-text .info-block tr td:last-child{font-weight: bold; color: #111;font-size: 14px; padding-left: 25px;}
+.article-text .info-block tr:first-child td{padding-top: 0;}
+.article-text .info-block tr:last-child td{padding-bottom: 0;}
+.article-text h3{color:#202020;font-size: 18px; margin: 15px 0;}
 .article-comments{background: #f6f6f6 url(../img/article-commets-icn.png) no-repeat 15px 5px; padding: 40px 40px 35px 70px; border-bottom: solid 2px #ffc000; margin: 20px 0 25px 0; font-size: 16px; line-height: 24px; color: #545454; border-top-left-radius: 3px; border-top-right-radius:3px;}
 
 /* Article statistic styles*/
