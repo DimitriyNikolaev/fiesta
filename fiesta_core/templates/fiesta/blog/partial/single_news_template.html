@@ -28,9 +28,11 @@
     {% endif %}
     </div>
 
-    <ul class="article-statistic">
-        <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
-    </ul>
-    <br/>
+    <div class="article-statistic">
+        <ul>
+            <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
+        </ul>
+        <div class="cb">&nbsp;</div>
+    </div>
     <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
 </article>

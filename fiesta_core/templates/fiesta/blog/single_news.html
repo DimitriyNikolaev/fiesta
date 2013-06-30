@@ -49,49 +49,53 @@
     </div>
     <section>
         <div class="article-text">{{ news.text}}</div>
-        <ul class="article-statistic">
-            <li class="browsing" title="Просмотров">{{ views_count }}</li>
-        </ul>
-    </section>
-<br/>
-    {% for subnews in news.subnews.all %}
-        <div>
-            {{ subnews.title }}
-            <br/>
-            {{ subnews.text }}
-            <br/>
-            {{ subnews.contacts }}
-            <div class="image-wrapper">
-                {% if subnews.subnews_photos.all|length > 1 %}
-                    <div id="subnews_slides_{{subnews.id  }}" class="slides">
+        <div class="article-comments">
+            Aliquam a lorem odio. Cras consectetur elementum ipsum sit amet dignissim. Curabitur non enim massa. Fusce dapibus turpis tellus, ac euismod elit viverra eu. Curabitur id quam lectus. Vestibulum semper rutrum ante, vel interdum elit auctor sed. Donec sagittis semper orci nec vehicula. Suspendisse vehicula diam sed arcu egestas varius. Quisque quis dui aliquet, iaculis massa consequat, euismod dui. Pellentesque ultricies tincidunt facilisis. Praesent ac dictum velit. Integer scelerisque et tortor non molestie. Vestibulum et turpis et arcu luctus egestas accumsan non lorem.
+        </div>
+
+        {% for subnews in news.subnews.all %}
+            <article class="sub-article">
+                <h3 class="header">{{ subnews.title }}</h3>
+                <div class="article-text">{{ subnews.text }}</div>
+                <div class="contacts">{{ subnews.contacts }}</div>
+                <div class="image-wrapper">
+                    {% if subnews.subnews_photos.all|length > 1 %}
+                        <div id="subnews_slides_{{subnews.id  }}" class="slides">
+                            {% for img in subnews.subnews_photos.all %}
+                                {% if img.image %}
+                                    <img src="{{ img.image.url }}">
+                                {% else %}
+                                    <img src="{{ img.preview.url }}"/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <script>
+                            $(function(){
+                                $("#subnews_slides_{{subnews.id}}").slidesjs({
+                                    //width: 400,
+                                    //height: 300
+                                });
+                            });
+                        </script>
+                    {% else %}
                         {% for img in subnews.subnews_photos.all %}
                             {% if img.image %}
-                                <img src="{{ img.image.url }}">
-                            {% else %}
-                                <img src="{{ img.preview.url }}"/>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <script>
-                        $(function(){
-                            $("#subnews_slides_{{subnews.id}}").slidesjs({
-                                //width: 400,
-                                //height: 300
-                            });
-                        });
-                    </script>
-                {% else %}
-                    {% for img in subnews.subnews_photos.all %}
-                        {% if img.image %}
                                 <img class="photo" src="{{ img.image.url }}">
                             {% else %}
                                 <img class="photo" src="{{ img.preview.url }}"/>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-    {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
 
+        <div class="article-statistic">
+            <ul>
+                <li class="browsing" title="Просмотров">{{ views_count }}</li>
+            </ul>
+            <div class="cb">&nbsp;</div>
+        </div>
+    </section>
 </article>
 {% endblock %}
