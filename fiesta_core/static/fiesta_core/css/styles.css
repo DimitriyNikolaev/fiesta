@@ -163,6 +163,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .dates-wrapper li.triangle{height: 0px; width: 0px; line-height: 0px;font-size: 0px;border-bottom: 30px solid #fddda4; border-left: 20px solid transparent; padding: 0;	}
 
 /* Article text styles*/
+.article-description{font-size: 18px; font-weight: bold; padding: 0 0 15px 0;}
 .article-text{font-size: 14px; line-height: 20px; color: #565656;}
 .article-text p{margin-bottom: 20px;}
 .article-text a.email{border-bottom: solid 1px #c3c3c3; font-weight: bold; display: inline-block;}
