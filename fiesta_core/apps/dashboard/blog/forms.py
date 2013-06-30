@@ -13,8 +13,8 @@ from fiesta_core.global_utils.image_utils import get_preview, get_thumbnail
 
 class NewsForm(ModelForm):
     date_added = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
-    event_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
-    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
+    event_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
+    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
     class Meta:
         model = News
 
@@ -85,8 +85,8 @@ NewsPhotoImageSet = inlineformset_factory(News, NewsPhoto,
     extra=5)
 
 class SubnewsForm(ModelForm):
-    event_data = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
-    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
+    event_data = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
+    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
     class Meta:
         model = Subnews
         exclude = ('news')
