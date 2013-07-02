@@ -6,6 +6,7 @@
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/jquery.slides.min.js"></script>
 {#    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap/bootstrap.min.js"></script>#}
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/dropdowns.js"></script>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?97"></script>
     <script type="text/javascript">
     $(document).ready(function () {
 
@@ -36,6 +37,9 @@
     {
         var re = new RegExp(name + "=([^;]+)"); var value = re.exec(document.cookie); return (value != null) ? value[1] : null;
     }
+
+    VK.Widgets.Group("vk_groups", {mode: 0, width: "238", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 26270763);
+    VK.init({apiId: 3740645, onlyWidgets: true});
     </script>
 {% endblock %}
 
@@ -45,15 +49,15 @@
             <div id="container">
                 <header id="header">
                     {% block header %}
-                    {% include "fiesta/partials/auth_tag.html" %}
+                    {% comment %}{% include "fiesta/partials/auth_tag.html" %}{% endcomment %}
                     <div class="cities-selector" >
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
                         </div>
-                        <ul class="dropdown-menu">
+                        {% comment %}<ul class="dropdown-menu">
                           <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="0"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
                           <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="1"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
-                        </ul>
+                        </ul>{% endcomment %}
                     </div>
 
                     <a class="logo-block" href="/"><img src="{{ STATIC_URL }}fiesta_core/img/logo.png"></a>
@@ -101,7 +105,9 @@
                     </div>
                     <div class="side-block">
                         <h3>{% trans "Join us" %}</h3>
-                        <img src="{{ STATIC_URL }}fiesta_core/img/vk.png">
+                        {% comment %}<img src="{{ STATIC_URL }}fiesta_core/img/vk.png">{% endcomment %}
+                        <div id="vk_groups"></div>
+
                     </div>
                 </div>
             </aside>
@@ -112,8 +118,8 @@
                 <div class="footer-container">
                     <div class="copyright">© Blog Fiesta 2013</div>
                     <ul class="footer-menu">
-                        <li><a href="{% url 'fiesta:blog:advertisement' %}">{% trans "Advertisement" %}</a></li>
-                        <li><a href="{% url 'fiesta:blog:contact' %}">{% trans "Contact us" %}</a></li>
+                        <li>Для связи: mail@blog-fiesta.com{% comment %}<a href="{% url 'fiesta:blog:advertisement' %}">{% trans "Advertisement" %}</a>{% endcomment %}</li>
+                        {% comment %}<li><a href="{% url 'fiesta:blog:contact' %}">{% trans "Contact us" %}</a></li>{% endcomment %}
                     </ul>
                     <ul class="soc-icons">
                         <li><a href="http://vk.com/blog_fiesta" target="_blank" class="vk" title="вконтакте"></a></li>

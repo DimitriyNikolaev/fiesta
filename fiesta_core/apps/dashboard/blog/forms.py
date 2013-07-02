@@ -1,30 +1,44 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'dimitriy'
-
+import datetime
+from pytz import utc
 from django import forms
 from django.forms import ModelForm, DateField
 from fiesta_core.apps.blog.models import News,NewsPhoto, NewsTags, Subnews
-from fiesta_core.forms.widgets import ImageInput
+from fiesta_core.forms.widgets import ImageInput, JSDateTimePickerWidget
 from django.forms.models import inlineformset_factory
 from fiesta_core.global_utils.image_utils import get_preview, get_thumbnail
 
 
 
 class NewsForm(ModelForm):
-    date_added = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'))
-    event_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
-    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
+    date_added =  forms.DateField(input_formats=('%d.%m.%Y',))
+    #time_added = forms.TimeField(widget=JSDateTimePickerWidget(), input_formats=('%H:%M',))
+    event_date = forms.DateField(input_formats=('%d.%m.%Y',), required=False)
+    deadline_date = forms.DateField(input_formats=('%d.%m.%Y',), required=False)
+    def __init__(self,*args,**kwargs):
+        ModelForm.__init__(self,*args,**kwargs)
+        #first argument, index is the position of the field you want it to come before
+        self.fields.insert(6,'time_added',forms.TimeField(widget=JSDateTimePickerWidget(), input_formats=('%H:%M',), required=True))
+        if not self.instance.id:
+            self.instance.date_added = utc.localize(datetime.datetime.today())
+
+        self.fields['time_added'].initial = self.instance.date_added.time()
     class Meta:
         model = News
 
+        # widgets = {
+        #     'time_added':JSDateTimePickerWidget()
+        #     }
 
-    # def save(self):
-    #     object = super(NewsForm, self).save(False)
-    #     object.save()
-    #     if hasattr(self, 'save_m2m'):
-    #         self.save_m2m()
-    #     return object
+
+
+    def save(self):
+        object = super(NewsForm, self).save(False)
+        object.date_added = utc.localize(datetime.datetime.combine(self.cleaned_data['date_added'], self.cleaned_data['time_added']))
+        object.save()
+        return object
 
 
 
@@ -37,6 +51,7 @@ class NewsForm(ModelForm):
             # calling the clean() method of BaseForm here is required to apply checks
         # for 'unique' field. This prevents e.g. the UPC field from raising
         # a DatabaseError.
+
         return super(NewsForm, self).clean()
 
 class NewsImageForm(forms.ModelForm):
@@ -85,8 +100,8 @@ NewsPhotoImageSet = inlineformset_factory(News, NewsPhoto,
     extra=5)
 
 class SubnewsForm(ModelForm):
-    event_data = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
-    deadline_date = forms.DateField(input_formats=('%d-%m-%Y', '%d.%m.%Y', '%Y-%m-%d'), required=False)
+    event_date = forms.DateField(input_formats=('%d.%m.%Y',), required=False)
+    deadline_date = forms.DateField(input_formats=('%d.%m.%Y',), required=False)
     class Meta:
         model = Subnews
         exclude = ('news')
@@ -114,7 +129,7 @@ class SubnewsImageForm(forms.ModelForm):
     type = forms.Select
     class Meta:
         model = NewsPhoto
-        exclude = ('news','is_newsphoto')
+        exclude = ('news','is_newsphoto','display_order', 'preview', 'thumbnail')
 
         # use ImageInput widget to create HTML displaying the
         # actual uploaded image and providing the upload dialog

@@ -6,6 +6,7 @@
     <link href="{{ STATIC_URL }}fiesta_core/css/dashboard.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{ STATIC_URL }}fiesta_core/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{ STATIC_URL }}fiesta_core/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" media="screen" />
 {% endblock %}
 {% block scripts %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
@@ -16,6 +17,7 @@
 
     <script type="text/javascript" src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}fiesta_core/js/plugins/bootstrap-timepicker.js"></script>
 
 
 {% endblock %}
@@ -103,7 +105,7 @@
     </section>
 {% endblock %}
 {% block extraheads %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.css" />
+    {% comment %}<link rel="stylesheet" href="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.css" />{% endcomment %}
 {% endblock %}
 
 {% block extrascripts %}
@@ -111,8 +113,8 @@
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/plugins.js" type="text/javascript" charset="utf-8"></script>
 
     {# WYSIHTML5 #}
-    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/wysihtml5-0.3.0_rc2.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.js" type="text/javascript" charset="utf-8"></script>
+    {% comment %}<script src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/wysihtml5-0.3.0_rc2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap-wysihtml5/bootstrap-wysihtml5-0.0.2.js" type="text/javascript" charset="utf-8"></script>{% endcomment %}
 
     <script src="{{ STATIC_URL }}fiesta_core/js/project/ui.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{ STATIC_URL }}fiesta_core/js/project/dashboard.js" type="text/javascript" charset="utf-8"></script>

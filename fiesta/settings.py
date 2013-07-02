@@ -28,8 +28,9 @@ DATABASES = LOCAL_DATABASES
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Europe/Moscow'
 
+TIME_INPUT_FORMATS = ('%H:%M')
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'ru'#'en-us'
@@ -40,6 +41,7 @@ LANGUAGES = (
 )
 
 SITE_ID = 1
+SITE_DOMAIN = 'http://blog-fiesta.com'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -205,3 +207,5 @@ CACHEOPS = {
     '*.*': ('just_enable', 60*15),
 }
 
+#vk
+VK_API_ID = 3740645

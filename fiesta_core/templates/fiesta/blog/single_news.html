@@ -6,13 +6,13 @@
         <div class="dates-wrapper">
             <ul>
                 {% if news.event_date %}
-                    <li class="{% if news.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news.event_date|date:"d E" }}</li>
+                    <li class="{% if news.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news.event_date|date:"j E" }}</li>
                     {% if news.deadline_date %}
                         <li class="triangle">&nbsp;</li>
                     {% endif %}
                 {% endif %}
                 {% if news.deadline_date %}
-                    <li class="to-date">{{ news.deadline_date|date:"d E" }}</li>
+                    <li class="to-date">{{ news.deadline_date|date:"j E" }}</li>
                 {% endif %}
             </ul>
         </div>
@@ -24,7 +24,7 @@
                 {% for img in news.news_photos.all %}
                     {% if img.image %}
                         <img src="{{ img.image.url }}">
-                    {% else %}
+                    {% elif img.preview %}
                         <img src="{{ img.preview.url }}"/>
                     {% endif %}
                 {% endfor %}
@@ -41,7 +41,7 @@
             {% for img in news.news_photos.all %}
                 {% if img.image %}
                     <img class="photo" src="{{ img.image.url }}">
-                {% else %}
+                {% elif img.preview %}
                     <img class="photo" src="{{ img.preview.url }}"/>
                 {% endif %}
             {% endfor %}
@@ -50,7 +50,10 @@
     <section>
         <div class="article-description">{{ news.description|safe}}</div>
         <div class="article-text">{{ news.text|safe}}</div>
-        <div class="article-comments">
+        {% if news.contacts %}
+            <div class="article-text">{{ news.contacts }}</div>
+        {% endif %}
+        <div class="article-comments hide">
             Aliquam a lorem odio. Cras consectetur elementum ipsum sit amet dignissim. Curabitur non enim massa. Fusce dapibus turpis tellus, ac euismod elit viverra eu. Curabitur id quam lectus. Vestibulum semper rutrum ante, vel interdum elit auctor sed. Donec sagittis semper orci nec vehicula. Suspendisse vehicula diam sed arcu egestas varius. Quisque quis dui aliquet, iaculis massa consequat, euismod dui. Pellentesque ultricies tincidunt facilisis. Praesent ac dictum velit. Integer scelerisque et tortor non molestie. Vestibulum et turpis et arcu luctus egestas accumsan non lorem.
         </div>
 
@@ -58,14 +61,16 @@
             <article class="sub-article">
                 <h3 class="header">{{ subnews.title }}</h3>
                 <div class="article-text">{{ subnews.text|safe }}</div>
-                <div class="contacts">{{ subnews.contacts }}</div>
+                {% if subnews.contacts %}
+                    <div class="contacts">{{ subnews.contacts }}</div>
+                {% endif %}
                 <div class="image-wrapper">
                     {% if subnews.subnews_photos.all|length > 1 %}
                         <div id="subnews_slides_{{subnews.id  }}" class="slides">
                             {% for img in subnews.subnews_photos.all %}
                                 {% if img.image %}
                                     <img src="{{ img.image.url }}">
-                                {% else %}
+                                {% elif img.preview %}
                                     <img src="{{ img.preview.url }}"/>
                                 {% endif %}
                             {% endfor %}
@@ -82,7 +87,7 @@
                         {% for img in subnews.subnews_photos.all %}
                             {% if img.image %}
                                 <img class="photo" src="{{ img.image.url }}">
-                            {% else %}
+                            {% elif img.preview %}
                                 <img class="photo" src="{{ img.preview.url }}"/>
                             {% endif %}
                         {% endfor %}
@@ -94,9 +99,13 @@
         <div class="article-statistic">
             <ul>
                 <li class="browsing" title="Просмотров">{{ views_count }}</li>
+                <li><div id="vk_like_{{ news.id }}"></div></li>
             </ul>
             <div class="cb">&nbsp;</div>
         </div>
     </section>
 </article>
+<script>
+    VK.Widgets.Like('vk_like_{{ news.id }}',{type:'mini', pageTitle:'{{ news.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news.id %}'{% with img=news.news_photos.all|first %}{% if img.preview %}, pageImage:"{{ site_domain }}{{ img.preview.url }}"{% endif %} {% endwith %}, verb:1},{{ news.id }});
+</script>
 {% endblock %}

@@ -92,7 +92,7 @@ img {
 #header .auth{margin: 10px 0 0 -10px;}
 
 /* Cities selector styles*/
-.cities-selector{ background: #fff; bottom: 0;margin: 0 0 10px 0;}
+.cities-selector{ background: #fff; top: 20px;margin: 0 0 10px 0;}
 .cities-selector .dropdown-toggle {display:inline-block;position: relative; padding: 10px; cursor: pointer; background: #fff;}
 .cities-selector .dropdown-toggle .city-label-wrapper{display: inline-block;background: #fff url(../img/arrow-down.png) no-repeat right center; padding-right: 10px;}
 .cities-selector .dropdown-toggle span{cursor: pointer; border-bottom: dotted 1px #666; color: #333;}
@@ -181,7 +181,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .article-statistic ul{list-style: none;}
 .article-statistic li{float: left; margin: 0 20px 0 0;}
 .article-statistic li:last-child{margin-right: 0;}
-.article-statistic li.browsing{background: url(../img/browsing-icon.png) no-repeat center left; padding: 0 0 0 25px;}
+.article-statistic li.browsing{background: url(../img/browsing-icon.png) no-repeat center left; padding: 3px 0 0 25px;}
 
 /*Wall article styles*/
 .wall-article{padding: 13px; width: 323px; border: solid 1px #eee; margin-bottom: 12px;}

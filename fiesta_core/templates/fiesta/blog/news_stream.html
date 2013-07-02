@@ -23,9 +23,11 @@
     <script type="text/javascript">
         var lHeight=0;
         var rHeight=0;
+
         var manageArticlesToColumns = function(){
+
             $('article.wall-article:not([data-side])').each(function(index){
-                //console.log('высота:'+$(this).height());
+                console.log('высота:'+$(this).height());
                 if(lHeight > rHeight){
                     $(this).attr('data-side','r');
                     rHeight += $(this).height();
@@ -39,7 +41,6 @@
 
         $.ready(new function(){
             manageArticlesToColumns();
-
         });
 
 

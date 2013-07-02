@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.forms.util import flatatt
 
 
+
 class ImageInput(FileInput):
     """
     Widget prodiving a input element for file uploads based on the
@@ -55,4 +56,31 @@ class WYSIWYGTextArea(forms.Textarea):
         kwargs['attrs'].setdefault('class', '')
         kwargs['attrs']['class'] += ' wysiwyg'
         super(WYSIWYGTextArea, self).__init__(*args, **kwargs)
+
+class JSDateTimePickerWidget(forms.TextInput):
+    template_name = 'partials/datetimepicker_widget.html'
+    def render(self, name, value, attrs=None):
+        """
+        Render the ``input`` field based on the defined ``template_name``. The
+        image URL is take from *value* and is provided to the template as
+        ``image_url`` context variable relative to ``MEDIA_URL``. Further
+        attributes for the ``input`` element are provide in ``input_attrs`` and
+        contain parameters specified in *attrs* and *name*.
+        If *value* contains no valid image URL an empty string will be provided
+        in the context.
+        """
+        if value is None:
+            value = ''
+
+        final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
+        if value != '':
+            # Only add the 'value' attribute if a value is non-empty.
+            final_attrs['value'] = force_unicode(self._format_value(value))
+
+        date = final_attrs.get('value', '')
+
+        return render_to_string(self.template_name, Context({
+            'input_attrs': flatatt(final_attrs),
+            'name':name
+            }))
 

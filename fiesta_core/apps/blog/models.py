@@ -23,7 +23,7 @@ class News(models.Model):
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
-    description = models.TextField(_('Description'), null=True, blank=True, default='')
+
 
     @property
     def views_count(self):

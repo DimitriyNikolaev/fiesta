@@ -5,13 +5,13 @@
         <div class="dates-wrapper">
             <ul>
                 {% if news_item.event_date %}
-                    <li class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news_item.event_date|date:"d E" }}</li>
+                    <li class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news_item.event_date|date:"j E" }}</li>
                     {% if news_item.deadline_date %}
                         <li class="triangle">&nbsp;</li>
                     {% endif %}
                 {% endif %}
                 {% if news_item.deadline_date %}
-                    <li class="to-date">{{ news_item.deadline_date|date:"d E" }}</li>
+                    <li class="to-date">{{ news_item.deadline_date|date:"j E" }}</li>
                 {% endif %}
             </ul>
         </div>
@@ -31,8 +31,12 @@
     <div class="article-statistic">
         <ul>
             <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
+            <li><div id="vk_like_{{ news_item.id }}"></div></li>
         </ul>
         <div class="cb">&nbsp;</div>
     </div>
     <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
 </article>
+<script>
+    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}',  pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
+</script>
