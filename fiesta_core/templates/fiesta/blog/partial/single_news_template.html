@@ -38,5 +38,5 @@
     <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
 </article>
 <script>
-    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}',  pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
+    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
 </script>

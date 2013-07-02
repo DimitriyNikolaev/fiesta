@@ -134,7 +134,7 @@ def cached_as_with_params(sample, extra=None, timeout=None):
         def wrapper(*args):
             argstr = ''
             for arg in args:
-                argstr += arg if arg else ''
+                argstr += str(arg) if arg else ''
             cache_key = queryset._cache_key(extra=key_extra+'args%s'%argstr)
             cache_data = redis_client.get(cache_key)
             if cache_data is not None:

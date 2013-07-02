@@ -3,12 +3,12 @@ __author__ = 'dimitriy'
 from django.utils.translation import ugettext_lazy as _
 
 FIESTA_NEWSLINE_ENTITY_TYPES = (
-    ( 0, _("News")),
-    ( 1, _("Advertisement")),
-    ( 2, _("Event")),
-    ( 3, _("Live")),
-    ( 4, _("Place")),
-    ( 5, _("Sight"))
+    ( 1, _("News")),
+    ( 2, _("Advertisement")),
+    ( 3, _("Event")),
+    ( 4, _("Live")),
+    ( 5, _("Place")),
+    ( 6, _("Sight"))
 )
 
 FIESTA_BLOG_LANGS = (
@@ -17,6 +17,6 @@ FIESTA_BLOG_LANGS = (
 )
 
 FIESTA_NEWS_CITY = (
-    (0, _('Saint Petersburg')),
-    (1, _('Moscow'))
+    (1, _('Saint Petersburg')),
+    (2, _('Moscow'))
 )

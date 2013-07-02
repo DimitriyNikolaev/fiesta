@@ -15,7 +15,7 @@ oscar.dashboard = {
         // Run initialisation that should take place on every page of the dashboard.
 
         // Use datepicker for all intputs that have 'date' in the name
-        $('input[name^="date"], input[name$="date"]').datepicker({dateFormat: 'dd.MM.yyyy'});
+        $('input[name^="date"], input[name$="date"]').datepicker({dateFormat: 'dd.mm.yy'});
         $('input[name^="time"], input[name$="time"]').timepicker({showMeridian:false});
 
         // Use WYSIHTML5 widget on textareas
