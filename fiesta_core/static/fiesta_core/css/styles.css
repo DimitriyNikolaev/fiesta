@@ -167,7 +167,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 
 /* Article text styles*/
 .article-description{font-size: 18px; font-weight: bold; line-height: 20px; padding: 0 0 15px 0;}
-.article-text{font-size: 14px; line-height: 20px; color: #565656;}
+.article-text{font-size: 14px; line-height: 20px; color: #565656; margin: 0 0 10px 0;}
 .article-text p{margin-bottom: 20px;}
 .article-text a.email{border-bottom: solid 1px #c3c3c3; font-weight: bold; display: inline-block;}
 .article-text a.email:hover{ border-bottom-color: #111;}
@@ -207,6 +207,7 @@ article.detail .dates-wrapper ul{margin: 0 0 0 20px;}
 article.detail .image-wrapper img{width: 100%;}
 article.detail .article-statistic{margin: 40px 0 0 0;}
 
+.sub-article{padding:20px 0;}
 .sub-article h3.header{color:#202020;font-size: 18px;}
 
 /* Paginator styles*/
