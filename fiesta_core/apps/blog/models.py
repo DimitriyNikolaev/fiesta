@@ -7,7 +7,8 @@ from datetime import datetime, date
 from fiesta_core.global_utils.redis_adapter import redis_adapter
 from model_extension import RedisKeys
 from utils import upload_to_path
-from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS, FIESTA_NEWS_CITY
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS, FIESTA_NEWS_CITY, news_types
+
 
 class News(models.Model):
     type = models.PositiveSmallIntegerField(_('Type'),null=False, default=0, blank=False, choices=FIESTA_NEWSLINE_ENTITY_TYPES)
@@ -28,6 +29,10 @@ class News(models.Model):
     @property
     def views_count(self):
         return redis_adapter.scard(RedisKeys.news_views % self.id)
+    @property
+    def verbal_type(self):
+        return news_types[self.type]
+
     @models.permalink
     def get_absolute_url(self):
         u"""Return a product's absolute url"""

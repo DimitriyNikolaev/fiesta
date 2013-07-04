@@ -34,6 +34,7 @@ def paging_slice(p):
     l = p.paginator.page_range[first:last]
     return p.paginator.page_range[first:last]
 
+
 class GetParametersNode(template.Node):
     """
     Renders current get parameters except for the specified parameter

@@ -16,7 +16,7 @@ from cacheops import cached_as_with_params
 def get_news_base_queryset(city, type):
     queryset = News.objects.filter(is_displayed=True, city=city)
     if type:
-        queryset = queryset.filter(Q(type=type) | Q(type=1))
+        queryset = queryset.filter(Q(type=type) | Q(type=2))
     queryset = queryset.order_by('-date_added').nocache()
     photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True).nocache()
     photos_dict = {}
@@ -40,7 +40,7 @@ def get_news_search_queryset(city, q):
 class NewsStream(ListView):
     context_object_name = "news"
     template_name = 'blog/news_stream.html'
-    paginate_by = 7
+    paginate_by = 12
     model = News
 
     def get_search_query(self):

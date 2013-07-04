@@ -16,7 +16,7 @@
 
 {% endblock %}
 {% block prefooter %}
-    <a class="cb show-more-btn" onclick="loadNextPage()"><span>{% trans "Show more" %}</span></a>
+    <a id="btn_show_more" class="cb show-more-btn" onclick="loadNextPage()"><span>{% trans "Show more" %}</span></a>
     {% comment %}{% include "partials/pagination.html" %}{% endcomment %}
 {% endblock %}
 {% block extrascripts %}
@@ -27,7 +27,6 @@
         var manageArticlesToColumns = function(){
 
             $('article.wall-article:not([data-side])').each(function(index){
-                console.log('высота:'+$(this).height());
                 if(lHeight > rHeight){
                     $(this).attr('data-side','r');
                     rHeight += $(this).height();
@@ -76,6 +75,8 @@
                             manageArticlesToColumns();
                             paginator.items_loaded = 0;
                             paginator.items_per_page = 0
+                            if (paginator.next == '')
+                                $('#btn_show_more').addClass('hide');
                         }
                     }
                 });

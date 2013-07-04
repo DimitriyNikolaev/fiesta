@@ -2,6 +2,7 @@
 __author__ = 'dimitriy'
 from django.utils.translation import ugettext_lazy as _
 
+
 FIESTA_NEWSLINE_ENTITY_TYPES = (
     ( 1, _("News")),
     ( 2, _("Advertisement")),
@@ -10,6 +11,7 @@ FIESTA_NEWSLINE_ENTITY_TYPES = (
     ( 5, _("Place")),
     ( 6, _("Sight"))
 )
+news_types = dict(FIESTA_NEWSLINE_ENTITY_TYPES)
 
 FIESTA_BLOG_LANGS = (
     ('ru',_("Russian")),

@@ -30,7 +30,7 @@
                 </tr>
                 {% for news_item in news %}
                     <tr>
-                        <td>{{ news_item.type }}</td>
+                        <td>{{ news_item.verbal_type }}</td>
                         <td>{{ news_item.title|default:"-" }}</td>
                         <td>{{ news_item.date_added }}</td>
                         <td>{{ news_item.is_displayed }}</td>

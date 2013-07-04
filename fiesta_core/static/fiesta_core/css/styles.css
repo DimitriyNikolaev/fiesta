@@ -18,20 +18,20 @@ section {
 }
 html,body {height:100%}
 body{
-    font:normal 12px "Noto Sans", sans-serif;
+    font:normal 12px "Arial", sans-serif;
     /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     /*font-size: 12px;*/
     line-height: 16px;
-    background-color: #ffffff;
+    background-color: #CACACA;
     color:#535353;
     height:100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(bottom, #50A8DE, #fff);
+  /*  background-image: linear-gradient(bottom, #50A8DE, #fff);
     background-image: -o-linear-gradient(bottom, #50A8DE, #fff);
     background-image: -moz-linear-gradient(bottom, #50A8DE, #fff);
     background-image: -webkit-linear-gradient(bottom, #50A8DE, #fff);
     background-image: -ms-linear-gradient(bottom, #50A8DE, #fff);
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fff), color-stop(0, #50A8DE));
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fff), color-stop(0, #50A8DE));*/
     background-attachment: fixed;
 }
 label,
@@ -166,7 +166,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .dates-wrapper li.triangle{height: 0px; width: 0px; line-height: 0px;font-size: 0px;border-bottom: 30px solid #fddda4; border-left: 20px solid transparent; padding: 0;	}
 
 /* Article text styles*/
-.article-description{font-size: 18px; font-weight: bold; line-height: 20px; padding: 0 0 15px 0;}
+.article-description{font-size: 18px; font-weight: bold; line-height: 23px; padding: 0 0 15px 0;}
 .article-text{font-size: 14px; line-height: 20px; color: #565656; margin: 0 0 10px 0;}
 .article-text p{margin-bottom: 20px;}
 .article-text a.email{border-bottom: solid 1px #c3c3c3; font-weight: bold; display: inline-block;}
@@ -192,8 +192,8 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .wall-article[data-side="r"]{clear: right; float: right;}
 .wall-article .img-container{margin: 10px -7px;}
 .wall-article .dates-wrapper ul{margin: -9px 15px -20px 0;}
-.wall-article img.photo{width: 400px; }
-.wall-article .article-text{font-size: 12px; line-height: 18px;}
+.wall-article img.photo{width: 337px; }
+.wall-article .article-text{font-size: 14px; line-height: 18px;}
 .wall-article h2.article-header{border-bottom: solid 1px #eee; padding: 0 0 15px 0; margin:0 0 10px 0;}
 
 h2.article-header {margin: 15px 0 20px 0; }
