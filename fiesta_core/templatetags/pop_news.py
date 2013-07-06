@@ -23,10 +23,10 @@ def pop_news_list(context):
                     result.append(pickle.loads(preview_serialized))
                 else:
                     id = pop_news_idlist[ind] if len(pop_news_idlist) > ind else 0
-                    if id > 0:
+                    if id is not None and id != 'None' and id > 0:
                         news = News.objects.get(pk=id)
                         photos = news.news_photos.all()
-                        preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos.count() > 0 else '')
+                        preview = NewsPreview(news.id,news.title, photos[0].preview.url if photos.count() > 0 else '', news.slug)
                         preview_serialized = pickle.dumps(preview)
                         redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
                         result.append(preview)

@@ -1,5 +1,5 @@
 <article class="wall-article">
-    <h2 class="article-header"><a href="{% url "fiesta:blog:single_news" news_item.id %}">{{ news_item.title }}</a></h2>
+    <h2 class="article-header"><a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">{{ news_item.title }}</a></h2>
     <div class="article-text">{{ news_item.description|safe}}</div>
     <div class="img-container">
         <div class="dates-wrapper">
@@ -16,10 +16,10 @@
             </ul>
         </div>
     {% if  news_item.photo  %}
-        <a href="{% url "fiesta:blog:single_news" news_item.id %}">
+        <a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">
             {% with img=news_item.photo %}
                 {% if img.preview %}
-                    <img class="photo" src="{{ img.preview.url }}"/>
+                    <img class="photo" style="width:{{ img.preview.width }}px; height:{{ img.preview.height }}px;"  src="{{ img.preview.url }}"/>
                 {% else %}
                     <img class="photo" src="{{ img.image.url }}">
                 {% endif %}
@@ -31,12 +31,14 @@
     <div class="article-statistic">
         <ul>
             <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
-            <li><div id="vk_like_{{ news_item.id }}"></div></li>
+            <li>
+                <div id="vk_like_{{ news_item.id }}"></div>
+                <script>
+                    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
+                </script>
+            </li>
         </ul>
         <div class="cb">&nbsp;</div>
     </div>
     <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
 </article>
-<script>
-    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
-</script>

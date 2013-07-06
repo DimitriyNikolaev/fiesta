@@ -7,7 +7,8 @@ class RedisKeys:
     preview_news_key = 'preview_news_%s'
 
 class NewsPreview:
-    def __init__(self,id, title, preview):
+    def __init__(self,id, title, preview, slug):
         self.id = id
         self.title = title
         self.preview = preview
+        self.slug = slug

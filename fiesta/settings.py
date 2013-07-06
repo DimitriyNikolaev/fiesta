@@ -184,7 +184,7 @@ AUTHENTICATION_BACKENDS = (
 CUSTOM_USER_MODEL = 'account.SocialUser'
 
 UNIC_TMP_USER_ID = 'unic_tmp_userid'
-TOP_NEWS_LIVETIME = 15 #days
+TOP_NEWS_LIVETIME = 3 #days
 
 UNIC_TMP_USER_CITY = 'unic_tmp_user_city'
 

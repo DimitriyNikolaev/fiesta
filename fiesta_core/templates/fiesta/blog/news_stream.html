@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% load display_tags %}
-
+{% block news_title %}Blog-fiesta.com{% endblock %}
 {% block content_wrapper %}
 
     {% if news|length > 0 %}
@@ -27,6 +27,7 @@
         var manageArticlesToColumns = function(){
 
             $('article.wall-article:not([data-side])').each(function(index){
+                console.log('высота:'+ $(this).height());
                 if(lHeight > rHeight){
                     $(this).attr('data-side','r');
                     rHeight += $(this).height();
@@ -50,8 +51,8 @@
         paginator.previous = {% if page_obj.has_previous %} {{ page_obj.previous_page_number }} {% else %}'' {% endif %};
         paginator.current = {{ page_obj.number }};
         paginator.ulrpattern = '?{% get_parameters page %}page=';
-        paginator.items_per_page = 0;
-        paginator.items_loaded = 0;
+        //paginator.items_per_page = 0;
+        //paginator.items_loaded = 0;
 
         var loadNextPage = function(){
             if(paginator.next != '')
@@ -68,17 +69,19 @@
             $('#content').append(data);
             $('#content').ready(function(){
                 $('article.wall-article:not([data-side]) img').each(function(){
-                    paginator.items_per_page +=1;
-                    this.onload = function() {
-                        paginator.items_loaded +=1;
-                        if(paginator.items_loaded == paginator.items_per_page){
-                            manageArticlesToColumns();
-                            paginator.items_loaded = 0;
-                            paginator.items_per_page = 0
-                            if (paginator.next == '')
-                                $('#btn_show_more').addClass('hide');
-                        }
-                    }
+                    manageArticlesToColumns();
+                    if (paginator.next == '')
+                        $('#btn_show_more').hide();
+                    //paginator.items_per_page +=1;
+                    //this.onload = function() {
+                    //    paginator.items_loaded +=1;
+                    //    if(paginator.items_loaded == paginator.items_per_page){
+
+                    //        paginator.items_loaded = 0;
+                    //        paginator.items_per_page = 0
+
+                    //    }
+                    //}
                 });
             });
 

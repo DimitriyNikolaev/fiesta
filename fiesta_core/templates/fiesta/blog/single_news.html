@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load i18n %}
+{% block news_title %}{{ news.title }}{% endblock %}
 {% block content_wrapper %}
 <article class="detail">
     <div class="header">
@@ -23,9 +24,14 @@
             <div id="news_slides_{{news.id  }}" class="slides">
                 {% for img in news.news_photos.all %}
                     {% if img.image %}
-                        <img src="{{ img.image.url }}">
+                        <div>
+                            <img src="{{ img.image.url }}">
+                            <div>
+                                {{ img.description }}
+                            </div>
+                        </div>
                     {% elif img.preview %}
-                        <img src="{{ img.preview.url }}"/>
+                        <div><img src="{{ img.preview.url }}"/></div>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -69,9 +75,16 @@
                         <div id="subnews_slides_{{subnews.id  }}" class="slides">
                             {% for img in subnews.subnews_photos.all %}
                                 {% if img.image %}
-                                    <img src="{{ img.image.url }}">
+                                    <div>
+                                        <img src="{{ img.image.url }}">
+                                         <div>
+                                            {{ img.description }}
+                                        </div>
+                                    </div>
                                 {% elif img.preview %}
-                                    <img src="{{ img.preview.url }}"/>
+                                    <div>
+                                        <img src="{{ img.preview.url }}"/>
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -104,6 +117,37 @@
             <div class="cb">&nbsp;</div>
         </div>
     </section>
+    <!-- Яндекс.Директ -->
+<div class="single-post-yandex-ad" id="yandex_ad"></div>
+<script type="text/javascript">
+(function(w, d, n, s, t) {
+    w[n] = w[n] || [];
+    w[n].push(function() {
+        Ya.Direct.insertInto(114735, "yandex_ad", {
+            site_charset: "utf-8",
+            ad_format: "direct",
+            font_size: 1,
+            font_family: "arial",
+            type: "horizontal",
+            limit: 2,
+            title_font_size: 3,
+            site_bg_color: "FFFFFF",
+            header_bg_color: "FEEAC7",
+            title_color: "212121",
+            url_color: "006600",
+            text_color: "565656",
+            hover_color: "0066FF",
+            favicon: true
+        });
+    });
+    t = d.documentElement.firstChild;
+    s = d.createElement("script");
+    s.type = "text/javascript";
+    s.src = "http://an.yandex.ru/system/context.js";
+    s.setAttribute("async", "true");
+    t.insertBefore(s, t.firstChild);
+})(window, document, "yandex_context_callbacks");
+</script>
 </article>
 <script>
     VK.Widgets.Like('vk_like_{{ news.id }}',{type:'mini', pageTitle:'{{ news.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news.id %}'{% with img=news.news_photos.all|first %}{% if img.preview %}, pageImage:"{{ site_domain }}{{ img.preview.url }}"{% endif %} {% endwith %}, verb:1},{{ news.id }});

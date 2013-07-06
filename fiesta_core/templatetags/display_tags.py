@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 from django.core.urlresolvers import reverse
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
 
 
 def get_parameters(parser, token):
@@ -18,7 +19,7 @@ def get_parameters(parser, token):
 @register.simple_tag
 def navactive(request, url, id):
     if id != '':
-        if request.path == reverse(url, args=[id]):
+        if request.path == reverse(url, args=[id]) or (id in FIESTA_NEWSLINE_ENTITY_SLUGTYPES and request.path == reverse(url, args=[FIESTA_NEWSLINE_ENTITY_SLUGTYPES[id]])):
             return "current"
     else:
         if request.path == reverse(url):

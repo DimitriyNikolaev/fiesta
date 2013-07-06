@@ -24,7 +24,7 @@ class News(models.Model):
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
-
+    slug = models.CharField(_('Slug'), null=True,blank=True, max_length=40,unique=True)
 
     @property
     def views_count(self):
@@ -33,12 +33,7 @@ class News(models.Model):
     def verbal_type(self):
         return news_types[self.type]
 
-    @models.permalink
-    def get_absolute_url(self):
-        u"""Return a product's absolute url"""
-        return ('catalogue:detail', (), {
-            'product_slug': self.slug,
-            'pk': self.id})
+
 
 
 
@@ -58,12 +53,14 @@ class NewsPhoto(models.Model):
     news = models.ForeignKey(News,verbose_name=_('News photo'), null=True, blank=True, related_name='news_photos')
     subnews = models.ForeignKey(Subnews, verbose_name=_('Subnews photo'), null=True, blank=True, related_name='subnews_photos')
     is_newsphoto = models.BooleanField(_('is_newsphoto'), null=False, blank=False)
+    description = models.CharField(_('Description'), null=True, blank=True, max_length=150)
     image = models.ImageField(upload_to=upload_to_path)
     preview = models.ImageField(upload_to=upload_to_path, null=True, blank=True, default=None)
     thumbnail = models.ImageField(upload_to=upload_to_path, null=True, blank=True, default=None)
     display_order = models.PositiveIntegerField(_("Display Order"), default=0,
         help_text=_("""An image with a display order of
                        zero will be the primary image for a product"""))
+
 
 
     class Meta:

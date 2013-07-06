@@ -11,6 +11,14 @@ FIESTA_NEWSLINE_ENTITY_TYPES = (
     ( 5, _("Place")),
     ( 6, _("Sight"))
 )
+FIESTA_NEWSLINE_ENTITY_SLUGTYPES = {
+    'news': 1,
+    'ad': 2,
+    'events': 3,
+    'live': 4,
+    'places': 5,
+    'sights': 6
+}
 news_types = dict(FIESTA_NEWSLINE_ENTITY_TYPES)
 
 FIESTA_BLOG_LANGS = (

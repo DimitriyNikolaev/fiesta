@@ -3,11 +3,11 @@
 
 <ul>
     <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:stream_type" 1 %}"><a href="{% url "fiesta:blog:stream_type" 1%}">{% trans "News" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:stream_type" 5 %}"><a href="{% url "fiesta:blog:stream_type" 5%}">{% trans "Places" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:stream_type" 3 %}"><a href="{% url "fiesta:blog:stream_type" 3%}">{% trans "Events" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:stream_type" 4 %}"><a href="{% url "fiesta:blog:stream_type" 4%}">{% trans "Live" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:stream_type" 6 %}"><a href="{% url "fiesta:blog:stream_type" 6%}">{% trans "Attractions" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'news' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'news'%}">{% trans "News" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'places' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'places'%}">{% trans "Places" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'events' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'events'%}">{% trans "Events" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'live' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'live'%}">{% trans "Live" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'sights' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'sights'%}">{% trans "Attractions" %}</a></li>
 </ul>
 <div class="top-search">
     {% include "partials/search.html" %}

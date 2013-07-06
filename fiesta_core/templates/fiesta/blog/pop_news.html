@@ -3,7 +3,7 @@
 <div class="pop-news">
 {% if pop_news|length > 0 %}
     {% for news in pop_news %}
-        <a href="{% url "fiesta:blog:single_news" news.id %}">
+        <a href="{% if news.slug %}{% url "fiesta:blog:slug_single_news" news.slug %}{% else %}{% url "fiesta:blog:single_news" news.id %}{% endif %}">
             {% if news.preview %}
             <img src="{{ news.preview }}"/>
             {% endif %}

@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load pop_news %}
+{% block news_title %}{% endblock %}
 {% block scripts %}
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}fiesta_core/js/jquery-1_9/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/jquery.slides.min.js"></script>
+    <script src="{{ STATIC_URL }}fiesta_core/js/plugins/jquery.scrollUp.min.js"></script>
 {#    <script src="{{ STATIC_URL }}fiesta_core/js/bootstrap/bootstrap.min.js"></script>#}
     <script src="{{ STATIC_URL }}fiesta_core/js/plugins/dropdowns.js"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?97"></script>
+
     <script type="text/javascript">
     $(document).ready(function () {
 
@@ -20,6 +23,16 @@
             window.location.href = '{% url "fiesta:blog:index" %}';
             });
     });
+
+    setTimeout($(function(){
+        if($(window).width() > 1134)
+        {
+          $.scrollUp({
+                      scrollText: ''
+                  });
+        }
+    }),300);
+
     var set_city = function()
     {
         var val  = getCookie('unic_tmp_user_city');
@@ -40,6 +53,8 @@
 
     VK.Widgets.Group("vk_groups", {mode: 0, width: "238", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 26270763);
     VK.init({apiId: 3740645, onlyWidgets: true});
+
+
     </script>
 {% endblock %}
 

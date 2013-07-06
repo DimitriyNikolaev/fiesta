@@ -11,6 +11,7 @@ from models import News, NewsPhoto
 from fiesta_core.global_utils.redis_adapter import redis_adapter
 from model_extension import RedisKeys
 from cacheops import cached_as_with_params
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
 
 @cached_as_with_params(News.objects.all())
 def get_news_base_queryset(city, type):
@@ -55,6 +56,8 @@ class NewsStream(ListView):
         else:
             if 'type' in self.kwargs:
                 return get_news_base_queryset(city,self.kwargs['type'])
+            elif 'slug_type' in self.kwargs and self.kwargs['slug_type'] in FIESTA_NEWSLINE_ENTITY_SLUGTYPES:
+                return get_news_base_queryset(city,FIESTA_NEWSLINE_ENTITY_SLUGTYPES[self.kwargs['slug_type']])
         return get_news_base_queryset(city,None)
 
 
@@ -92,16 +95,18 @@ class SingleNewsView(DetailView):
         return context;
 
     def setAnalitic(self):
-        pk = self.kwargs.get(self.pk_url_kwarg, None)
-        if settings.UNIC_TMP_USER_ID in self.request.COOKIES:
-            unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
-            redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
-        views_count = redis_adapter.scard(RedisKeys.news_views % pk)
-        if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
-            redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
-        else:
-            redis_adapter.zrem(RedisKeys.pop_news, pk)
-        return views_count
+        if self.object:
+            pk = self.object.id
+            if settings.UNIC_TMP_USER_ID in self.request.COOKIES:
+                unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
+                redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
+            views_count = redis_adapter.scard(RedisKeys.news_views % pk)
+            if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
+                redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
+            else:
+                redis_adapter.zrem(RedisKeys.pop_news, pk)
+            return views_count
+        return 0;
 
 
 class AdvertisementView(TemplateView):
