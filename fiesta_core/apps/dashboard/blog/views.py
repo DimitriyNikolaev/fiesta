@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.views.generic.edit import FormMixin
 from fiesta_core.apps.blog.models import News, Subnews
 from forms import NewsForm,NewsPhotoImageSet, SubnewsForm, SubnewsPhotoImageSet
 from fiesta_core.apps.blog.model_extension import NewsPreview, RedisKeys
@@ -27,6 +28,20 @@ class NewsList(ListView):
 
     def get_queryset(self):
         return News.objects.all().order_by('-date_added')
+
+    def post(self, request, *args, **kwargs):
+        news_action = request.POST.get('news_action', '').lower()
+        news_id = request.POST.get('news_id', '')
+        if news_action and news_id:
+            if news_action == u'delete':
+                obj = self.model.objects.get(pk=news_id)
+                if obj:
+                    obj.delete()
+                redis_adapter.zrem(RedisKeys.pop_news, news_id)
+                redis_adapter.delete(RedisKeys.preview_news_key % news_id)
+        return self.get(request, *args, **kwargs)
+
+
 
 class AddNewsView(CreateView):
     template_name = 'dashboard/blog/news_add_or_update.html'
@@ -132,6 +147,16 @@ class UpdateNewsView(UpdateView):
         news.delete()
         ctx = self.get_context_data(form=form, photo_formset=photos_formset)
         return self.render_to_response(ctx)
+    def post(self, request, *args, **kwargs):
+        news_action = request.POST.get('news_action', '').lower()
+        subnews_id = request.POST.get('subnews_id', '').lower()
+        if news_action and subnews_id:
+            obj = Subnews.objects.get(pk=subnews_id)
+            if obj:
+                obj.delete()
+            return HttpResponseRedirect(reverse('fiesta:dashboard:edit_news',kwargs=kwargs))
+        return super(UpdateNewsView,self).post(self, request, *args, **kwargs)
+
 
     def get_success_url(self):
         return reverse('fiesta:dashboard:news_list')

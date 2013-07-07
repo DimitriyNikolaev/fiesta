@@ -19,7 +19,6 @@ class FiestaBlog(Application):
             (r'', include(self.blog_app.urls)),
             (r'^dashboard/', include(self.dashboard_app.urls)),
             (r'^account/', include(self.account_app.urls))
-
         )
         return urlpatterns
 

@@ -58,9 +58,6 @@
         <div class="pull-right">
             <a href="{% url "fiesta:dashboard:news_list" %}">{% trans "Cancel" %}</a> {% trans "or" %} <button class="btn btn-primary btn-large" type="submit">{% trans "Save news" %}</button>
         </div>
-        {% if product %}
-            <a class="btn btn-success btn-large" href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a>
-        {% endif %}
     </div>
 </form>
   {% if news.id > 0 %}
@@ -92,7 +89,14 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li><a href="{% url "fiesta:dashboard:edit_subnews" subnews.id %}">{% trans "Edit" %}</a></li>
-                                        {% comment %}<li><a href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a></li>{% endcomment %}
+                                         <li>
+                                             <form action="." method="post">
+                                                 {% csrf_token %}
+                                                 <input type="hidden" name="news_action" value="delete"/>
+                                                 <input type="hidden" name="subnews_id" value="{{ subnews.id }}"/>
+                                                 <input type="submit" value="{% trans "Delete" %}" class="btn-link"/>
+                                             </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
