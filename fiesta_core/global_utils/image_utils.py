@@ -28,7 +28,8 @@ def get_preview(original_image, field):
         name = 'preview_%s' %  original_image.name
     if hasattr(original_image, 'content_type'):
         content_type =  original_image.content_type
-    else: u'image/jpeg'
+    else:
+        content_type = u'image/jpeg'
 
     return InMemoryUploadedFile(thumb, field, name, content_type, thumb.len, original_image.charset)
 
@@ -64,6 +65,7 @@ def get_thumbnail(original_image,field):
         name = 'thumb_%s' %  original_image.name
     if hasattr(original_image, 'content_type'):
         content_type =  original_image.content_type
-    else: u'image/jpeg'
+    else:
+        content_type = u'image/jpeg'
     original_image.seek(0)
     return InMemoryUploadedFile(thumb, field, name, content_type, thumb.len, original_image.charset)

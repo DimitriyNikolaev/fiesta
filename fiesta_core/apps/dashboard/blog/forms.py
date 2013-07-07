@@ -81,11 +81,12 @@ class NewsImageForm(forms.ModelForm):
         kwargs['commit'] = False
         obj = super(NewsImageForm, self).save(*args, **kwargs)
         obj.is_newsphoto = True
-        preview = get_preview(self.cleaned_data['image'], 'preview')
-        obj.preview.save(preview.name, preview)
-        self.cleaned_data['image'].seek(0)
-        thumbnail = get_thumbnail(self.cleaned_data['image'], 'thumbnail')
-        obj.thumbnail.save(thumbnail.name,thumbnail)
+        if not obj.preview:
+            preview = get_preview(self.cleaned_data['image'], 'preview')
+            obj.preview.save(preview.name, preview)
+            self.cleaned_data['image'].seek(0)
+            thumbnail = get_thumbnail(self.cleaned_data['image'], 'thumbnail')
+            obj.thumbnail.save(thumbnail.name,thumbnail)
         obj.display_order = self.get_display_order()
         obj.save()
         return obj
