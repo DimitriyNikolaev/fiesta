@@ -160,7 +160,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 
 /* Article date styles*/
 .dates-wrapper{position: relative;z-index: 11; }
-.dates-wrapper ul{list-style: none; float: right;}
+.dates-wrapper ul{list-style: none; float: right; background: #ffbe00;}
 .dates-wrapper li{float: left; line-height: 30px; background: #ffbe00; font-size: 14px; font-weight: bold; padding: 0 20px;}
 .dates-wrapper li.to-date{background: #fddda4;}
 .dates-wrapper li.triangle{height: 0px; width: 0px; line-height: 0px;font-size: 0px;border-bottom: 30px solid #fddda4; border-left: 20px solid transparent; padding: 0;	}
@@ -260,6 +260,8 @@ article.detail .article-statistic{margin: 40px 0 0 0;}
 .slides .slidesjs-pagination li{display: inline-block;margin: 0 5px;}
 .slides .slidesjs-pagination a{background: #666;text-indent: -9999px;display: block;width: 10px;height: 10px; outline: 0;border-radius: 5px;}
 .slides .slidesjs-pagination a:hover,.slides .slidesjs-pagination a.active {background: #000;}
+
+.flex-caption{position: absolute; bottom:0; background: #000; opacity: 0.5; color: #fff; width: 100%; padding: 10px;}
 
 /*yandex_ad*/
 .single-post-yandex-ad{margin-top: 20px; border: solid 1px #eee;}
