@@ -195,6 +195,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .wall-article img.photo{width: 337px; }
 .wall-article .article-text{font-size: 14px; line-height: 18px;}
 .wall-article h2.article-header{border-bottom: solid 1px #eee; padding: 0 0 15px 0; margin:0 0 10px 0;}
+.wall-article h2.article-header:hover{text-decoration: underline;}
 
 h2.article-header {margin: 15px 0 20px 0; }
 h2.article-header a{font-size: 16px;line-height:20px; color: #212121;}
@@ -205,6 +206,7 @@ article.detail .header,article.detail .image-wrapper{margin: 0 0 10px 0;}
 article.detail h2, article.static-content h2{color:#212121; line-height: 28px; font-size: 28px;}
 article.detail .dates-wrapper ul{margin: 0 0 0 20px;}
 article.detail .image-wrapper img{width: 100%;}
+article.detail .image-wrapper .image-block{position: relative;}
 article.detail .article-statistic{margin: 40px 0 0 0;}
 
 .sub-article{padding:20px 0;}
@@ -261,7 +263,7 @@ article.detail .article-statistic{margin: 40px 0 0 0;}
 .slides .slidesjs-pagination a{background: #666;text-indent: -9999px;display: block;width: 10px;height: 10px; outline: 0;border-radius: 5px;}
 .slides .slidesjs-pagination a:hover,.slides .slidesjs-pagination a.active {background: #000;}
 
-.flex-caption{position: absolute; bottom:0; background: #000; opacity: 0.5; color: #fff; width: 100%; padding: 10px;}
+.flex-caption{position: absolute; bottom:0; background: #000; opacity: 0.5; color: #fff; width: inherit;padding: 10px;}
 
 /*yandex_ad*/
 .single-post-yandex-ad{margin-top: 20px; border: solid 1px #eee;}

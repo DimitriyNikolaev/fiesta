@@ -43,16 +43,21 @@
             </div>
             <script>
                 $(window).load(function() {
-                    $('.flexslider').flexslider({animation: "slide"});
+                    $('.flexslider').flexslider({animation: "slide",smoothHeight: true});
                 });
             </script>
         {% else %}
             {% for img in news.news_photos.all %}
-                {% if img.image %}
-                    <img class="photo" src="{{ img.image.url }}">
-                {% elif img.preview %}
-                    <img class="photo" src="{{ img.preview.url }}"/>
-                {% endif %}
+                <div class="image-block">
+                    {% if img.image %}
+                        <img class="photo" src="{{ img.image.url }}">
+                    {% elif img.preview %}
+                        <img class="photo" src="{{ img.preview.url }}"/>
+                    {% endif %}
+                    {% if img.description %}
+                        <div class="flex-caption">{{ img.description }}</div>
+                    {% endif %}
+                </div>
             {% endfor %}
         {% endif %}
     </div>
@@ -100,11 +105,16 @@
                         </script>
                     {% else %}
                         {% for img in subnews.subnews_photos.all %}
-                            {% if img.image %}
-                                <img class="photo" src="{{ img.image.url }}">
-                            {% elif img.preview %}
-                                <img class="photo" src="{{ img.preview.url }}"/>
-                            {% endif %}
+                            <div class="image-block">
+                                {% if img.image %}
+                                    <img class="photo" src="{{ img.image.url }}">
+                                {% elif img.preview %}
+                                    <img class="photo" src="{{ img.preview.url }}"/>
+                                {% endif %}
+                                {% if img.description %}
+                                    <div class="flex-caption">{{ img.description }}</div>
+                                {% endif %}
+                            </div>
                         {% endfor %}
                     {% endif %}
                 </div>
