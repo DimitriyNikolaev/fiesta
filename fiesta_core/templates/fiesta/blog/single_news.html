@@ -162,6 +162,6 @@
 </script>
 </article>
 <script>
-    VK.Widgets.Like('vk_like_{{ news.id }}',{type:'mini', pageTitle:'{{ news.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news.id %}'{% with img=news.news_photos.all|first %}{% if img.preview %}, pageImage:"{{ site_domain }}{{ img.preview.url }}"{% endif %} {% endwith %}, verb:1},{{ news.id }});
+    VK.Widgets.Like('vk_like_{{ news.id }}',{type:'mini', pageDescription:'{{ news.description }}', pageTitle:'{{ news.title }}', pageUrl:'{{ site_domain }}{% if mews.slug %}{% url "fiesta:blog:slug_single_news" news.slug %}{% else %}{% url "fiesta:blog:single_news" news.id %}{% endif %}'{% with img=news.news_photos.all|first %}{% if img.preview %}, pageImage:"{{ site_domain }}{{ img.preview.url }}"{% endif %} {% endwith %}, verb:1},{{ news.id }});
 </script>
 {% endblock %}

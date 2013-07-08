@@ -15,7 +15,7 @@ from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
 
 @cached_as_with_params(News.objects.all())
 def get_news_base_queryset(city, type):
-    queryset = News.objects.filter(is_displayed=True, city=city)
+    queryset = News.objects.filter(is_displayed=True, city=city, is_archive=False)
     if type:
         queryset = queryset.filter(Q(type=type) | Q(type=2))
     queryset = queryset.order_by('-date_added').nocache()
@@ -101,7 +101,7 @@ class SingleNewsView(DetailView):
                 unicId = self.request.COOKIES[settings.UNIC_TMP_USER_ID]
                 redis_adapter.sadd(RedisKeys.news_views % pk, unicId)
             views_count = redis_adapter.scard(RedisKeys.news_views % pk)
-            if self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
+            if self.object.is_displayed and not self.object.is_archive and self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
                 redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
             else:
                 redis_adapter.zrem(RedisKeys.pop_news, pk)

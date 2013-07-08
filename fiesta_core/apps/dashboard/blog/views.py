@@ -133,7 +133,7 @@ class UpdateNewsView(UpdateView):
             preview_serialized = pickle.dumps(preview)
             redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
 
-            if not news.is_displayed:
+            if not news.is_displayed or news.is_archive:
                 redis_adapter.zrem(RedisKeys.pop_news, news.id)
             elif news.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
                 redis_adapter.zadd(RedisKeys.pop_news, news.id, news.views_count)

@@ -263,7 +263,7 @@ article.detail .article-statistic{margin: 40px 0 0 0;}
 .slides .slidesjs-pagination a{background: #666;text-indent: -9999px;display: block;width: 10px;height: 10px; outline: 0;border-radius: 5px;}
 .slides .slidesjs-pagination a:hover,.slides .slidesjs-pagination a.active {background: #000;}
 
-.flex-caption{position: absolute; bottom:0; background: #000; opacity: 0.5; color: #fff; width: inherit;padding: 10px;}
+.flex-caption{position: absolute; bottom:0; background: #000; opacity: 0.5; color: #fff; width: 97.2%; padding: 10px;}
 
 /*yandex_ad*/
 .single-post-yandex-ad{margin-top: 20px; border: solid 1px #eee;}

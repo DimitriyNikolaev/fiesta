@@ -34,7 +34,7 @@
             <li>
                 <div id="vk_like_{{ news_item.id }}"></div>
                 <script>
-                    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% url "fiesta:blog:single_news" news_item.id %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
+                    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini',pageDescription:'{{ news_item.description }}', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% if mews_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
                 </script>
             </li>
         </ul>

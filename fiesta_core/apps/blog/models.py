@@ -25,6 +25,7 @@ class News(models.Model):
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
     slug = models.CharField(_('Slug'), null=True,blank=True, max_length=40,unique=True)
+    is_archive = models.BooleanField(_('Is_Archive'),null=False, blank=False, default=False)
 
     @property
     def views_count(self):

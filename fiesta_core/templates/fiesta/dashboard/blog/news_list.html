@@ -25,6 +25,7 @@
                     <th>{% trans "Title" %}</th>
                     <th>{% trans "Date" %}</th>
                     <th>{% trans "is_displayed" %}</th>
+                    <th>{% trans "is_archive" %}</th>
 
                 </tr>
                 {% for news_item in news %}
@@ -33,6 +34,7 @@
                         <td>{{ news_item.title|default:"-" }}</td>
                         <td>{{ news_item.date_added }}</td>
                         <td>{{ news_item.is_displayed }}</td>
+                        <td>{{ news_item.is_archive }}</td>
 
                         <td>
                             <div class="btn-toolbar">
