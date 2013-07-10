@@ -10,6 +10,21 @@ from fiesta_core.forms.widgets import ImageInput, JSDateTimePickerWidget
 from django.forms.models import inlineformset_factory
 from fiesta_core.global_utils.image_utils import get_preview, get_thumbnail
 
+from django import conf
+
+from django.utils import encoding
+
+try:
+    # Django 1.5 have some permutations.
+    from django.utils import text as src_pkg
+    from django.utils.text import slugify as dj_slugify
+except ImportError:
+    from django.template import defaultfilters as src_pkg
+    from django.template.defaultfilters import slugify as dj_slugify
+import unidecode
+def slugify(value):
+    value = encoding.smart_unicode(value)
+    return dj_slugify(encoding.smart_unicode(unidecode.unidecode(value)))
 
 
 class NewsForm(ModelForm):
@@ -51,6 +66,8 @@ class NewsForm(ModelForm):
             # calling the clean() method of BaseForm here is required to apply checks
         # for 'unique' field. This prevents e.g. the UPC field from raising
         # a DatabaseError.
+        if not self.cleaned_data['slug'] or self.cleaned_data['slug'] == '':
+            self.cleaned_data['slug'] = slugify(self.cleaned_data['title'])
 
         return super(NewsForm, self).clean()
 

@@ -10,6 +10,15 @@
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?97"></script>
 
     <script type="text/javascript">
+    function disableSelection(target){
+        if (typeof target.onselectstart!="undefined")
+            target.onselectstart=function(){return false}
+        else if (typeof target.style.MozUserSelect!="undefined")
+            target.style.MozUserSelect="none"
+        else
+            target.onmousedown=function(){return false}
+        target.style.cursor = "default"
+        }
     $(document).ready(function () {
 
         //set_city();
@@ -21,6 +30,9 @@
             document.cookie="unic_tmp_user_city="+c_value;
             window.location.href = '{% url "fiesta:blog:index" %}';
             });
+
+        disableSelection(document.body);
+
     });
 
     setTimeout($(function(){

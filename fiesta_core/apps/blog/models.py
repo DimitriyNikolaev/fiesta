@@ -9,7 +9,6 @@ from model_extension import RedisKeys
 from utils import upload_to_path
 from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_BLOG_LANGS, FIESTA_NEWS_CITY, news_types
 
-
 class News(models.Model):
     type = models.PositiveSmallIntegerField(_('Type'),null=False, default=0, blank=False, choices=FIESTA_NEWSLINE_ENTITY_TYPES)
     lang = models.CharField(_('Language'), max_length=2, null=False, blank=False, default='ru', choices=FIESTA_BLOG_LANGS)
@@ -24,7 +23,7 @@ class News(models.Model):
     contacts = models.CharField(_('Contacts'), null=True, blank=True, max_length=120)
     is_displayed = models.BooleanField(_('Is_displayed'), null=False, blank=False, default=True)
     city = models.PositiveSmallIntegerField(_('City'), null=True, blank=True, choices=FIESTA_NEWS_CITY)
-    slug = models.CharField(_('Slug'), null=True,blank=True, max_length=40,unique=True)
+    slug = models.SlugField(_('Slug'),null=True, blank=True, max_length=140,unique=True)
     is_archive = models.BooleanField(_('Is_Archive'),null=False, blank=False, default=False)
 
     @property
@@ -33,12 +32,6 @@ class News(models.Model):
     @property
     def verbal_type(self):
         return news_types[self.type]
-
-
-
-
-
-
 
 class Subnews(models.Model):
     news = models.ForeignKey(News, null=False, blank=False, related_name='subnews')
