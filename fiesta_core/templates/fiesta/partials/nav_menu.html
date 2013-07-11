@@ -2,12 +2,49 @@
 {% load display_tags %}
 
 <ul>
-    <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'news' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'news'%}">{% trans "News" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a>
+        <div>
+            <ul>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'news' %}">
+        <a href="{% url "fiesta:blog:slug_stream_type" 'news'%}">{% trans "News" %}</a>
+        <div>
+            <ul>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+            </ul>
+        </div>
+    </li>
     <li class="{% navactive request "fiesta:blog:slug_stream_type" 'places' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'places'%}">{% trans "Places" %}</a></li>
     <li class="{% navactive request "fiesta:blog:slug_stream_type" 'events' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'events'%}">{% trans "Events" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'live' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'live'%}">{% trans "Live" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'sights' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'sights'%}">{% trans "Attractions" %}</a></li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'live' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'live'%}">{% trans "Live" %}</a>
+        <div>
+            <ul>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'sights' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'sights'%}">{% trans "Attractions" %}</a>
+        <div>
+            <ul>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+                <li><a href="#">Some text</a></li>
+            </ul>
+        </div>
+    </li>
 </ul>
 <div class="top-search">
     {% include "partials/search.html" %}

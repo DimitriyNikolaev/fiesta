@@ -81,9 +81,15 @@ img {
 /* Main menu styles*/
 .main-menu{ background: #F6F6F6;border-bottom: solid 2px #FFC000;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;}
 .main-menu ul {list-style: none; margin: 0; padding: 0;}
-.main-menu li{ float: left; padding: 6px 0 6px 6px;}
+.main-menu li{ float: left; padding: 6px 0 6px 6px; position: relative;}
 .main-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
-.main-menu li a:hover, .main-menu li.current a{color:#FFC000; }/*{ background: #FCDDA7; border-radius: 15px; }*/
+.main-menu li > a:hover, .main-menu li.current > a{color:#FFC000; }
+.main-menu li > div{display: none; position: absolute; background: #F6F6F6; top: 100%;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;box-shadow: 2px 2px 2px rgba(255, 192, 1, 0.5);white-space: nowrap; margin-left: -50%;}
+.main-menu li:hover > div{display: block;}
+.main-menu li ul { white-space: nowrap;}
+.main-menu li > div li{padding: 0; display: inline-block; float: none;}
+.main-menu li:first-child > div{margin-left: -6px;}
+
 .top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px;}
 .top-search form{margin: 0; padding: 0;}
 .top-search input.search-text{display: inline-block; background: none; height: 20px; padding: 4px 6px; font-size: 12px; line-height: 20px;
