@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -25,7 +25,8 @@ urlpatterns = patterns('',
     url(r'^logout$', logout,name='logout' ),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^googled3c6e3bb1748f80a.html$', TemplateView.as_view(template_name='fiesta/root/googled3c6e3bb1748f80a.html') ),
-    url(r'^yandex_6d593574e69bfef1.html$', TemplateView.as_view(template_name='fiesta/root/yandex_6d593574e69bfef1.html') )
+    url(r'^yandex_6d593574e69bfef1.html$', TemplateView.as_view(template_name='fiesta/root/yandex_6d593574e69bfef1.html') ),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/fiesta_core/img/favicon.ico'))
 )
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

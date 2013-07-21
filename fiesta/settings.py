@@ -96,6 +96,7 @@ SECRET_KEY = 'k#r2i&amp;ilyog(j3o7os*^6z0=wx31w51(42+^9$@0naq1f(8io7'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django_mobile.loader.Loader'
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -106,7 +107,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'fiesta_core.middlewares.UnicUser.UnicUserMiddleware'
+    'fiesta_core.middlewares.UnicUser.UnicUserMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware'
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -135,6 +139,7 @@ INSTALLED_APPS = [
     'fiesta_core',
     'south',
     'cacheops',
+    'django_mobile'
 ]
 from fiesta_core import get_core_apps
 
@@ -173,7 +178,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.static',
     'fiesta_core.core.context_processors.user_metadata',
-    'django.core.context_processors.i18n'
+    'django.core.context_processors.i18n',
+    'django_mobile.context_processors.flavour'
     )
 
 AUTHENTICATION_BACKENDS = (

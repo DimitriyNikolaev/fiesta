@@ -14,10 +14,15 @@ from cacheops import cached_as_with_params
 from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
 
 @cached_as_with_params(News.objects.all())
-def get_news_base_queryset(city, type):
+def get_news_base_queryset(city, type, actualize):
     queryset = News.objects.filter(is_displayed=True, city=city, is_archive=False)
     if type:
         queryset = queryset.filter(Q(type=type) | Q(type=2))
+        if actualize == 'today':
+            queryset = queryset.filter(Q(event_date = date.today())
+                                       | Q(event_date__lt=date.today(), deadline_date__gte=date.today()))
+        elif actualize == 'future':
+            queryset = queryset.filter(event_date__gt = date.today())
     queryset = queryset.order_by('-date_added').nocache()
     photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True).nocache()
     photos_dict = {}
@@ -55,13 +60,15 @@ class NewsStream(ListView):
             return get_news_search_queryset(city,q)
         else:
             if 'type' in self.kwargs:
-                return get_news_base_queryset(city,self.kwargs['type'])
+                return get_news_base_queryset(city,self.kwargs['type'], self.kwargs['actualize'] if 'actualize' in self.kwargs else None)
             elif 'slug_type' in self.kwargs and self.kwargs['slug_type'] in FIESTA_NEWSLINE_ENTITY_SLUGTYPES:
-                return get_news_base_queryset(city,FIESTA_NEWSLINE_ENTITY_SLUGTYPES[self.kwargs['slug_type']])
-        return get_news_base_queryset(city,None)
+                return get_news_base_queryset(city,FIESTA_NEWSLINE_ENTITY_SLUGTYPES[self.kwargs['slug_type']],self.kwargs['actualize'] if 'actualize' in self.kwargs else None)
+        return get_news_base_queryset(city,None, None)
 
 
     def get_context_data(self, **kwargs):
+        # if self.request.flavour == 'mobile':
+        #     self.template_name = 'mobile/blog/news_stream.html'
         context = super(NewsStream, self).get_context_data(**kwargs)
         q = self.get_search_query()
         if not q:
@@ -90,6 +97,8 @@ class SingleNewsView(DetailView):
         return object
 
     def get_context_data(self, **kwargs):
+        # if self.request.flavour == 'mobile':
+        #     print('mobile deteted')
         context = super(SingleNewsView, self).get_context_data(**kwargs)
         context['views_count'] = self.setAnalitic()
         return context;

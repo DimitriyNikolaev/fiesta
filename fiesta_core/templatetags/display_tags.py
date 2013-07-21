@@ -21,10 +21,24 @@ def navactive(request, url, id):
     if id != '':
         if request.path == reverse(url, args=[id]) or (id in FIESTA_NEWSLINE_ENTITY_SLUGTYPES and request.path == reverse(url, args=[FIESTA_NEWSLINE_ENTITY_SLUGTYPES[id]])):
             return "current"
+        elif request.path.startswith(reverse(url, args=[id])) or (id in FIESTA_NEWSLINE_ENTITY_SLUGTYPES and request.path.startswith(reverse(url, args=[FIESTA_NEWSLINE_ENTITY_SLUGTYPES[id]]))):
+            return "current"
     else:
         if request.path == reverse(url):
             return "current"
     return ""
+@register.simple_tag
+def subnavactive(request, url, id, actualize):
+    if id != '' and actualize != '':
+        if request.path == reverse(url, args=[id, actualize]) or (id in FIESTA_NEWSLINE_ENTITY_SLUGTYPES and request.path == reverse(url, args=[FIESTA_NEWSLINE_ENTITY_SLUGTYPES[id], actualize])):
+            return "current"
+    else:
+        if request.path == reverse(url):
+            return "current"
+    return ""
+@register.filter(name='start_with')
+def start_with(str, sub_str):
+    return str.startswith(sub_str)
 
 @register.filter(name='paging_slice')
 def paging_slice(p):

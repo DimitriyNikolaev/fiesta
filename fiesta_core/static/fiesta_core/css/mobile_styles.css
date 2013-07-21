@@ -67,13 +67,13 @@ img {
 .fl{float: left;}
 .fr{float: right;}
 .hide{display: none;}
-#wrapper{width: 1034px; margin: 0 auto; background: #EFEFEF; position: relative; }
+#wrapper{width: 640px; margin: 0 auto; background: #EFEFEF; position: relative; }
 
 #header {width: 100%; position: relative;}
-#middle {width: 754px; border-right: solid 2px #ddd; background: #fff;  position: relative;}
-#container {float: left; overflow: hidden; padding: 0 20px 80px 20px; width: 714px;}
+#middle {width: 466px; border-right: solid 2px #ddd; background: #fff;  position: relative;}
+#container {float: left; overflow: hidden; padding: 0 20px 80px 20px; width: 426px;}
 #content {padding: 20px 0;}
-#sideRight { width: 278px; float: right; margin-right: -280px; position: relative;}
+#sideRight { width: 174px; float: right; margin-right: -174px; position: relative;}
 #footer { height: 80px;margin: -80px 0 0 0; position: absolute; width: 100%;}
 #footer .footer-container{border-top: solid 2px #FFC000; margin:0 20px; padding-top:30px;}
 
@@ -199,12 +199,12 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .article-statistic li.browsing{background: url(../img/browsing-icon.png) no-repeat center left; padding: 3px 0 0 25px;}
 
 /*Wall article styles*/
-.wall-article{padding: 13px; width: 323px; border: solid 1px #eee; margin-bottom: 12px;}
+.wall-article{padding: 13px; width: 398px; border: solid 1px #eee; margin-bottom: 12px;}
 .wall-article[data-side="l"]{clear: left; float: left;}
 .wall-article[data-side="r"]{clear: right; float: right;}
 .wall-article .img-container{margin: 10px -7px;}
 .wall-article .dates-wrapper ul{margin: -9px 15px -20px 0;}
-.wall-article img.photo{width: 337px; }
+.wall-article img.photo{width: 412px; }
 .wall-article .article-text{font-size: 14px; line-height: 18px;}
 .wall-article h2.article-header{border-bottom: solid 1px #eee; padding: 0 0 15px 0; margin:0 0 10px 0;}
 .wall-article h2.article-header:hover{text-decoration: underline;}
@@ -239,7 +239,7 @@ article.detail .article-statistic{margin: 40px 0 0 0;}
 .show-more-btn:hover{color: #222;}
 
 /* Sidebar styles*/
-#sideRight .side-bar{padding: 20px;}
+#sideRight .side-bar{padding: 10px;}
 .side-bar .side-block{ margin: 0 0 30px 0;}
 .side-bar .side-block h3,h3.side-bar-block-header{margin: 0 0 15px 0; color: #999; text-transform: uppercase; font-family: monospace;text-shadow: 1px 1px 0px rgba(255,255,255,0.7);}
 

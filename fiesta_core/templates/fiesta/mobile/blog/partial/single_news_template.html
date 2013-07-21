@@ -19,7 +19,7 @@
         <a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">
             {% with img=news_item.photo %}
                 {% if img.preview %}
-                    <img class="photo" style="width:{{ img.preview.width }}px; height:{{ img.preview.height }}px;"  src="{{ img.preview.url }}"/>
+                    <img class="photo" src="{{ img.preview.url }}"/>
                 {% else %}
                     <img class="photo" src="{{ img.image.url }}">
                 {% endif %}

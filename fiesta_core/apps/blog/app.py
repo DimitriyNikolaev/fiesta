@@ -18,10 +18,13 @@ class BlogApp(Application):
         url(r'^$',self.news_stream.as_view(), name='index'),
         url(r'^(?P<type>\d+)$',self.news_stream.as_view(), name='stream_type'),
         url(r'^(?P<slug_type>[-\w]+)$',self.news_stream.as_view(), name='slug_stream_type'),
+        url(r'^(?P<slug_type>[-\w]+)/(?P<actualize>[-\w]+)$', self.news_stream.as_view(), name='actual_event_stream'),
         url(r'^news/(?P<pk>\d+)/$', self.single_news.as_view(), name='single_news'),
         url(r'^news/(?P<slug>[-\w]+)/$', self.single_news.as_view(), name='slug_single_news'),
         url(r'^advertisement',self.advertisement.as_view(),name='advertisement'),
-        url(r'^contact',self.contact.as_view(),name='contact')
+        url(r'^contact',self.contact.as_view(),name='contact'),
+
+
         )
         return self.post_process_urls(urlpatterns)
 

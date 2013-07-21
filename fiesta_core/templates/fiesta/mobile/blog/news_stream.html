@@ -1,0 +1,94 @@
+{% extends "mobile/layout.html" %}
+{% load i18n %}
+{% load display_tags %}
+{% block news_title %}Blog-fiesta.com{% endblock %}
+{% block content_wrapper %}
+
+    {% if news|length > 0 %}
+
+        {% for news_item in news %}
+            {% include 'fiesta/mobile/blog/partial/single_news_template.html' with news_item=news_item %}
+        {% endfor %}
+
+    {% else %}
+        <p>{% trans "No news found." %}</p>
+    {% endif %}
+
+{% endblock %}
+{% block prefooter %}
+    <a id="btn_show_more" class="cb show-more-btn" onclick="loadNextPage()"><span>{% trans "Show more" %}</span></a>
+    {% comment %}{% include "partials/pagination.html" %}{% endcomment %}
+{% endblock %}
+{% block extrascripts %}
+    <script type="text/javascript">
+        {% comment %}var lHeight=0;
+        var rHeight=0;
+
+        var manageArticlesToColumns = function(){
+
+            $('article.wall-article:not([data-side])').each(function(index){
+                console.log('высота:'+ $(this).height());
+                if(lHeight > rHeight){
+                    $(this).attr('data-side','r');
+                    rHeight += $(this).height();
+                }
+                else{
+                    $(this).attr('data-side','l');
+                    lHeight += $(this).height();
+                }
+            });
+        }
+
+        $.ready(new function(){
+            manageArticlesToColumns();
+        });{% endcomment %}
+
+
+        //paginating
+        var paginator = new Object();
+        paginator.total = {{ paginator.num_pages }};
+        paginator.next = {% if page_obj.has_next %} {{ page_obj.next_page_number }} {% else %} '' {% endif %};
+        paginator.previous = {% if page_obj.has_previous %} {{ page_obj.previous_page_number }} {% else %}'' {% endif %};
+        paginator.current = {{ page_obj.number }};
+        paginator.ulrpattern = '?{% get_parameters page %}page=';
+        //paginator.items_per_page = 0;
+        //paginator.items_loaded = 0;
+
+        var loadNextPage = function(){
+            if(paginator.next != '')
+                $.get(paginator.ulrpattern+paginator.next,{}, onLoadNextPage)
+        }
+        var onLoadNextPage = function(data){
+            paginator.previous = paginator.current;
+            paginator.current = paginator.next;
+            if(paginator.next == paginator.total){
+                paginator.next ='';
+                $('#btn_show_more').hide();
+            }
+            else
+                paginator.next +=1;
+
+            $('#content').append(data);
+            {% comment %}$('#content').ready(function(){
+                $('article.wall-article:not([data-side]) img').each(function(){
+                    manageArticlesToColumns();
+                    if (paginator.next == '')
+                        $('#btn_show_more').hide();
+                    //paginator.items_per_page +=1;
+                    //this.onload = function() {
+                    //    paginator.items_loaded +=1;
+                    //    if(paginator.items_loaded == paginator.items_per_page){
+
+                    //        paginator.items_loaded = 0;
+                    //        paginator.items_per_page = 0
+
+                    //    }
+                    //}
+                });
+            });{% endcomment %}
+
+        }
+
+    </script>
+
+{% endblock %}

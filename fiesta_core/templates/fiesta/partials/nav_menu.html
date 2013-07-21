@@ -1,52 +1,37 @@
 {% load i18n %}
 {% load display_tags %}
+<div class="main-menu">
+    <ul>
+        <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a>
 
-<ul>
-    <li class="{% navactive request "fiesta:blog:index" ""%}"><a href="{% url "fiesta:blog:index" %}">{% trans "All news" %}</a>
-        <div>
-            <ul>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'news' %}">
-        <a href="{% url "fiesta:blog:slug_stream_type" 'news'%}">{% trans "News" %}</a>
-        <div>
-            <ul>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'places' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'places'%}">{% trans "Places" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'events' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'events'%}">{% trans "Events" %}</a></li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'live' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'live'%}">{% trans "Live" %}</a>
-        <div>
-            <ul>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="{% navactive request "fiesta:blog:slug_stream_type" 'sights' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'sights'%}">{% trans "Attractions" %}</a>
-        <div>
-            <ul>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-                <li><a href="#">Some text</a></li>
-            </ul>
-        </div>
-    </li>
-</ul>
-<div class="top-search">
-    {% include "partials/search.html" %}
+        </li>
+        <li class="{% navactive request "fiesta:blog:slug_stream_type" 'news' %}">
+            <a href="{% url "fiesta:blog:slug_stream_type" 'news'%}">{% trans "News" %}</a>
+
+        </li>
+        <li class="{% navactive request "fiesta:blog:slug_stream_type" 'places' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'places'%}">{% trans "Places" %}</a></li>
+        <li class="{% navactive request "fiesta:blog:slug_stream_type" 'events' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'events'%}">{% trans "Events" %}</a></li>
+
+        <li class="{% navactive request "fiesta:blog:slug_stream_type" 'live' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'live'%}">{% trans "Live" %}</a>
+
+        </li>
+        <li class="{% navactive request "fiesta:blog:slug_stream_type" 'sights' %}"><a href="{% url "fiesta:blog:slug_stream_type" 'sights'%}">{% trans "Attractions" %}</a>
+
+        </li>
+    </ul>
+    <div class="top-search">
+        {% include "partials/search.html" %}
+    </div>
+    <div class="cb"> </div>
 </div>
-<div class="cb"> </div>
+{% url "fiesta:blog:slug_stream_type" 'events'  as event_url %}
+{% if request.get_full_path|start_with:event_url%}
+<div class="actualize-event-menu">
+    <ul>
+        <li class="{% subnavactive request "fiesta:blog:actual_event_stream" 'events' 'today' %}"><a href="{% url "fiesta:blog:actual_event_stream" 'events' 'today'%}">{% trans "Today" %}</a></li>
+        <li class="{% subnavactive request "fiesta:blog:actual_event_stream" 'events' 'future' %}"><a href="{% url "fiesta:blog:actual_event_stream" 'events' 'future'%}">{% trans "Future" %}</a></li>
+    </ul>
+    <div class="cb"> </div>
+</div>
+{% endif %}
+
