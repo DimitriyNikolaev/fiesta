@@ -36,12 +36,12 @@
     });
 
     setTimeout($(function(){
-        if($(window).width() > 1134)
-        {
+        //if($(window).width() > 1134)
+        //{
           $.scrollUp({
                       scrollText: ''
                   });
-        }
+        //}
     }),300);
 
     var set_city = function()
@@ -85,6 +85,9 @@
                           <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="2"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
                         </ul>{% endcomment %}
                     </div>
+                    <div>
+                        {% include "fiesta/mobile/mobile_nav_menu.html" %}
+                    </div>
 
                     <a class="logo-block" href="/"><img src="{{ STATIC_URL }}fiesta_core/img/logo.png"></a>
 
@@ -106,12 +109,15 @@
                         </form>
                     </div>
 
+                    {% include "fiesta/mobile/mobile_search.html" %}
+
+
                     <div class="cb"> </div>
                 {% endblock %}
                 </header>
-                <div>
-                    {% include "partials/nav_menu.html" %}
-                </div>
+{#                <div>#}
+{#                    {% include "partials/nav_menu.html" %}#}
+{#                </div>#}
                 <div id="content">
                 {% block content_wrapper %}
                 {% endblock %}
@@ -121,7 +127,7 @@
                     {% endblock %}
                 </div>
             </div>
-            <aside  id="sideRight">
+            {% comment %}<aside  id="sideRight">
                 <div class="side-bar">
                     <div class="side-block">
                         <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>
@@ -131,7 +137,7 @@
                     </div>
                     <div class="side-block">
                         <h3>{% trans "Join us" %}</h3>
-                        {% comment %}<img src="{{ STATIC_URL }}fiesta_core/img/vk.png">{% endcomment %}
+                        {% endcomment %}{% comment %}<img src="{{ STATIC_URL }}fiesta_core/img/vk.png">{% endcomment %}{% comment %}
                         <div id="vk_groups"></div>
 
                     </div>
@@ -168,7 +174,7 @@
                         </script>
                     </div>
                 </div>
-            </aside>
+            </aside>{% endcomment %}
             <div class="cb">&nbsp;</div>
 
             <!-- #footer -->

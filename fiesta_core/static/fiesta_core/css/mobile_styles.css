@@ -70,8 +70,8 @@ img {
 #wrapper{width: 640px; margin: 0 auto; background: #EFEFEF; position: relative; }
 
 #header {width: 100%; position: relative;}
-#middle {width: 466px; border-right: solid 2px #ddd; background: #fff;  position: relative;}
-#container {float: left; overflow: hidden; padding: 0 20px 80px 20px; width: 426px;}
+#middle {width: 640px; border-right: solid 2px #ddd; background: #fff;  position: relative;}
+#container {float: left; overflow: hidden; padding: 0 20px 80px 20px; width: 600px;}
 #content {padding: 20px 0;}
 #sideRight { width: 174px; float: right; margin-right: -174px; position: relative;}
 #footer { height: 80px;margin: -80px 0 0 0; position: absolute; width: 100%;}
@@ -79,8 +79,10 @@ img {
 
 
 /* Main menu styles*/
-.main-menu{ background: #F6F6F6;border-bottom: solid 2px #FFC000;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;}
-.main-menu ul {list-style: none; margin: 0; padding: 0;}
+.main-menu{ background: #F6F6F6;border-bottom: solid 2px #FFC000;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;
+    position: absolute; top:80px;
+}
+.main-menu ul {list-style: none; margin: 0; padding: 0; }
 .main-menu li{ float: left; padding: 6px 0 6px 6px; position: relative;}
 .main-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
 .main-menu li > a:hover, .main-menu li.current > a{color:#FFC000; }
@@ -89,6 +91,7 @@ img {
 .main-menu li ul { white-space: nowrap;}
 .main-menu li > div li{padding: 0; display: inline-block; float: none;}
 .main-menu li:first-child > div{margin-left: -6px;}
+.main-menu li span {font-size: 36px; padding-left: 5px; padding-right: 11px; padding-top: 5px;}
 
 .actualize-event-menu{ margin-top: 5px; }
 .actualize-event-menu ul {list-style: none; margin: 0px; padding: 0px; }
@@ -96,7 +99,7 @@ img {
 .actualize-event-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
 .actualize-event-menu li > a:hover,.actualize-event-menu li.current > a{color:#FFC000; }
 
-.top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px;}
+.top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px; position: absolute; top:80px; right: 0; }
 .top-search form{margin: 0; padding: 0;}
 .top-search input.search-text{display: inline-block; background: none; height: 20px; padding: 4px 6px; font-size: 12px; line-height: 20px;
     vertical-align: middle; border: none; width: 120px; color: #111; margin: 0;}
@@ -199,24 +202,27 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .article-statistic li.browsing{background: url(../img/browsing-icon.png) no-repeat center left; padding: 3px 0 0 25px;}
 
 /*Wall article styles*/
-.wall-article{padding: 13px; width: 398px; border: solid 1px #eee; margin-bottom: 12px;}
+.wall-article{padding: 13px; width: inherit; border: solid 1px #eee; margin-bottom: 12px;}
 .wall-article[data-side="l"]{clear: left; float: left;}
 .wall-article[data-side="r"]{clear: right; float: right;}
-.wall-article .img-container{margin: 10px -7px;}
+.wall-article .img-container{margin: 10px 0px; }
 .wall-article .dates-wrapper ul{margin: -9px 15px -20px 0;}
-.wall-article img.photo{width: 412px; }
-.wall-article .article-text{font-size: 14px; line-height: 18px;}
+/*.wall-article .dates-wrapper {float: left; margin-left: 20px; position: absolute;}*/
+.wall-article img.photo{ width: 100%;}
+.wall-article .article-text{font-size: 18px; line-height: 22px;}
 .wall-article h2.article-header{border-bottom: solid 1px #eee; padding: 0 0 15px 0; margin:0 0 10px 0;}
 .wall-article h2.article-header:hover{text-decoration: underline;}
 
+.
+
 h2.article-header {margin: 15px 0 20px 0; }
-h2.article-header a{font-size: 16px;line-height:20px; color: #212121;}
+h2.article-header a{font-size: 22px;line-height:26px; color: #212121;}
 
 /*Article details style*/
 article.detail{}
 article.detail .header,article.detail .image-wrapper{margin: 0 0 10px 0;}
 article.detail h2, article.static-content h2{color:#212121; line-height: 28px; font-size: 28px;}
-article.detail .dates-wrapper ul{margin: 0 0 0 20px;}
+article.detail .dates-wrapper ul{margin: 0 0 0 20px; }
 article.detail .image-wrapper img{width: 100%;}
 article.detail .image-wrapper .image-block{position: relative;}
 article.detail .article-statistic{margin: 40px 0 0 0;}

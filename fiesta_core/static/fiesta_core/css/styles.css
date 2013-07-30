@@ -93,7 +93,7 @@ img {
 .actualize-event-menu{ margin-top: 5px; }
 .actualize-event-menu ul {list-style: none; margin: 0px; padding: 0px; }
 .actualize-event-menu li{ float: left; padding: 6px 0 6px 6px; position: relative;}
-.actualize-event-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
+.actualize-event-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold; font-size: 28px;}
 .actualize-event-menu li > a:hover,.actualize-event-menu li.current > a{color:#FFC000; }
 
 .top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px;}

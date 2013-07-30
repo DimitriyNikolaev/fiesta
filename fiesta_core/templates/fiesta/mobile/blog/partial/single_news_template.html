@@ -27,18 +27,20 @@
         </a>
     {% endif %}
     </div>
+    {% comment %}<div class="article-preview">{% endcomment %}
 
-    <div class="article-statistic">
-        <ul>
-            <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
-            <li>
-                <div id="vk_like_{{ news_item.id }}"></div>
-                <script>
-                    VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini',pageDescription:'{{ news_item.description }}', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
-                </script>
-            </li>
-        </ul>
-        <div class="cb">&nbsp;</div>
-    </div>
-    <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
+        <div class="article-statistic">
+            <ul>
+                <li class="browsing" title="Просмотров">{{ news_item.views_count }}</li>
+                <li>
+                    <div id="vk_like_{{ news_item.id }}"></div>
+                    <script>
+                        VK.Widgets.Like('vk_like_{{ news_item.id }}', {type:'mini',pageDescription:'{{ news_item.description }}', pageTitle: '{{ news_item.title }}', pageUrl:'{{ site_domain }}{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}'{% if news_item.photo.preview %},pageImage:"{{ site_domain }}{{ news_item.photo.preview.url }}"{% endif %}}, {{ news_item.id }});
+                    </script>
+                </li>
+            </ul>
+            <div class="cb">&nbsp;</div>
+        </div>
+        <div>{{ news_item.date_added|date:"d.m.Y" }}</div>
+    {% comment %}</div>{% endcomment %}
 </article>

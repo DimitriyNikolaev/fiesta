@@ -67,8 +67,8 @@ class NewsStream(ListView):
 
 
     def get_context_data(self, **kwargs):
-        # if self.request.flavour == 'mobile':
-        #     self.template_name = 'mobile/blog/news_stream.html'
+        #if self.request.flavour == 'mobile':
+        self.template_name = 'mobile/blog/news_stream.html'
         context = super(NewsStream, self).get_context_data(**kwargs)
         q = self.get_search_query()
         if not q:
