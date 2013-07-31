@@ -255,6 +255,7 @@ article.detail .article-statistic{margin: 40px 0 0 0;}
 .pop-news a img + b{display: table-cell; height: 80px; vertical-align: middle;}
 
 /* Footer styles */
+.footer-container{padding: 10px 0 0 0;}
 .footer-container .copyright, .footer-container .footer-menu{float: left;}
 .footer-container .copyright,.footer-container .footer-menu a{color: #777; }
 .footer-container ul{list-style: none;}
