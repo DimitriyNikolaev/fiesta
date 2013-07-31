@@ -67,31 +67,23 @@ img {
 .fl{float: left;}
 .fr{float: right;}
 .hide{display: none;}
-#wrapper{width: 640px; margin: 0 auto; background: #EFEFEF; position: relative; }
 
-#header {width: 100%; position: relative;}
-#middle {width: 640px; border-right: solid 2px #ddd; background: #fff;  position: relative;}
-#container {float: left; overflow: hidden; padding: 0 20px 80px 20px; width: 600px;}
-#content {padding: 20px 0;}
-#sideRight { width: 174px; float: right; margin-right: -174px; position: relative;}
-#footer { height: 80px;margin: -80px 0 0 0; position: absolute; width: 100%;}
-#footer .footer-container{border-top: solid 2px #FFC000; margin:0 20px; padding-top:30px;}
 
+#modile-wrapper{max-width: 620px; margin: 0 auto; background: #FFF; position: relative; padding: 10px;}
+#header {position: relative;}
+#container {overflow: hidden; padding: 10px 0; }
+#footer { border-top: solid 2px #FFC000;}
 
 /* Main menu styles*/
-.main-menu{ background: #F6F6F6;border-bottom: solid 2px #FFC000;-webkit-border-top-left-radius: 3px; -moz-border-radius-topleft: 3px; border-top-left-radius: 3px;
-    position: absolute; top:80px;
-}
+.main-menu{ background: #F6F6F6;border-bottom: solid 2px #FFC000; line-height: normal;}
 .main-menu ul {list-style: none; margin: 0; padding: 0; }
-.main-menu li{ float: left; padding: 6px 0 6px 6px; position: relative;}
-.main-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
+.main-menu li{ position: relative; white-space: nowrap;font-size: 36px;}
+.main-menu ul > li {text-align: center;}
+.main-menu li a {display: block; padding: 4px 10px; color: #111; font-size: 28px;}
 .main-menu li > a:hover, .main-menu li.current > a{color:#FFC000; }
-.main-menu li > div{display: none; position: absolute; background: #F6F6F6; top: 100%;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;box-shadow: 2px 2px 2px rgba(255, 192, 1, 0.5);white-space: nowrap; margin-left: -50%;}
-.main-menu li:hover > div{display: block;}
-.main-menu li ul { white-space: nowrap;}
-.main-menu li > div li{padding: 0; display: inline-block; float: none;}
-.main-menu li:first-child > div{margin-left: -6px;}
-.main-menu li span {font-size: 36px; padding-left: 5px; padding-right: 11px; padding-top: 5px;}
+.main-menu li > div{display: none; position: absolute; width: 100%;background: #F6F6F6; top: 100%; z-index: 12;}
+.main-menu li.hover > div{display: block;}
+.main-menu li > div li{padding: 0;width: 100%;}
 
 .actualize-event-menu{ margin-top: 5px; }
 .actualize-event-menu ul {list-style: none; margin: 0px; padding: 0px; }
@@ -99,15 +91,21 @@ img {
 .actualize-event-menu li a {display: block; float: left; padding: 4px 10px; color: #111; font-weight: bold;}
 .actualize-event-menu li > a:hover,.actualize-event-menu li.current > a{color:#FFC000; }
 
-.top-search{float:right; background: #EFEFEF; padding: 0 0 0 5px; position: absolute; top:80px; right: 0; }
-.top-search form{margin: 0; padding: 0;}
-.top-search input.search-text{display: inline-block; background: none; height: 20px; padding: 4px 6px; font-size: 12px; line-height: 20px;
-    vertical-align: middle; border: none; width: 120px; color: #111; margin: 0;}
+.top-search{background: #EFEFEF; position: relative;width: 100%; margin-top: 5px;}
+.top-search input[type=text]{width: 90%; background: none; height: 27px; padding: 4px 6px; font-size: 12px; line-height: 27px;
+    vertical-align: middle; border: none; color: #111; margin: 0; }
+.top-search input[type=image] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 36px;
+    width: 36px;
+    font-size: 14px;}
 
 /* Header blocks */
 #header .logo-block{margin: 0 auto; display: block; width: 170px;}
-#header .auth, #header .cities-selector{position: absolute;}
-#header .auth{margin: 10px 0 0 -10px;}
+/*#header .auth, #header .cities-selector{position: absolute;}*/
+/*#header .auth{margin: 10px 0 0 -10px;}*/
 
 /* Cities selector styles*/
 .cities-selector{ background: #fff; top: 20px;margin: 0 0 10px 0;}
@@ -168,7 +166,7 @@ button, input[type=submit] { display: inline-block; vertical-align: middle; text
 .auth.open .login-form{display: block;}
 .auth.open {background: #f8f8f6; border-top-left-radius: 3px; border-top-right-radius: 3px; border-right: solid 1px #ddd;}
 
-.locale{position: absolute; width: 100px; right: 0; top: 20px;}
+.locale{width: 100px;}
 .locale .form-horizontal .controls{margin-left: 0px;}
 .locale .well {border-radius: 25px;}
 .locale .control-group label{padding: 0;}
