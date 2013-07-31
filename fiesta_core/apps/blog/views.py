@@ -97,8 +97,8 @@ class SingleNewsView(DetailView):
         return object
 
     def get_context_data(self, **kwargs):
-        # if self.request.flavour == 'mobile':
-        #     print('mobile deteted')
+        #if self.request.flavour == 'mobile':
+        self.template_name = 'mobile/blog/single_news.html'
         context = super(SingleNewsView, self).get_context_data(**kwargs)
         context['views_count'] = self.setAnalitic()
         return context;
