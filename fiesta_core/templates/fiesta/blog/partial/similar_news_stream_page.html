@@ -1,0 +1,7 @@
+<ol>
+{% for news_item in similar_news_stream %}
+    <li>
+        {% include 'fiesta/blog/partial/single_similar_news_template.html' with news_item=news_item %}
+    </li>
+{% endfor %}
+</ol>

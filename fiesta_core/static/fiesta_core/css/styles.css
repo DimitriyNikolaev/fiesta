@@ -219,10 +219,23 @@ article.detail h2, article.static-content h2{color:#212121; line-height: 28px; f
 article.detail .dates-wrapper ul{margin: 0 0 0 20px;}
 article.detail .image-wrapper img{width: 100%;}
 article.detail .image-wrapper .image-block{position: relative;}
-article.detail .article-statistic{margin: 40px 0 0 0;}
+article.detail .article-statistic{margin: 40px 0 0 0; background: #f6f6f6; border-radius: 3px; padding: 10px 15px;}
 
 .sub-article{padding:20px 0;}
 .sub-article h3.header{color:#202020;font-size: 18px;}
+
+.similar-articles{padding: 20px 0;}
+.similar-articles h3.header{ border-bottom: solid 2px #FFC000;color: #1F1F1F; text-transform: uppercase; margin: 10px 0; padding: 0 0 7px 0;}
+.similar-articles ol{list-style: none;}
+.similar-articles ol>li{width: 32%; margin-left: 2%; float: left;}
+.similar-articles ol>li > article{border:solid 1px #eee; padding: 8px;}
+.similar-articles ol>li:first-child{margin-left: 0;}
+article.similar h3.article-header{color: #202020; margin: 30px 0 10px 0;}
+article.similar h3.article-header:hover{text-decoration: underline;}
+article.similar .intro{font-size: 12px; color: #5C5C5C;}
+article.similar .dates-wrapper ul{margin: -10px 15px 0 0;}
+article.similar .dates-wrapper ul li.triangle{padding: 0;}
+article.similar .dates-wrapper li{font-size: 12px; padding: 0 10px;}
 
 /* Paginator styles*/
 .paginator-wrapper{position: absolute; bottom: 0; margin-bottom: 80px; width: 714px;}

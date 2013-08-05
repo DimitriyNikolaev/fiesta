@@ -137,6 +137,14 @@
             </ul>
             <div class="cb">&nbsp;</div>
         </div>
+        <!-- .similar-articles -->
+        <div class="similar-articles">
+            <h3 class="header">Похожие статьи</h3>
+            {% with '1 2 3' as list %}
+            {% include 'fiesta/blog/partial/similar_news_stream_page.html' with similar_news_stream=list.split %}
+            {% endwith %}
+            <div class="cb">&nbsp;</div>
+        </div><!-- .similar-articles -->
     </section>
     <!-- Яндекс.Директ -->
 <div class="single-post-yandex-ad" id="yandex_ad"></div>
