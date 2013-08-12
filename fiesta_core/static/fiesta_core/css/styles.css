@@ -225,7 +225,7 @@ article.detail .article-statistic{margin: 40px 0 0 0; background: #f6f6f6; borde
 .sub-article h3.header{color:#202020;font-size: 18px;}
 
 .similar-articles{padding: 20px 0;}
-.similar-articles h3.header{ border-bottom: solid 2px #FFC000;color: #1F1F1F; text-transform: uppercase; margin: 10px 0; padding: 0 0 7px 0;}
+.similar-articles h3.header, .comments h3.header{ border-bottom: solid 2px #FFC000;color: #1F1F1F; text-transform: uppercase; margin: 10px 0 20px 0; padding: 0 0 7px 0;}
 .similar-articles ol{list-style: none;}
 .similar-articles ol>li{width: 32%; margin-left: 2%; float: left;}
 .similar-articles ol>li > article{border:solid 1px #eee; padding: 8px;}
@@ -236,6 +236,35 @@ article.similar .intro{font-size: 12px; color: #5C5C5C;}
 article.similar .dates-wrapper ul{margin: -10px 15px 0 0;}
 article.similar .dates-wrapper ul li.triangle{padding: 0;}
 article.similar .dates-wrapper li{font-size: 12px; padding: 0 10px;}
+
+/* Article comments styles*/
+.comments{}
+.comments ul{list-style: none;}
+.comments .post{position: relative; padding: 0 0 0 65px;}
+.comments .post header, .comments .post .post-content{margin: 0 0 5px 0;}
+.comments .post .avatar{position: absolute; left: 0; width: 50px;}
+.comments .post .author{text-transform: uppercase; color: #333; font-weight: bold;display: inline-block; margin-right: 15px;}
+.comments .post .post-message{font-size: 105%; color: #666;}
+.comments .post .post-footer{margin: 0 0 30px -65px; padding: 0 0 0 55px; border-bottom:solid 1px #ddd;height: 10px;}
+.comments .post .post-footer .footer-controls{padding:0 10px;background: #fff; display: inline-block;}
+.comments .post .post-footer .answer-link{ border-bottom: dotted 1px #d8d8d8; color: #666;  }
+.comments .post .post-footer .answer-link:hover{border-bottom:solid 1px #d8d8d8;}
+
+.comments-form{padding: 20px; background: #f6f6f6; border-radius: 3px;}
+.comments-form .form-header{color: #222; text-transform: uppercase; margin: 0 0 20px 0; font-weight: bold;font-size: 105%;}
+.comments-form .account{min-width: 150px; }
+.comments-form .account>div{white-space: nowrap; }
+.comments-form .account .avatar{float: left; margin: 0 10px 0 0;}
+.comments-form .account .info{list-style: none; float: left; width: 80px;}
+.comments-form .account .info li{color: #aaa;}
+.comments-form .account .info .account-name{font-weight: bold; color: #444; text-transform: uppercase; margin-bottom: 2px;}
+.comments-form .account .info .logout-link{color: #555; border-bottom: solid 1px #cdcdcd;}
+.comments-form .form-container{float: left; width: 534px;}
+.comments-form form{padding: 0 0 0 20px;}
+.comments-form textarea{width: 96%;border:solid 1px; border-color: #e0e0e0 #eee #eee #e0e0e0; border-radius: 3px; padding: 10px;box-shadow:inset 1px 1px 5px #e0e0e0;}
+.comments-form form .btn{float: right;margin-top: 20px;background: #eee;box-shadow: 1px 2px 0 rgba(255, 193, 0, 1); color: #222; font-weight: bold; text-transform: uppercase; cursor: pointer; font-size: 95%; border-radius: 0;}
+
+
 
 /* Paginator styles*/
 .paginator-wrapper{position: absolute; bottom: 0; margin-bottom: 80px; width: 714px;}
