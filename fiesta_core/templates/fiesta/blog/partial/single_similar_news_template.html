@@ -1,16 +1,24 @@
 <article class="similar">
     <div class="img-container">
-        <a href="#">
-            <img src="{{ STATIC_URL }}fiesta_core/img/test-img.png" />
+        <a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">
+            {% if news_item.photo and news_item.photo.preview %}
+                <img src="{{ news_item.photo.preview.url }}" />
+            {% endif %}
         </a>
         <div class="dates-wrapper">
             <ul>
-                <li class="from-date">18 апреля</li>
-                <li class="triangle">&nbsp;</li>
-                <li class="to-date">10 июня</li>
+                {% if news_item.event_date %}
+                    <li class="{% if news_item.deadline_date %}from-date{% else %}event-date{% endif %}">{{ news_item.event_date|date:"j E" }}</li>
+                    {% if news_item.deadline_date %}
+                        <li class="triangle">&nbsp;</li>
+                    {% endif %}
+                {% endif %}
+                {% if news_item.deadline_date %}
+                    <li class="to-date">{{ news_item.deadline_date|date:"j E" }}</li>
+                {% endif %}
             </ul>
         </div>
     </div>
-    <h3 class="article-header"><a href="#">Художественная акция "Туша"</a></h3>
-    <div class="intro">Phasellus elementum ligula ac tempus adipiscing. Integer aliquet turpis id dolor condimentum lacinia.</div>
+    <h3 class="article-header"><a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">{{ news_item.title }}</a></h3>
+    <div class="intro">{{ news_item.description|safe }}</div>
 </article>

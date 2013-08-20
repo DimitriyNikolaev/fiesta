@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 23:32+0400\n"
+"POT-Creation-Date: 2013-08-18 18:47+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: defaults.py:7 templates/fiesta/dashboard/blog/news_list.html:9
+#: templates/fiesta/mobile/mobile_nav_menu.html:9
 #: templates/fiesta/partials/nav_menu.html:9
 msgid "News"
 msgstr "Новости"
@@ -32,7 +33,8 @@ msgstr "Реклама"
 msgid "Event"
 msgstr "События"
 
-#: defaults.py:10 templates/fiesta/partials/nav_menu.html:22
+#: defaults.py:10 templates/fiesta/mobile/mobile_nav_menu.html:12
+#: templates/fiesta/partials/nav_menu.html:15
 msgid "Live"
 msgstr "Live"
 
@@ -189,11 +191,11 @@ msgstr ""
 msgid "News tag value"
 msgstr ""
 
-#: apps/blog/views.py:72
+#: apps/blog/views.py:115
 msgid "Latest news"
 msgstr "Последние новости"
 
-#: apps/blog/views.py:74
+#: apps/blog/views.py:117
 #, python-format
 msgid "News matching '%(query)s'"
 msgstr "Найдено по запросу '%(query)s'"
@@ -202,10 +204,10 @@ msgstr "Найдено по запросу '%(query)s'"
 msgid "Blog"
 msgstr ""
 
-#: apps/dashboard/blog/views.py:64 apps/dashboard/blog/views.py:87
-#: apps/dashboard/blog/views.py:116 apps/dashboard/blog/views.py:143
-#: apps/dashboard/blog/views.py:181 apps/dashboard/blog/views.py:200
-#: apps/dashboard/blog/views.py:231 apps/dashboard/blog/views.py:248
+#: apps/dashboard/blog/views.py:64 apps/dashboard/blog/views.py:89
+#: apps/dashboard/blog/views.py:118 apps/dashboard/blog/views.py:147
+#: apps/dashboard/blog/views.py:185 apps/dashboard/blog/views.py:204
+#: apps/dashboard/blog/views.py:235 apps/dashboard/blog/views.py:252
 msgid "Your submitted data was not valid - please correct the below errors"
 msgstr ""
 
@@ -250,16 +252,22 @@ msgstr "Обновить"
 #: templates/fiesta/blog/news_stream.html:14
 #: templates/fiesta/dashboard/blog/news_add_or_update.html:112
 #: templates/fiesta/dashboard/blog/news_list.html:68
+#: templates/fiesta/mobile/blog/news_stream.html:14
 msgid "No news found."
 msgstr "Новости не найдены"
 
 #: templates/fiesta/blog/news_stream.html:19
+#: templates/fiesta/mobile/blog/news_stream.html:19
 msgid "Show more"
 msgstr "Показать еще"
 
 #: templates/fiesta/blog/pop_news.html:2
 msgid "Pop news"
 msgstr "Популярные новости"
+
+#: templates/fiesta/blog/single_news.html:143
+msgid "Other articles"
+msgstr "Другие материалы рубрики"
 
 #: templates/fiesta/dashboard/layout.html:36
 msgid "Welcome"
@@ -360,6 +368,26 @@ msgstr "Сохранить новостной подраздел"
 msgid "Unable to create object"
 msgstr ""
 
+#: templates/fiesta/mobile/mobile_nav_menu.html:8
+#: templates/fiesta/partials/nav_menu.html:5
+msgid "All news"
+msgstr "Вся лента"
+
+#: templates/fiesta/mobile/mobile_nav_menu.html:10
+#: templates/fiesta/partials/nav_menu.html:12
+msgid "Places"
+msgstr "Места"
+
+#: templates/fiesta/mobile/mobile_nav_menu.html:11
+#: templates/fiesta/partials/nav_menu.html:13
+msgid "Events"
+msgstr "События"
+
+#: templates/fiesta/mobile/mobile_nav_menu.html:13
+#: templates/fiesta/partials/nav_menu.html:18
+msgid "Attractions"
+msgstr "Достопримечательности"
+
 #: templates/fiesta/partials/auth_tag.html:71
 msgid "Sign up"
 msgstr "Регистрация"
@@ -368,29 +396,13 @@ msgstr "Регистрация"
 msgid "Upload Image"
 msgstr "Загрузить картинку"
 
-#: templates/fiesta/partials/nav_menu.html:5
-msgid "All news"
-msgstr "Вся лента"
-
-#: templates/fiesta/partials/nav_menu.html:12
-msgid "Places"
-msgstr "Места"
-
-#: templates/fiesta/partials/nav_menu.html:13
-msgid "Events"
-msgstr "События"
-
-#: templates/fiesta/partials/nav_menu.html:16
+#: templates/fiesta/partials/nav_menu.html:31
 msgid "Today"
 msgstr "Сегодня"
 
-#: templates/fiesta/partials/nav_menu.html:17
+#: templates/fiesta/partials/nav_menu.html:32
 msgid "Future"
 msgstr "Предстоящие"
-
-#: templates/fiesta/partials/nav_menu.html:25
-msgid "Attractions"
-msgstr "Достопримечательности"
 
 #: templates/fiesta/partials/pagination.html:6
 msgid "previous"

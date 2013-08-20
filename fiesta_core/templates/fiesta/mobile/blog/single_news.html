@@ -94,6 +94,11 @@
                                         {% if img.description %}
                                             <div class="flex-caption">{{ img.description }}</div>
                                         {% endif %}
+                                    {% elif img.image %}
+                                        <img src="{{ img.image.url }}"/>
+                                        {% if img.description %}
+                                            <div class="flex-caption">{{ img.description }}</div>
+                                        {% endif %}
                                     {% endif %}
                                 </li>
                             {% endfor %}
@@ -109,6 +114,8 @@
                             <div class="image-block">
                                 {% if img.preview %}
                                     <img class="photo" src="{{ img.preview.url }}"/>
+                                {% elif img.image %}
+                                    <img class="photo" src="{{ img.image.url }}"/>
                                 {% endif %}
                                 {% if img.description %}
                                     <div class="flex-caption">{{ img.description }}</div>

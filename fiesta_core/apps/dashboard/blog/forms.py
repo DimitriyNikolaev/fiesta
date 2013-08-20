@@ -163,6 +163,9 @@ class SubnewsImageForm(forms.ModelForm):
         obj = super(SubnewsImageForm, self).save(*args, **kwargs)
         obj.display_order = self.get_display_order()
         obj.is_newsphoto = False
+        if not obj.preview:
+            preview = get_preview(self.cleaned_data['image'], 'preview')
+            obj.preview.save(preview.name, preview)
         obj.save()
         return obj
 

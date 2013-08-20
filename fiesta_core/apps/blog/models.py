@@ -80,7 +80,7 @@ class NewsPhoto(models.Model):
             obj.image.delete()
             obj.preview.delete()
             obj.thumbnail.delete()
-        except (NewsPhoto.DoesNotExist, ValueError):
+        except:
             pass
         super(NewsPhoto, self).delete()
 

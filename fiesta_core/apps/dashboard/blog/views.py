@@ -78,7 +78,9 @@ class AddNewsView(CreateView):
             photos_formset.save()
             #save preview to redis
             photos = news.news_photos.all()
-            preview = NewsPreview(news.id,news.title, photos[0].thumbnail.url if photos.count() > 0 else '', news.slug)
+            preview = NewsPreview(news.id,news.title, photos[0].thumbnail.url if photos.count() > 0 else '', news.slug,
+                                  news.event_date, news.deadline_date,news.description,
+                                  photos[0].preview.url if photos.count() > 0 else '')
             preview_serialized = pickle.dumps(preview)
             redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
             return HttpResponseRedirect(self.get_success_url())
@@ -129,7 +131,9 @@ class UpdateNewsView(UpdateView):
             photos_formset.save()
             #save preview to redis
             photos = news.news_photos.all()
-            preview = NewsPreview(news.id,news.title, photos[0].thumbnail.url if photos.count() > 0 else '', news.slug)
+            preview = NewsPreview(news.id,news.title, photos[0].thumbnail.url if photos.count() > 0 else '', news.slug,
+                                  news.event_date, news.deadline_date,news.description,
+                                  photos[0].preview.url if photos.count() > 0 else '')
             preview_serialized = pickle.dumps(preview)
             redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
 

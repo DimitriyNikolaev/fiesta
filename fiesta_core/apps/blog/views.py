@@ -12,6 +12,7 @@ from fiesta_core.global_utils.redis_adapter import redis_adapter
 from model_extension import RedisKeys
 from cacheops import cached_as_with_params
 from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
+from fiesta_core.apps.blog.model_extension import NewsPreview
 
 @cached_as_with_params(News.objects.all())
 def get_news_base_queryset(city, type, actualize):
@@ -32,6 +33,20 @@ def get_news_base_queryset(city, type, actualize):
         item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
     return queryset
 
+@cached_as_with_params(News.objects.all())
+def get_similar_news_queryset(city, type, current_news_id):
+    queryset = News.objects.filter(is_displayed=True, city=city, is_archive=False).exclude(id=current_news_id)
+    if type:
+        queryset = queryset.filter(Q(type=type) | Q(type=2))
+    queryset = queryset.order_by('-date_added').nocache()
+    photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True).nocache()
+    photos_dict = {}
+    for p in photos:
+        photos_dict[p.news_id] = p
+    for item in queryset:
+        item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
+    return queryset
+
 def get_news_search_queryset(city, q):
     queryset = News.objects.filter(is_displayed=True, city=city, title__icontains=q).order_by('-date_added')
     photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
@@ -42,6 +57,45 @@ def get_news_search_queryset(city, q):
         item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
     return queryset
 
+def get_pop_news_by_type(type, current_news_id):
+    pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news_by_group % type,0,3)
+    result = []
+    if len(pop_news_idlist) > 0:
+        pipe = redis_adapter.pipeline()
+        i = 0
+        for id in pop_news_idlist:
+            if str(current_news_id) != id and i < 3:
+                pipe.get(RedisKeys.preview_news_key % id)
+                i += 1
+        exec_res = pipe.execute()
+        if len(exec_res) > 0:
+
+            for ind,preview_serialized in enumerate(exec_res):
+                if preview_serialized is not None:
+                    obj = pickle.loads(preview_serialized)
+                    if hasattr(obj, 'img') and  hasattr(obj, 'description'):
+                    #     id = pop_news_idlist[ind] if len(pop_news_idlist) > ind else 0
+                    #     if id is not None and id != 'None' and id > 0:
+                    #         preview = set_preview_by_id(id)
+                    #         result.append(preview)
+                    # else:
+                        result.append(obj)
+                else:
+                    id = pop_news_idlist[ind] if len(pop_news_idlist) > ind else 0
+                    if id is not None and id != 'None' and id > 0:
+                        preview = set_preview_by_id(id)
+                        result.append(preview)
+
+
+
+    return result
+def set_preview_by_id(id):
+    news = News.objects.get(pk=id)
+    photos = news.news_photos.all()
+    preview = NewsPreview(news.id,news.title, photos[0].thumbnail.url if photos.count() > 0 else '', news.slug, news.event_date, news.deadline_date,news.description,photos[0].preview.url if photos.count() > 0 else '')
+    preview_serialized = pickle.dumps(preview)
+    redis_adapter.set(RedisKeys.preview_news_key % news.id, preview_serialized)
+    return preview
 
 class NewsStream(ListView):
     context_object_name = "news"
@@ -68,7 +122,7 @@ class NewsStream(ListView):
 
     def get_context_data(self, **kwargs):
         #if self.request.flavour == 'mobile':
-        self.template_name = 'mobile/blog/news_stream.html'
+        #self.template_name = 'mobile/blog/news_stream.html'
         context = super(NewsStream, self).get_context_data(**kwargs)
         q = self.get_search_query()
         if not q:
@@ -98,9 +152,11 @@ class SingleNewsView(DetailView):
 
     def get_context_data(self, **kwargs):
         #if self.request.flavour == 'mobile':
-        self.template_name = 'mobile/blog/single_news.html'
+        #self.template_name = 'mobile/blog/single_news.html'
         context = super(SingleNewsView, self).get_context_data(**kwargs)
         context['views_count'] = self.setAnalitic()
+        #context['other_materials'] = get_pop_news_by_type(self.object.type, self.object.id)
+        context['other_materials'] = get_similar_news_queryset(self.request.COOKIES[settings.UNIC_TMP_USER_CITY],self.object.type,self.object.id)[0:3]
         return context;
 
     def setAnalitic(self):
@@ -112,8 +168,10 @@ class SingleNewsView(DetailView):
             views_count = redis_adapter.scard(RedisKeys.news_views % pk)
             if self.object.is_displayed and not self.object.is_archive and self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
                 redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
+                redis_adapter.zadd(RedisKeys.pop_news_by_group % self.object.type, pk, views_count)
             else:
                 redis_adapter.zrem(RedisKeys.pop_news, pk)
+                redis_adapter.zrem(RedisKeys.pop_news_by_group % self.object.type, pk, views_count)
             return views_count
         return 0;
 
