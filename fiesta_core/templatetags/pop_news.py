@@ -5,11 +5,15 @@ from django import template
 from fiesta_core.global_utils.redis_adapter import redis_adapter
 from fiesta_core.apps.blog.model_extension import RedisKeys, NewsPreview
 from fiesta_core.apps.blog.models import News
+from fiesta_core.defaults import FIESTA_NEWS_CITY_SLUG
 
 register = template.Library()
 @register.inclusion_tag('fiesta/blog/pop_news.html', takes_context=True)
 def pop_news_list(context):
-    pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news,0,2)
+    if str(context['city_id']) != str(FIESTA_NEWS_CITY_SLUG['spb']):
+        pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news_by_city % context['city_id'],0,2)
+    else:
+        pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news,0,2)
     result = []
     if len(pop_news_idlist) > 0:
         pipe = redis_adapter.pipeline()

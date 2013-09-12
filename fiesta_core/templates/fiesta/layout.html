@@ -62,7 +62,7 @@
         var re = new RegExp(name + "=([^;]+)"); var value = re.exec(document.cookie); return (value != null) ? value[1] : null;
     }
 
-    VK.Widgets.Group("vk_groups", {mode: 0, width: "238", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 26270763);
+    VK.Widgets.Group("vk_groups", {mode: 0, width: "238", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, {% if city_id == '1' %} 26270763 {% elif city_id == '2' %} 24485016 {% else %} 26270763 {% endif %});
     VK.init({apiId: 3740645, onlyWidgets: true});
 
 
@@ -80,10 +80,10 @@
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
                         </div>
-                        {% comment %}<ul class="dropdown-menu">
-                          <li><input hidden type="radio" id="city_dd_spb" name="city_dd" value="1"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
-                          <li><input hidden type="radio" id="city_dd_msk" name="city_dd" value="2"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
-                        </ul>{% endcomment %}
+                        <ul class="dropdown-menu">
+                          <li {% if city_id == '1' %} class="hide" {% endif %}><input hidden type="radio" id="city_dd_spb" name="city_dd" value="1"><label for="city_dd_spb">{% trans "Saint Petersburg" %}</label></li>
+                          <li {% if city_id == '2' %} class="hide" {% endif %}><input hidden type="radio" id="city_dd_msk" name="city_dd" value="2"><label for="city_dd_msk">{% trans "Moscow"%}</label></li>
+                        </ul>
                     </div>
 
                     <a class="logo-block" href="/"><img src="{{ STATIC_URL }}fiesta_core/img/logo.png"></a>
@@ -122,43 +122,7 @@
                 </div>
             </div>
             <aside  id="sideRight">
-                <div class="side-bar">
-                    <div class="side-block">
-{#                        <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>#}
-                        <!-- Pingmedia 240x400 code START-->
-                        <script language="javascript" type="text/javascript"><!--
-                        if(typeof(ar_cn)=="undefined") var ar_cn=1;
-                        var ar_Tail=document.referrer ? escape(document.referrer) : 'unknown';
-                        var ar_link="http://ad.adriver.ru/cgi-bin/erle.cgi?sid=193517&bt=49&target=blank&tail256=" + ar_Tail;
-                        document.write('<div style="visibility:hidden;height:0px;"><iframe id="ar_container_'+ar_cn+'" width=1 height=1 marginwidth=0 marginheight=0 scrolling=no frameborder=0><\/iframe><\/div><div id="ad_ph_'+ar_cn+'"><\/div>');
-                        function ar_getDoc(t,n,l){var doc;if(t<100){if(document.all && !window.opera){doc = window.frames['ar_container_'+n].document}
-                        else if(document.getElementById){doc=document.getElementById('ar_container_'+n).contentDocument}
-                            if(!doc){setTimeout('ar_getDoc('+(++t)+','+n+',"'+l+'")', 100)}else {var RndNum4NoCash = Math.round(Math.random() * 1000000000);
-                                doc.write ('<sc'+'ript language="JavaScript" type="text/javascript">var ar_bnum='+n+';<\/sc'+'ript>');
-                                doc.write ('<sc'+'ript language="JavaScript" type="text/javascript" src="'+l+'&rnd='+RndNum4NoCash+'"><\/sc'+'ript>');}}}
-                        (function(num,link){function addEvent(e,t,f){if(e.addEventListener)e.addEventListener(t,f,false);else if(e.attachEvent)e.attachEvent('on'+t,f)}
-                            function removeEvent(e,t,f){if(e.removeEventListener)e.removeEventListener(t,f,false);else if(e.detachEvent)e.detachEvent('on'+t,f)}
-                            var BannerLoader={top:0,height:400,cm:document.compatMode=="CSS1Compat",
-                                scroll:function(){var ch=self.innerHeight||this.cm&&document.documentElement.clientHeight||document.body.clientHeight;
-                                    var st=self.pageYOffset||this.cm&&document.documentElement.scrollTop||document.body.scrollTop;
-                                    var sh=self.scrollHeight||this.cm&&document.documentElement.scrollHeight||document.body.scrollHeight;
-                                    if((st-this.top<=this.height*0.2&&st+ch-this.top>=this.height*0.8)||(sh-this.top<=this.height*0.8&&(sh-st-ch<1||sh<ch))){
-                                        removeEvent(window,'scroll',this.sfunc);ar_getDoc(0,num,link)}},
-                                sfunc: function(){BannerLoader.scroll()},init:function(){var t=this,obj=document.getElementById('ad_ph_'+num);
-                                    if(obj){while(obj.offsetParent){t.top += obj.offsetTop; obj = obj.offsetParent}
-                                        addEvent(window,'scroll',this.sfunc);t.scroll()}}};addEvent(window, 'load', function(){BannerLoader.init()})})(ar_cn++,ar_link);
-                        //--></script>
-                        <!-- Pingmedia 240x400 code END -->
-                    </div>
-                    <div class="side-block">
-                        {% pop_news_list %}
-                    </div>
-                    <div class="side-block">
-                        <h3>{% trans "Join us" %}</h3>
-                        {% comment %}<img src="{{ STATIC_URL }}fiesta_core/img/vk.png">{% endcomment %}
-                        <div id="vk_groups"></div>
-
-                    </div>
+                <div class="side-bar" style="padding: 19px;">
                     <div class="side-block">
                         <!-- Яндекс.Директ -->
                         <div id="rside_yandex_ad"></div>
@@ -191,7 +155,52 @@
                         })(window, document, "yandex_context_callbacks");
                         </script>
                     </div>
-                </div>
+                    <div class="side-block">
+                        {% pop_news_list %}
+                    </div>
+                    <div class="side-block">
+                        <h3>{% trans "Join us" %}</h3>
+                        {% comment %}<img src="{{ STATIC_URL }}fiesta_core/img/vk.png">{% endcomment %}
+                        <div id="vk_groups"></div>
+
+                    </div>
+                    <div class="side-block">
+                        <a class="twitter-timeline" href="https://twitter.com/Blog_Fiesta" data-widget-id="377151226564976640">Твиты пользователя @Blog_Fiesta</a>
+                        <script>
+                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+                        </script>
+                    </div>
+                    <div class="side-block">
+                        <embed type="application/x-shockwave-flash" src="{{ STATIC_URL }}130835-imaginegreen-240x400.swf?link1={{ site_domain }}/news/ThinkQ/" width="240" height="400" style="" id="flashcontent" name="flashcontent" bgcolor="#F8F8F8" quality="high">
+                    </div>
+                    <div class="side-block" style="height: 400px;">
+{#                        <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>#}
+                        <!-- Pingmedia 240x400 code START-->
+                        <script language="javascript" type="text/javascript"><!--
+                        if(typeof(ar_cn)=="undefined") var ar_cn=1;
+                        var ar_Tail=document.referrer ? escape(document.referrer) : 'unknown';
+                        var ar_link="http://ad.adriver.ru/cgi-bin/erle.cgi?sid=193517&bt=49&target=blank&tail256=" + ar_Tail;
+                        document.write('<div style="visibility:hidden;height:0px;"><iframe id="ar_container_'+ar_cn+'" width=1 height=1 marginwidth=0 marginheight=0 scrolling=no frameborder=0><\/iframe><\/div><div id="ad_ph_'+ar_cn+'"><\/div>');
+                        function ar_getDoc(t,n,l){var doc;if(t<100){if(document.all && !window.opera){doc = window.frames['ar_container_'+n].document}
+                        else if(document.getElementById){doc=document.getElementById('ar_container_'+n).contentDocument}
+                        if(!doc){setTimeout('ar_getDoc('+(++t)+','+n+',"'+l+'")', 100)}else {var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+                        doc.write ('<sc'+'ript language="JavaScript" type="text/javascript">var ar_bnum='+n+';<\/sc'+'ript>');
+                        doc.write ('<sc'+'ript language="JavaScript" type="text/javascript" src="'+l+'&rnd='+RndNum4NoCash+'"><\/sc'+'ript>');}}}
+                        (function(num,link){function addEvent(e,t,f){if(e.addEventListener)e.addEventListener(t,f,false);else if(e.attachEvent)e.attachEvent('on'+t,f)}
+                        function removeEvent(e,t,f){if(e.removeEventListener)e.removeEventListener(t,f,false);else if(e.detachEvent)e.detachEvent('on'+t,f)}
+                        var BannerLoader={top:0,height:400,cm:document.compatMode=="CSS1Compat",
+                        scroll:function(){var ch=self.innerHeight||this.cm&&document.documentElement.clientHeight||document.body.clientHeight;
+                        var st=self.pageYOffset||this.cm&&document.documentElement.scrollTop||document.body.scrollTop;
+                        var sh=self.scrollHeight||this.cm&&document.documentElement.scrollHeight||document.body.scrollHeight;
+                        if((st-this.top<=this.height*0.2&&st+ch-this.top>=this.height*0.8)||(sh-this.top<=this.height*0.8&&(sh-st-ch<1||sh<ch))){
+                        removeEvent(window,'scroll',this.sfunc);ar_getDoc(0,num,link)}},
+                        sfunc: function(){BannerLoader.scroll()},init:function(){var t=this,obj=document.getElementById('ad_ph_'+num);
+                        if(obj){while(obj.offsetParent){t.top += obj.offsetTop; obj = obj.offsetParent}
+                        addEvent(window,'scroll',this.sfunc);t.scroll()}}};addEvent(window, 'load', function(){BannerLoader.init()})})(ar_cn++,ar_link);
+                        //--></script>
+                        <!-- Pingmedia 240x400 code END -->
+                    </div>
+                 </div>
             </aside>
             <div class="cb">&nbsp;</div>
 

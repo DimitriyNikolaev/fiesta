@@ -11,7 +11,7 @@ from models import News, NewsPhoto
 from fiesta_core.global_utils.redis_adapter import redis_adapter
 from model_extension import RedisKeys
 from cacheops import cached_as_with_params
-from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES
+from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES, FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_NEWS_CITY_SLUG
 from fiesta_core.apps.blog.model_extension import NewsPreview
 
 @cached_as_with_params(News.objects.all())
@@ -115,8 +115,12 @@ class NewsStream(ListView):
         else:
             if 'type' in self.kwargs:
                 return get_news_base_queryset(city,self.kwargs['type'], self.kwargs['actualize'] if 'actualize' in self.kwargs else None)
-            elif 'slug_type' in self.kwargs and self.kwargs['slug_type'] in FIESTA_NEWSLINE_ENTITY_SLUGTYPES:
-                return get_news_base_queryset(city,FIESTA_NEWSLINE_ENTITY_SLUGTYPES[self.kwargs['slug_type']],self.kwargs['actualize'] if 'actualize' in self.kwargs else None)
+            elif 'slug_type' in self.kwargs:
+                if self.kwargs['slug_type'] in FIESTA_NEWSLINE_ENTITY_SLUGTYPES:
+                    return get_news_base_queryset(city,FIESTA_NEWSLINE_ENTITY_SLUGTYPES[self.kwargs['slug_type']],self.kwargs['actualize'] if 'actualize' in self.kwargs else None)
+                elif self.kwargs['slug_type'] in FIESTA_NEWS_CITY_SLUG:
+                    self.request.COOKIES[settings.UNIC_TMP_USER_CITY] = FIESTA_NEWS_CITY_SLUG[self.kwargs['slug_type']]
+                    return get_news_base_queryset(FIESTA_NEWS_CITY_SLUG[self.kwargs['slug_type']],None, None)
         return get_news_base_queryset(city,None, None)
 
 
@@ -160,6 +164,7 @@ class SingleNewsView(DetailView):
         return context;
 
     def setAnalitic(self):
+        city = self.object.city
         if self.object:
             pk = self.object.id
             if settings.UNIC_TMP_USER_ID in self.request.COOKIES:
@@ -169,9 +174,11 @@ class SingleNewsView(DetailView):
             if self.object.is_displayed and not self.object.is_archive and self.object.date_added + timedelta(days=settings.TOP_NEWS_LIVETIME) > utc.localize(datetime.today()):
                 redis_adapter.zadd(RedisKeys.pop_news, pk, views_count)
                 redis_adapter.zadd(RedisKeys.pop_news_by_group % self.object.type, pk, views_count)
+                redis_adapter.zadd(RedisKeys.pop_news_by_city % city, pk, views_count)
             else:
                 redis_adapter.zrem(RedisKeys.pop_news, pk)
-                redis_adapter.zrem(RedisKeys.pop_news_by_group % self.object.type, pk, views_count)
+                redis_adapter.zrem(RedisKeys.pop_news_by_group % self.object.type, pk)
+                redis_adapter.zrem(RedisKeys.pop_news_by_city % city, pk)
             return views_count
         return 0;
 

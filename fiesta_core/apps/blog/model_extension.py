@@ -6,6 +6,7 @@ class RedisKeys:
     pop_news = 'pop_news'
     preview_news_key = 'preview_news_%s'
     pop_news_by_group = 'pop_news_%s'
+    pop_news_by_city = 'city_pop_news_%s'
 
 class NewsPreview:
     def __init__(self,id, title, preview, slug, date_from, date_to,description, img):

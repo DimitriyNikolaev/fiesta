@@ -9,7 +9,7 @@
     {% endif %}
    {% endwith %}
 {% endif %}
-
+<meta name="vk:description" content="{{ news.description|safe }}">
 {% endblock %}
 {% block content_wrapper %}
     <link rel="stylesheet" href="{{ STATIC_URL }}fiesta_core/css/flexslider.css" type="text/css" media="screen" />

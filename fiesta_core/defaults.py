@@ -30,3 +30,7 @@ FIESTA_NEWS_CITY = (
     (1, _('Saint Petersburg')),
     (2, _('Moscow'))
 )
+FIESTA_NEWS_CITY_SLUG = {
+    'spb':1,
+    'msk':2
+}

@@ -13,7 +13,8 @@ def user_metadata(request):
         city = FIESTA_NEWS_CITY[index_city][1]
     else:
         city = FIESTA_NEWS_CITY[0][1]
-    c = {'current_path': request.path, 'user': request.user, 'avatar': avatar, 'city': city, 'site_domain': settings.SITE_DOMAIN }
+    c = {'current_path': request.path, 'user': request.user, 'avatar': avatar, 'city': city, 'site_domain': settings.SITE_DOMAIN,
+        'city_id': request.COOKIES[settings.UNIC_TMP_USER_CITY]}
 
     c.update(csrf(request))
     return c
