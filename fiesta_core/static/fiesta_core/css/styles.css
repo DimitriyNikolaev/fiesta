@@ -67,6 +67,7 @@ img {
 .fl{float: left;}
 .fr{float: right;}
 .hide{display: none;}
+html{min-width: 1034px;}
 #wrapper{width: 1034px; margin: 0 auto; background: #EFEFEF; position: relative; }
 
 #header {width: 100%; position: relative;}
