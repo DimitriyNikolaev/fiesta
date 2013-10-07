@@ -36,7 +36,7 @@
     });
 
     setTimeout($(function(){
-        if($(window).width() > 1134)
+        if($(window).width() > 1234)
         {
           $.scrollUp({
                       scrollText: ''
@@ -75,7 +75,7 @@
             <div id="container">
                 <header id="header">
                     {% block header %}
-                    {% comment %}{% include "fiesta/partials/auth_tag.html" %}{% endcomment %}
+{#                    {% include "fiesta/partials/auth_tag.html" %}#}
                     <div class="cities-selector">
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             <div class="city-label-wrapper"><span data-label-placement="" class="city-label">{{ city }}</span></div>
@@ -171,8 +171,21 @@
                         </script>
                     </div>
                     <div class="side-block">
-                        <embed type="application/x-shockwave-flash" src="{{ STATIC_URL }}130835-imaginegreen-240x400.swf?link1={{ site_domain }}/news/ThinkQ/" width="240" height="400" style="" id="flashcontent" name="flashcontent" bgcolor="#F8F8F8" quality="high">
+                        <script type="text/javascript"><!--
+                            google_ad_client = "ca-pub-9630725189942769";
+                            /* Blog Fiesta */
+                            google_ad_slot = "5409566532";
+                            google_ad_width = 240;
+                            google_ad_height = 400;
+                            //-->
+                            </script>
+                            <script type="text/javascript"
+                            src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+                        </script>
                     </div>
+                    {% comment %}<div class="side-block">
+                        <embed type="application/x-shockwave-flash" src="{{ STATIC_URL }}130835-imaginegreen-240x400.swf?link1={{ site_domain }}/news/ThinkQ/" width="240" height="400" style="" id="flashcontent" name="flashcontent" bgcolor="#F8F8F8" quality="high">
+                    </div>{% endcomment %}
                     <div class="side-block" style="height: 400px;">
 {#                        <img src="{{ STATIC_URL }}fiesta_core/img/bunner.png"/>#}
                         <!-- Pingmedia 240x400 code START-->

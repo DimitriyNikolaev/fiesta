@@ -13,6 +13,7 @@ from model_extension import RedisKeys
 from cacheops import cached_as_with_params
 from fiesta_core.defaults import FIESTA_NEWSLINE_ENTITY_SLUGTYPES, FIESTA_NEWSLINE_ENTITY_TYPES, FIESTA_NEWS_CITY_SLUG
 from fiesta_core.apps.blog.model_extension import NewsPreview
+from fiesta_core.global_utils.sphinx_adapter import sphinx
 
 @cached_as_with_params(News.objects.all())
 def get_news_base_queryset(city, type, actualize):
@@ -48,14 +49,34 @@ def get_similar_news_queryset(city, type, current_news_id):
     return queryset
 
 def get_news_search_queryset(city, q):
-    queryset = News.objects.filter(is_displayed=True, city=city, title__icontains=q).order_by('-date_added')
-    photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
-    photos_dict = {}
-    for p in photos:
-        photos_dict[p.news_id] = p
-    for item in queryset:
-        item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
-    return queryset
+
+    try:
+        sphinx.SetFilter('city',  [int(city)], exclude=0)
+        search_result = sphinx.Query(q, 'article', '')
+        sphinx.ResetFilters()
+        items = []
+        for match in search_result['matches']:
+            news = News()
+            news.id = match['id']
+            for key, value in match['attrs'].iteritems():
+                setattr(news, key, value)
+            items.append(news)
+    except:
+        error = sphinx.GetLastError()
+        raise Exception('search', error)
+
+
+    #queryset = News.objects.filter(is_displayed=True, city=city, title__icontains=q).order_by('-date_added')
+    if items and len(items) > 0:
+        photos = NewsPhoto.objects.filter(display_order=0, subnews_id__isnull=True)
+        photos_dict = {}
+        for p in photos:
+            photos_dict[p.news_id] = p
+        for item in items:
+            item.photo = photos_dict[item.id] if item.id in photos_dict.keys() else None
+        return items
+    else:
+        return []
 
 def get_pop_news_by_type(type, current_news_id):
     pop_news_idlist  = redis_adapter.zrevrange(RedisKeys.pop_news_by_group % type,0,3)

@@ -15,12 +15,10 @@
 
     {% endblock %}
 </head>
-<body style="background:#CACACA url({{ STATIC_URL }}fiesta_core/img/thinkq.jpg) 50% 0px no-repeat;">
-    <a href="#" style="width:1034px; height: 260px; display: block; margin: 0 auto;"></a>
-
+<body> {#style="background:#CACACA url({{ STATIC_URL }}thinkQ.jpg) 50% 0px no-repeat;">#}
+{#    <a href="{{ site_domain }}/news/ThinkQ/" style="width:auto; height: 260px; display: block; margin: 0 auto;"></a>#}
     {# maincontent place here #}
     {% block layout %}{% endblock %}
-
     {# import scripts on current page #}
     {% block extrascripts %}{% endblock %}
 <!--LiveInternet counter--><script type="text/javascript"><!--

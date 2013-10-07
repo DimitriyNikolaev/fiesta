@@ -5,3 +5,4 @@ psycopg2>=2.5
 redis>=2.7.5
 simplejson
 pytz>=2013b
+unidecode
