@@ -162,7 +162,11 @@ class NewsStream(ListView):
         if not request.is_ajax():
             self.template_name = 'blog/news_stream.html'
         else:
-            self.template_name = 'blog/partial/news_stream_page.html'
+            q = self.get_search_query()
+            if q:
+                self.template_name = 'blog/partial/search_window.html'
+            else:
+                self.template_name = 'blog/partial/news_stream_page.html'
         return super(NewsStream,self).get(request, args, kwargs)
 
 class SingleNewsView(DetailView):

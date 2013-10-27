@@ -5,6 +5,17 @@
 	<input type="submit" value="{% trans "Search" %}" class="btn" />
 </form>{% endcomment %}
 <form method="get" action=".">
-    <input type="text" id="q" name="q"  class="search-text" value="{{ search_term }}"/>
+    <input type="text" id="q" name="q"  class="search-text" value="{{ search_term }}" oninput="get_search_result();"/>
     <input type="image" src="{{ STATIC_URL }}fiesta_core/img/search-btn.png" />
 </form>
+<script>
+    function get_search_result(){
+
+        var query = $("#q").val();
+        if(query.length > 2)
+            $.get('{{current_path}}'+'?q='+query,{}, onLoadSearchResult);
+    }
+    function onLoadSearchResult(data){
+        alert(data);
+    }
+</script>

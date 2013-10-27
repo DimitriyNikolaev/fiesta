@@ -9,7 +9,7 @@
     {% endif %}
    {% endwith %}
 {% endif %}
-<meta name="vk:description" content="{{ news.description|safe }}">
+<meta name="og:description" content="{{ news.description }}">
 {% endblock %}
 {% block content_wrapper %}
     <link rel="stylesheet" href="{{ STATIC_URL }}fiesta_core/css/flexslider.css" type="text/css" media="screen" />
@@ -136,6 +136,19 @@
                 <li><div id="vk_like_{{ news.id }}"></div></li>
             </ul>
             <div class="cb">&nbsp;</div>
+        </div>
+        <div style="height: 94px; width: 714px;">
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-9630725189942769";
+            /* футер */
+            google_ad_slot = "6647137333";
+            google_ad_width = 728;
+            google_ad_height = 90;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
         </div>
         <!-- .similar-articles -->
         {% if other_materials|length > 0 %}
