@@ -4,11 +4,12 @@
     {{ search_form.q }}
 	<input type="submit" value="{% trans "Search" %}" class="btn" />
 </form>{% endcomment %}
-<form method="get" action=".">
+<form method="get" action="." >
     <input type="text" id="q" name="q"  class="search-text" value="{{ search_term }}" oninput="get_search_result();"/>
     <input type="image" src="{{ STATIC_URL }}fiesta_core/img/search-btn.png" />
 </form>
 <script>
+    $(document).on('click.dropdown.search-api', removeSearchResultsBox);
     function get_search_result(){
 
         var query = $("#q").val();
@@ -16,6 +17,10 @@
             $.get('{{current_path}}'+'?q='+query,{}, onLoadSearchResult);
     }
     function onLoadSearchResult(data){
-        alert(data);
+        removeSearchResultsBox();
+        $('.top-search').append(data).addClass('open');
+    }
+    function removeSearchResultsBox(){
+        $('.top-search .search-results').remove();
     }
 </script>

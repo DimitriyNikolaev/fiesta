@@ -1,12 +1,12 @@
-<div>
+<ul class="search-results">
 {% for news_item in news|slice:"0:7" %}
-    <ul>
-        <li>
-            <a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">
-                {{ news_item.title }}
-            </a>
-        </li>
-    </ul>
+    <li>
+        <a href="{% if news_item.slug %}{% url "fiesta:blog:slug_single_news" news_item.slug %}{% else %}{% url "fiesta:blog:single_news" news_item.id %}{% endif %}">
+            {{ news_item.title }}
+        </a>
+    </li>
 {% endfor %}
-<a href="{% url "fiesta:blog:index" %}?q={{ search_term }}"> Все результаты ({{ news|length }})</a>
-</div>
+    <li class="total">
+        <a href="{% url "fiesta:blog:index" %}?q={{ search_term }}"> Все результаты <span>({{ news|length }})</span></a>
+    </li>
+</ul>
